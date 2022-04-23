@@ -6,6 +6,9 @@ import java.util.Random;
 
 public class TumbleDryerImp implements TumbleDryer {
 
+    // Singleton
+    private TumbleDryerImp dryer;
+
     private boolean gentleTumble;
     private DryingLevel dryingLevel;
     private float delay;
@@ -24,7 +27,24 @@ public class TumbleDryerImp implements TumbleDryer {
     // For debugging
     private Random random;
 
-    public TumbleDryerImp() {
+    public TumbleDryerImp getInstance() {
+        if (dryer == null) {
+            dryer = new TumbleDryerImp();
+        }
+
+        return dryer;
+    }
+
+    public TumbleDryerImp getRandomInstance() {
+        if (dryer == null) {
+            long now = Calendar.getInstance().getTime().getTime();
+            dryer = new TumbleDryerImp(now);
+        }
+
+        return dryer;
+    }
+
+    private TumbleDryerImp() {
         // Initialize the tumble with default values
         gentleTumble = false;
         dryingLevel = DryingLevel.NORMAL;
@@ -42,7 +62,7 @@ public class TumbleDryerImp implements TumbleDryer {
     }
 
     // For debugging!
-    public TumbleDryerImp(long seed) {
+    private TumbleDryerImp(long seed) {
         random = new Random(seed);
 
         // Assign random values
