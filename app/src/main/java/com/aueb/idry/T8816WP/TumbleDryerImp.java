@@ -1,11 +1,7 @@
 package com.aueb.idry.T8816WP;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class TumbleDryerImp implements TumbleDryer {
@@ -21,8 +17,7 @@ public class TumbleDryerImp implements TumbleDryer {
     private Programme programme;
     private boolean doorClosed;
     private boolean powerOn;
-    private Duration duration;
-    private LocalDateTime endTime;
+    private Date endTime;
     private ProgrammeSequence sequence;
     private boolean running;
 
@@ -163,64 +158,60 @@ public class TumbleDryerImp implements TumbleDryer {
 
             case FLASHING:
                 perfectDry = estimatePerfectDry();
+                long MILLIS_IN_HOUR = 3600000L;
+                long duration = 0L;
 
-                // Start the selected program
+                // Calculate the duration of the selected program
                 switch (programme) {
-                    // TODO: Insert duration for each program
+                    // Set end time for each program
                     case COTTONS:
-
+                    case WOOLLENS:
+                    case SHIRTS:
+                    case GENTLE_SMOOTHING:
+                    case PROOFING:
+                        duration += MILLIS_IN_HOUR;
                         break;
 
                     case MINIMUM_IRON:
-
-                        break;
-
-                    case WOOLLENS:
-
+                    case EXPRESS:
+                    case AUTOMATIC_PLUS:
+                    case DENIM:
+                        duration += MILLIS_IN_HOUR / 2;
                         break;
 
                     case OUTERWEAR:
-
-                        break;
-
-                    case PROOFING:
-
-                        break;
-
-                    case EXPRESS:
-
-                        break;
-
-                    case AUTOMATIC_PLUS:
-
-                        break;
-
-                    case SHIRTS:
-
-                        break;
-
-                    case DENIM:
-
-                        break;
-
                     case HYGIENE:
-
-                        break;
-
                     case WARM_AIR:
-
-                        break;
-
-                    case GENTLE_SMOOTHING:
-
+                        duration += MILLIS_IN_HOUR * 3 / 4;
                         break;
                 }
 
+                switch (dryingLevel) {
+                    case EXTRA_DRY:
+                        duration += MILLIS_IN_HOUR / 4;
+                        break;
+
+                    case HAND_IRON:
+                        duration += MILLIS_IN_HOUR / 6;
+                        break;
+
+                    case MACHINE_IRON:
+                        duration += MILLIS_IN_HOUR / 8;
+                        break;
+                }
+
+                // Determine the exact end time of the program
+                Calendar calendar = Calendar.getInstance();
+                endTime = calendar.getTime();
+                long now = calendar.getTime().getTime();
+                endTime.setTime(now + duration);
+
                 running = true;
+                startStop = StartStopButtonState.CONSTANT_LIT;
                 break;
 
             case CONSTANT_LIT:
-                running = false;
+                running = !running;
                 break;
         }
     }
@@ -290,19 +281,13 @@ public class TumbleDryerImp implements TumbleDryer {
 
     // Programme duration
     @Override
-    public Duration getDuration() {
-        return duration;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private Duration calculateDuration() {
+    public long getDuration() {
         if (endTime != null) {
-            // FIXME: API errors
-            LocalDateTime now = LocalDateTime.now();
-            return Duration.between(now, endTime);
+            Date now = Calendar.getInstance().getTime();
+            return now.getTime() - endTime.getTime();
         }
 
-        return Duration.ZERO;
+        return 0L;
     }
 
     // Programme sequence
@@ -314,5 +299,18 @@ public class TumbleDryerImp implements TumbleDryer {
     @Override
     public void setProgrammeSequence(ProgrammeSequence sequence) {
         this.sequence = sequence;
+    }
+
+    @Override
+    public boolean checkProgrammeTime() {
+        long now = Calendar.getInstance().getTime().getTime();
+        if (running && now >= endTime.getTime()) {
+            // Stop running
+            running = false;
+            endTime = null;
+            return true;
+        }
+
+        return false;
     }
 }

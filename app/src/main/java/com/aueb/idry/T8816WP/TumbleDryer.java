@@ -1,7 +1,5 @@
 package com.aueb.idry.T8816WP;
 
-import java.time.Duration;
-
 // Interface emulating the T8816WP Edition 111 tumble dryer's operations
 public interface TumbleDryer {
     // Gentle tumble
@@ -52,9 +50,12 @@ public interface TumbleDryer {
     public void setPower(boolean value);
 
     // Programme duration
-    public Duration getDuration();
+    public long getDuration();
 
     // Programme sequence
     public ProgrammeSequence getProgrammeSequence();
     public void setProgrammeSequence(ProgrammeSequence sequence);
+
+    // Returns true if the program which is running ought to end now
+    public boolean checkProgrammeTime();
 }
