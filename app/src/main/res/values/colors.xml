@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Custom colors -->
+    <color name="gray_400">#202225</color>
+    <color name="gray_300">#2F3136</color>
+    <color name="gray_200">#36393F</color>
+    <color name="gray_100">#B9BBBE</color> <!-- For text -->
+    <color name="confirmation_green">#43C466</color>
+    <color name="whitesmoke">#F5F5F5</color>
 </resources>
