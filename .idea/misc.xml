@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.327" />
+        <entry key="app/src/main/res/font/font.xml" value="0.3859375" />
+        <entry key="app/src/main/res/font/proxima_nova.xml" value="0.3859375" />
+        <entry key="app/src/main/res/font/proxima_nova_bold.xml" value="0.3859375" />
+        <entry key="app/src/main/res/layout/activity_routine_menu.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/fragment_routine.xml" value="0.5" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

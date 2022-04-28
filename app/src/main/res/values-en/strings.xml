@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="my_routines_label">My routines</string>
+    <string name="routines_prompt">Select one of the following routines or create a new one</string>
+    <string name="new_routine_label">Create new routine</string>
+    <string name="new_routine_btn">New routine</string>
+</resources>

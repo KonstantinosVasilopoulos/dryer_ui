@@ -22,9 +22,14 @@ public class RoutineDAO {
     private static RoutineDAO instance;
 
     // Set for storing routines
-    private Set<Routine> routines;
+    private final Set<Routine> routines;
     private String storagePath;
     private final String STORAGE_FILENAME = "routines.csv";
+
+    // Warning: instance might be null!
+    public static RoutineDAO getInstance() {
+        return instance;
+    }
 
     public static RoutineDAO getInstance(Context context) {
         if (instance == null) {
@@ -69,6 +74,22 @@ public class RoutineDAO {
             }
 
             reader.close();
+
+            // Add preset routines
+            Routine presetRoutine = new Routine("Everyday cottons");
+            saveRoutine(presetRoutine);
+            presetRoutine = new Routine(
+                    "Express",
+                    DryingLevel.NORMAL,
+                    Programme.EXPRESS
+            );
+            saveRoutine(presetRoutine);
+            presetRoutine = new Routine(
+                    "Hand iron",
+                    DryingLevel.HAND_IRON,
+                    Programme.SHIRTS
+            );
+            saveRoutine(presetRoutine);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,6 +185,19 @@ public class RoutineDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+    // Search for a routine using its name
+    public Routine getRoutine(String name) {
+        if (containsName(name)) {
+            for (Routine routine : routines) {
+                if (name.equals(routine.getName())) {
+                    return routine;
+                }
+            }
+        }
+
+        return null;
     }
 
     public Set<Routine> getRoutines() {
