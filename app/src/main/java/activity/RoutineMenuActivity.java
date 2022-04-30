@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.aueb.idry.R;
@@ -42,5 +45,16 @@ public class RoutineMenuActivity extends AppCompatActivity {
         }
 
         transaction.commit();
+
+        // Add listener to the button responsible for creating new routines
+        Button newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
+        newRoutineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the first step activity for selecting drying level
+                Intent intent = new Intent(RoutineMenuActivity.this, SelectionFirstStepActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

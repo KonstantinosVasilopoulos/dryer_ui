@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
+            android:name="activity.SelectionFirstStepActivity"
+            android:exported="true"
+            android:theme="@style/Theme.IDry.MidnightMadness" />
+        <activity
             android:name="activity.RoutineMenuActivity"
             android:exported="true"
             android:theme="@style/Theme.IDry.MidnightMadness">

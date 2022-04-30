@@ -1,0 +1,77 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    tools:context="activity.SelectionBarFragment">
+
+    <LinearLayout
+        android:id="@+id/selectionBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/barDryingLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="5sp"
+            android:text="@string/bar_drying_level"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/barDividerFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bar_divider"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/barProgramme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="5sp"
+            android:paddingEnd="5sp"
+            android:text="@string/bar_programme"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/barDividerSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bar_divider"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/barTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="5sp"
+            android:paddingEnd="5sp"
+            android:text="@string/bar_time"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/barDividerThird"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bar_divider"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/barPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="5sp"
+            android:text="@string/bar_preview"
+            android:textSize="13sp" />
+    </LinearLayout>
+</FrameLayout>
