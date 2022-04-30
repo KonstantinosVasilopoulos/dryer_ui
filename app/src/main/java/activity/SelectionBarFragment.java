@@ -1,11 +1,13 @@
 package activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +79,27 @@ public class SelectionBarFragment extends Fragment {
         }
 
         stepText.setTextColor(getResources().getColor(R.color.confirmation_green));
+
+        // Make each section of the bar clickable
+        // Drying level
+        TextView barDryingLevel = (TextView) view.findViewById(R.id.barDryingLevel);
+        barDryingLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Do not restart the current activity
+                if (currentStep != SelectionBarStep.DRYING_LEVEL) {
+                    // Change activity to the first step activity
+                    Intent intent = new Intent(getActivity(), SelectionFirstStepActivity.class);
+                    getActivity().startActivity(intent);
+                }
+            }
+        });
+
+        // TODO: Programme
+
+        // TODO: Time
+
+        // TODO: Preview
     }
 
     public SelectionBarStep getCurrentStep() {
