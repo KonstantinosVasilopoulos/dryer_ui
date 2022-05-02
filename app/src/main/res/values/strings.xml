@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">iDry</string>
     <string name="title_activity_filters_guide_first">FiltersGuideFirstActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -6,7 +7,24 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="app_name" translatable="false">iDry</string>
+    <string name="my_routines_label">Τα προγράμματα μου</string>
+    <string name="routines_prompt">Επιλέξτε ένα από τα παρακάτω προγράμματα ή δημιουργήστε ένα καινούργιο</string>
+    <string name="new_routine_label">Δημιουργία νέου προγράμματος</string>
+    <string name="new_routine_btn">Νέο πρόγραμμα</string>
+    <string name="placeholder" translatable="false">placeholder</string>
+    <string name="bar_drying_level">Στάθμη</string>
+    <string name="bar_programme">Πρόγραμμα</string>
+    <string name="bar_time">Αναμονή</string>
+    <string name="bar_preview">Σύνοψη</string>
+    <string name="bar_divider" translatable="false">›</string>
+    <string name="drying_level_label">Επιλέξτε επίπεδο ξηρότητας</string>
+    <string name="drying_level_extra_dry_btn">Πολύ ξηρά</string>
+    <string name="drying_level_normal_btn">Κανονικό</string>
+    <string name="drying_level_hand_iron_btn">Σίδερο χεριού</string>
+    <string name="drying_level_machine_iron_btn">Σίδερο μηχανής</string>
+    <string name="up_arrow" translatable="false">︿</string>
+    <string name="down_arrow" translatable="false">﹀</string>
+    <string name="previous_btn">Προηγούμενο</string>
+    <string name="next_btn">Επόμενο</string>
 </resources>
