@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry">
         <activity
-            android:name=".T8816WP.FiltersGuideSecondActivity"
+            android:name=".T8816WP.FiltersGuideFirstActivity"
             android:exported="false" />
         <activity
-            android:name=".T8816WP.FiltersGuideFirstActivity"
+            android:name=".T8816WP.FiltersGuideSecondActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
