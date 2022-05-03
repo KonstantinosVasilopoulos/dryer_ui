@@ -11,15 +11,26 @@
         android:theme="@style/Theme.IDry">
         <activity
             android:name=".T8816WP.FiltersGuideFirstActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.IDry.MidnightMadness">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:name="activity.SelectionFirstStepActivity"
+            android:exported="true"
+            android:theme="@style/Theme.IDry.MidnightMadness" />
+        <activity
+            android:name="activity.RoutineMenuActivity"
+            android:exported="true"
+            android:theme="@style/Theme.IDry.MidnightMadness"/>
         <activity
             android:name=".T8816WP.FiltersGuideSecondActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true"
+            android:theme="@style/Theme.IDry.MidnightMadness">
         </activity>
     </application>
 

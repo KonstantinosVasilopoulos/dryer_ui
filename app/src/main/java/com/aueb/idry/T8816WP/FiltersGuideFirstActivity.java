@@ -11,6 +11,6 @@ public class FiltersGuideFirstActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filters_guide_first);
+        setContentView(R.layout.activity_filter_guide_first);
     }
 }

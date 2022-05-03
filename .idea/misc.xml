@@ -3,15 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/ic_launcher_background.xml" value="0.293" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/square_rounded_shape.xml" value="0.1905" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/square_second_shape.xml" value="0.1245" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/square_shape.xml" value="0.1905" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/square_warning_shape.xml" value="0.191" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_filter_guide_first.xml" value="0.264" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_filters_guide_first.xml" value="0.152" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_filters_guide_second.xml" value="0.264" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_routine_menu.xml" value="0.264" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_selection_first_step.xml" value="0.28558476881233" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/content_filters_guide_first.xml" value="0.16304347826086957" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_first.xml" value="0.16304347826086957" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_routine.xml" value="0.2774252039891206" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_second.xml" value="0.16304347826086957" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_selection_bar.xml" value="0.28558476881233" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.327" />
         <entry key="app/src/main/res/font/font.xml" value="0.3859375" />
         <entry key="app/src/main/res/font/proxima_nova.xml" value="0.3859375" />
