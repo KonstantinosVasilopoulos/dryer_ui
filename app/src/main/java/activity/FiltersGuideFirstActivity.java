@@ -1,4 +1,4 @@
-package com.aueb.idry.T8816WP;
+package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

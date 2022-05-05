@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".T8816WP.FiltersGuideFirstActivity"
+    tools:context="activity.FiltersGuideFirstActivity"
     android:orientation="vertical">
     <!--  Settings button and back to home button  -->
     <LinearLayout
