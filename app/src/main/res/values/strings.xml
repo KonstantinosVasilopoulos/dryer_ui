@@ -1,4 +1,11 @@
 <resources>
+
+    <string name="title_activity_filters_guide_first" translatable="false">FiltersGuideFirstActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <string name="app_name" translatable="false">iDry</string>
     <string name="my_routines_label">Τα προγράμματα μου</string>
     <string name="routines_prompt">Επιλέξτε ένα από τα παρακάτω προγράμματα ή δημιουργήστε ένα καινούργιο</string>
