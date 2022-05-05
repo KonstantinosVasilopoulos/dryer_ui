@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="my_routines_label">My routines</string>
+    <string name="routines_prompt">Select one of the following routines or create a new one</string>
+    <string name="new_routine_label">Create new routine</string>
+    <string name="new_routine_btn">New routine</string>
+    <string name="bar_drying_level">Level</string>
+    <string name="bar_programme">Programme</string>
+    <string name="bar_time">Delay</string>
+    <string name="bar_preview">Preview</string>
+    <string name="drying_level_label">Select drying level</string>
+    <string name="drying_level_extra_dry_btn">Extra dry</string>
+    <string name="drying_level_normal_btn">Normal</string>
+    <string name="drying_level_hand_iron_btn">Hand iron</string>
+    <string name="drying_level_machine_iron_btn">Machine iron</string>
+    <string name="previous_btn">Previous</string>
+    <string name="next_btn">Next</string>
+</resources>

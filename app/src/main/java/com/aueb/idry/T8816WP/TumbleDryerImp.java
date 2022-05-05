@@ -7,7 +7,7 @@ import java.util.Random;
 public class TumbleDryerImp implements TumbleDryer {
 
     // Singleton
-    private TumbleDryerImp dryer;
+    private static TumbleDryerImp dryer;
 
     private boolean gentleTumble;
     private DryingLevel dryingLevel;
@@ -27,7 +27,7 @@ public class TumbleDryerImp implements TumbleDryer {
     // For debugging
     private Random random;
 
-    public TumbleDryerImp getInstance() {
+    public static TumbleDryerImp getInstance() {
         if (dryer == null) {
             dryer = new TumbleDryerImp();
         }
@@ -35,7 +35,7 @@ public class TumbleDryerImp implements TumbleDryer {
         return dryer;
     }
 
-    public TumbleDryerImp getRandomInstance() {
+    public static TumbleDryerImp getRandomInstance() {
         if (dryer == null) {
             long now = Calendar.getInstance().getTime().getTime();
             dryer = new TumbleDryerImp(now);
