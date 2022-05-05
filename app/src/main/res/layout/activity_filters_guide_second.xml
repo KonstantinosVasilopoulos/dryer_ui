@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".T8816WP.FiltersGuideSecondActivity"
+    tools:context="activity.FiltersGuideSecondActivity"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"

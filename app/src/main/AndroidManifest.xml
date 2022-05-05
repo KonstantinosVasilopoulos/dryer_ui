@@ -10,16 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry.MidnightMadness">
         <activity
-            android:name=".T8816WP.FiltersGuideFirstActivity"
+            android:name="activity.FiltersGuideFirstActivity"
             android:exported="true" />
         <activity
             android:name="activity.SelectionFirstStepActivity"
             android:exported="true" />
         <activity
             android:name="activity.RoutineMenuActivity"
-            android:exported="true" />
-        <activity
-            android:name=".T8816WP.FiltersGuideSecondActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="activity.FiltersGuideSecondActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
