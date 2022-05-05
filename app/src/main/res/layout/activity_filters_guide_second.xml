@@ -37,7 +37,8 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@drawable/square_second_shape">
 
         <TextView
             android:id="@+id/square_third_step"
@@ -67,11 +68,13 @@
         <TextView
             android:id="@+id/filter_third_step_txt"
             android:layout_width="234dp"
-            android:layout_height="36dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:text="Αφαιρέστε το χερούλι από το φίλτρο"
             android:textAlignment="textStart"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:background="@drawable/square_text_shape"
             app:layout_constraintBottom_toBottomOf="@+id/square_third_step"
             app:layout_constraintStart_toEndOf="@+id/filter_third_step_ic"
             app:layout_constraintTop_toTopOf="@+id/square_third_step"
@@ -82,6 +85,8 @@
             android:layout_width="166dp"
             android:layout_height="125dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/square_third_step"
@@ -92,7 +97,8 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@drawable/square_second_shape">
         <TextView
             android:id="@+id/square_fourth_step"
             android:layout_width="300dp"
@@ -106,11 +112,13 @@
         <TextView
             android:id="@+id/filter_fourth_step_txt"
             android:layout_width="234dp"
-            android:layout_height="36dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:contentDescription="σδσ"
+            android:background="@drawable/square_text_shape"
+            android:gravity="center_vertical"
             android:text="Καθαρίστε το φίλτρο"
             android:textAlignment="textStart"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/square_fourth_step"
             app:layout_constraintStart_toEndOf="@+id/filter_fourth_step_ic"
@@ -139,9 +147,10 @@
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/square_text_shape"
             android:text="Τοποθετήστε το φίλτρο κάτω από τρεχούμενο νερό."
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/square_fourth_step"
             tools:ignore="MissingConstraints" />
@@ -151,7 +160,9 @@
             android:layout_width="250dp"
             android:layout_height="20dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/square_text_shape"
             android:text="Στίψτε καλά το φίλτρο."
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dryer_handle_img" />
@@ -161,58 +172,72 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/square_text_shape"
             android:text="Αφαιρέστε οποιοδήποτε ίχνος χνουδιού βρίσκεται πάνω στο χερούλι."
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:background="@drawable/square_second_shape"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/square_shape"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:text="Βεβαιωθείτε ότι το φίλτρο έχει στεγνώσει καλά πριν το τοποθετήσετε ξανά πίσω."
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/square_warning_shape"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toStartOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:srcCompat="@android:drawable/ic_dialog_alert" />
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Βεβαιωθείτε ότι το φίλτρο έχει στεγνώσει καλά πριν το τοποθετήσετε ξανά πίσω."
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@color/gray_400"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toStartOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView"
+                app:srcCompat="@android:drawable/ic_dialog_alert" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
+
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="160dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="Προηγούμενο" />
+            android:text="Προηγουμενο"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/next_btn"
-            android:layout_width="160dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Επόμενο" />
+            android:text="Επόμενο"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>
