@@ -16,6 +16,9 @@
             android:name="activity.RoutineMenuActivity"
             android:exported="true"
             android:theme="@style/Theme.IDry.MidnightMadness">
+        <activity
+            android:name="activity.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
