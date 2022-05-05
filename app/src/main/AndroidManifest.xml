@@ -7,8 +7,15 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.IDry">
+        android:supportsRtl="true">
+        <activity
+            android:name="activity.SelectionFirstStepActivity"
+            android:exported="true"
+            android:theme="@style/Theme.IDry.MidnightMadness" />
+        <activity
+            android:name="activity.RoutineMenuActivity"
+            android:exported="true"
+            android:theme="@style/Theme.IDry.MidnightMadness">
         <activity
             android:name="activity.MainActivity"
             android:exported="true">
