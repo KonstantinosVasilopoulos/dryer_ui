@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.FilterGuideFirstActivity">
+    tools:context="activity.ContainerGuideFirstActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintTop_toTopOf="parent">
@@ -57,14 +56,14 @@
             android:background="@drawable/square_second_shape">
 
             <TextView
-                android:id="@+id/square_first_step"
+                android:id="@+id/cont_square_first_step"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:background="@drawable/square_shape"
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/filter_first_step_ic"
+                android:id="@+id/container_first_step_ic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
@@ -75,39 +74,74 @@
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/square_first_step"
-                app:layout_constraintStart_toStartOf="@+id/square_first_step"
-                app:layout_constraintTop_toTopOf="@+id/square_first_step"
+                app:layout_constraintBottom_toBottomOf="@+id/cont_square_first_step"
+                app:layout_constraintStart_toStartOf="@+id/cont_square_first_step"
+                app:layout_constraintTop_toTopOf="@+id/cont_square_first_step"
 
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/filter_first_step_txt"
+                android:id="@+id/container_first_step_txt"
                 android:layout_width="234dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="Ανοίξτε το πορτάκι που υποδεικνέται στην εικόνα"
+                android:text="Αφαιρέστε το δοχείο"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/square_first_step"
-                app:layout_constraintStart_toEndOf="@+id/filter_first_step_ic"
-                app:layout_constraintTop_toTopOf="@+id/square_first_step"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintBottom_toBottomOf="@+id/cont_square_first_step"
+                app:layout_constraintStart_toEndOf="@+id/container_first_step_ic"
+                app:layout_constraintTop_toTopOf="@+id/cont_square_first_step"
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <ImageView
                 android:id="@+id/dryer_img"
-                android:layout_width="186dp"
-                android:layout_height="174dp"
+                android:layout_width="166dp"
+                android:layout_height="125dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cont_square_first_step"
+                app:srcCompat="@drawable/dryer_container_pull_out"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/square_shape"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/square_first_step"
-                app:srcCompat="@drawable/dryer"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toBottomOf="@+id/dryer_img"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:text="Κρατήστε το δοχείο με κλίση προς τα πίσω καθώς το μετακινείτε προκειμένου να μην χηθεί το νερό που περιέχει."
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="1dp" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/gray_400"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintEnd_toStartOf="@+id/textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView"
+                    app:srcCompat="@android:drawable/ic_dialog_alert" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,7 +152,7 @@
             android:background="@drawable/square_second_shape">
 
             <TextView
-                android:id="@+id/square_second_step"
+                android:id="@+id/square_seventh_step"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="216dp"
@@ -128,22 +162,23 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/filter_second_step_txt"
+                android:id="@+id/container_second_step_txt"
                 android:layout_width="234dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="Τραβήξτε προς τα έξω το φίλτρο από το χερούλι"
+                android:text="Αδειάστε το νερό του δοχείο"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/square_second_step"
-                app:layout_constraintStart_toEndOf="@+id/filter_second_step_ic"
-                app:layout_constraintTop_toTopOf="@+id/square_second_step"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintBottom_toBottomOf="@+id/square_seventh_step"
+                app:layout_constraintStart_toEndOf="@+id/container_second_step_ic"
+                app:layout_constraintTop_toTopOf="@+id/square_seventh_step"
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <TextView
-                android:id="@+id/filter_second_step_ic"
+                android:id="@+id/container_second_step_ic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
@@ -154,9 +189,9 @@
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/square_second_step"
-                app:layout_constraintStart_toStartOf="@+id/square_second_step"
-                app:layout_constraintTop_toTopOf="@+id/square_second_step"
+                app:layout_constraintBottom_toBottomOf="@+id/square_seventh_step"
+                app:layout_constraintStart_toStartOf="@+id/square_seventh_step"
+                app:layout_constraintTop_toTopOf="@+id/square_seventh_step"
                 tools:ignore="MissingConstraints" />
 
             <ImageView
@@ -169,22 +204,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/square_second_step"
-                app:srcCompat="@drawable/filter_handle"
+                app:layout_constraintTop_toBottomOf="@+id/square_seventh_step"
+                app:srcCompat="@drawable/dryer_empty_container"
                 tools:ignore="MissingConstraints" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
     <LinearLayout
 
-        android:id="@+id/linearLayout6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="50dp">
 
         <Button
             android:id="@+id/back_btn"

@@ -10,14 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry.MidnightMadness">
         <activity
-            android:name="activity.FiltersGuideFirstActivity"
+            android:name="activity.ContainerGuideSecondActivity"
             android:exported="true" />
         <activity
-            android:name="activity.SelectionFirstStepActivity"
+            android:name="activity.ContainerGuideFirstActivity"
             android:exported="true" />
         <activity
-            android:name="activity.RoutineMenuActivity"
-            android:exported="true">
+            android:name="activity.FilterGuideFourthActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.FilterGuideThirdActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.FilterGuideFirstActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +31,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="activity.FiltersGuideSecondActivity"
+            android:name="activity.SelectionFirstStepActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.RoutineMenuActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.FilterGuideSecondActivity"
             android:exported="true" />
     </application>
 

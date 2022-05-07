@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.FiltersGuideSecondActivity">
+    tools:context="activity.FilterGuideSecondActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -160,22 +160,35 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/dryer_handle_img"
+                android:id="@+id/dryer_handle_img_2"
                 android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/square_text_shape"
-                android:text="Τοποθετήστε το φίλτρο κάτω από τρεχούμενο νερό."
-                android:textSize="16sp"
+                android:background="@color/gray_200"
+                android:text="Διαδικασία καθαρισμού"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/square_fourth_step"
                 tools:ignore="MissingConstraints" />
 
             <TextView
+                android:id="@+id/dryer_handle_img"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/square_text_shape"
+                android:text="Τοποθετήστε το φίλτρο κάτω από τρεχούμενο νερό."
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dryer_handle_img_2"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
                 android:id="@+id/textView2"
                 android:layout_width="250dp"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/square_text_shape"
                 android:text="Στίψτε καλά το φίλτρο."
@@ -187,7 +200,7 @@
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="250dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/square_text_shape"
                 android:text="Αφαιρέστε οποιοδήποτε ίχνος χνουδιού βρίσκεται πάνω στο χερούλι."
