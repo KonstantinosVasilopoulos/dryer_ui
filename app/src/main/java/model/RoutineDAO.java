@@ -46,6 +46,7 @@ public class RoutineDAO {
             // Create an empty file if needed
             File file = new File(context.getFilesDir(), STORAGE_FILENAME);
             storagePath = file.getPath();
+            file.delete(); // -0
 
             // Create file if needed
             if (!file.exists()) {

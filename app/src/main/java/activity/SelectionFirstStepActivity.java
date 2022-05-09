@@ -1,6 +1,7 @@
 package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -13,8 +14,11 @@ import android.widget.Button;
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.DryingLevel;
 
+import model.Routine;
+import model.RoutineDAO;
 import utils.SelectionBarStep;
 
+// TODO: Have this activity accept a routine as parameter
 public class SelectionFirstStepActivity extends AppCompatActivity {
 
     private DryingLevel selectedDryingLevel;
@@ -35,15 +39,15 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         args.putString("current_step", SelectionBarStep.DRYING_LEVEL.name());
         SelectionBarFragment selectionBarFragment = new SelectionBarFragment();
         selectionBarFragment.setArguments(args);
-        transaction.add(R.id.selectionBar, selectionBarFragment);
+        transaction.add(R.id.dryingLevelSelectionBar, selectionBarFragment);
         transaction.commit();
 
         // Find all drying level buttons and select the Normal drying level
         selectedDryingLevel = DryingLevel.NORMAL;
-        extraDryBtn = (Button) findViewById(R.id.dryingLevelExtraDryBtn);
-        normalBtn = (Button) findViewById(R.id.dryingLevelNormalBtn);
-        handIronBtn = (Button) findViewById(R.id.dryingLevelHandIronBtn);
-        machineIronBtn = (Button) findViewById(R.id.dryingLevelMachineIronBtn);
+        extraDryBtn = (Button) findViewById(R.id.programmeCottonsBtn);
+        normalBtn = (Button) findViewById(R.id.programmeMinimumIronBtn);
+        handIronBtn = (Button) findViewById(R.id.programmeWoollensBtn);
+        machineIronBtn = (Button) findViewById(R.id.programmeOuterwearBtn);
         selectDryingLevelBtn(normalBtn);
 
         // Create and set a listener for every drying level button
@@ -135,8 +139,8 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         });
 
         // Add listeners to the button's controlling the routine creation/selection flow
-        final Button previousBtn = (Button) findViewById(R.id.dryingLevelPreviousBtn);
-        final Button nextBtn = (Button) findViewById(R.id.dryingLevelNextBtn);
+        final Button previousBtn = (Button) findViewById(R.id.programmePreviousBtn);
+        final Button nextBtn = (Button) findViewById(R.id.programmeNextBtn);
         previousBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +153,18 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Move the activity which selects the new routine's programme
+                // Create new routine
+                RoutineDAO routines = RoutineDAO.getInstance(getApplicationContext());
+                final int routinesSize = routines.getRoutines().size();
+                String routineName = "Routine " + String.valueOf(routinesSize);
+                Routine newRoutine = new Routine(routineName);
+                newRoutine.setLevel(selectedDryingLevel);
+                routines.saveRoutine(newRoutine);
+
+                // Move to the activity which selects the new routine's programme
+                Intent intent = new Intent(SelectionFirstStepActivity.this, SelectionSecondStepActivity.class);
+                intent.putExtra("routine_name", routineName);
+                startActivity(intent);
             }
         });
     }
@@ -179,7 +194,7 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
     // Apply stylistic changes to the selected drying level button
     private void selectDryingLevelBtn(Button btn) {
         // De-highlight the previously selected button
-        ColorStateList btnColor = getResources().getColorStateList(R.color.gray_300);
+        ColorStateList btnColor = AppCompatResources.getColorStateList(this, R.color.gray_300);
         switch (selectedDryingLevel) {
             case EXTRA_DRY:
                 extraDryBtn.setBackgroundTintList(btnColor);
@@ -199,6 +214,6 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         }
 
         // Highlight the button
-        btn.setBackgroundTintList(getResources().getColorStateList(R.color.gray_400));
+        btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
     }
 }

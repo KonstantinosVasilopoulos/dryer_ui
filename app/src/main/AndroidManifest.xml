@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry.MidnightMadness">
         <activity
+            android:name="activity.SelectionSecondStepActivity"
+            android:exported="false" />
+        <activity
             android:name="activity.FiltersGuideFirstActivity"
             android:exported="true" />
         <activity
