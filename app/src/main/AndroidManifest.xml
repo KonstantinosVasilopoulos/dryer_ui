@@ -11,15 +11,18 @@
         android:theme="@style/Theme.IDry.MidnightMadness">
         <activity
             android:name="activity.SelectionSecondStepActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name="activity.FiltersGuideFirstActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name="activity.SelectionFirstStepActivity"
-            android:exported="true" />
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity
             android:name="activity.RoutineMenuActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +32,11 @@
         </activity>
         <activity
             android:name="activity.FiltersGuideSecondActivity"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name="activity.SelectionThirdStepActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
     </application>
 
 </manifest>

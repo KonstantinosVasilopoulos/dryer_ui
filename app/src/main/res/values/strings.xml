@@ -37,4 +37,8 @@
     <string name="programme_warm_air_btn">Ζεστός αέρας</string>
     <string name="programme_gentle_smoothing_btn">Απαλή λείανση</string>
     <string name="second_fragment_label" translatable="false">Second fragment</string>
+    <string name="time_label">Επιλέξτε ώρα εκκίνησης</string>
+    <string name="time_now_btn">Εκκίνηση τώρα</string>
+    <string name="time_select_date_label">Επιλογή ημερομηνίας</string>
+    <string name="time_select_time_label">Επιλογή ώρας</string>
 </resources>

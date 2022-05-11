@@ -65,7 +65,8 @@ public class RoutineDAO {
                     Routine routine = new Routine(
                             values[0],
                             DryingLevel.values()[Integer.parseInt(values[1])],
-                            Programme.values()[Integer.parseInt(values[2])]
+                            Programme.values()[Integer.parseInt(values[2])],
+                            Long.parseLong(values[3])
                     );
                     routines.add(routine);
                 }

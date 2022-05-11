@@ -28,4 +28,8 @@
     <string name="programme_hygiene_btn">Hygiene</string>
     <string name="programme_warm_air_btn">Warm air</string>
     <string name="programme_gentle_smoothing_btn">Gentle smoothing</string>
+    <string name="time_label">Select starting time</string>
+    <string name="time_now_btn">Start now</string>
+    <string name="time_select_date_label">Date selection</string>
+    <string name="time_select_time_label">Time selection</string>
 </resources>

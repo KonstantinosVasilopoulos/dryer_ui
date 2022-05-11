@@ -212,7 +212,10 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Navigate to the time/delay selection activity
+                // Navigate to the time/delay selection activity
+                Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionThirdStepActivity.class);
+                intent.putExtra("routine_name", routineName);
+                startActivity(intent);
             }
         });
     }
