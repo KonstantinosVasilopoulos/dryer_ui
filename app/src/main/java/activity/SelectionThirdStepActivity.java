@@ -43,10 +43,6 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
         String routineName = params.getString("routine_name");
         Routine routine = RoutineDAO.getInstance().getRoutine(routineName);
 
-        // Date & time buttons
-        Button dateBtn = (Button) findViewById(R.id.timeSelectDateBtn);
-        Button timeBtn = (Button) findViewById(R.id.timeSelectTimeBtn);
-
         // Get the date
         Date date;
         if (routine.getDelay() != 0L) {
@@ -60,30 +56,8 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
         // Set date button's label
         Locale locale = getResources().getConfiguration().locale;
         SimpleDateFormat format = new SimpleDateFormat("EEEE dd MMMM", locale);
-        dateBtn.setText(format.format(date));
 
         // Set time button's label
         format = new SimpleDateFormat("kk:mm", locale);
-        timeBtn.setText(format.format(date));
-
-        // TODO: Open calendar on date button click
-
-        // Open time-picker widget on time button click
-        timeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance(locale);
-                calendar.setTime(date);
-                MaterialTimePicker timePicker = new MaterialTimePicker.Builder()
-                        .setTitleText(R.string.time_select_time_label)
-                        .setHour(calendar.get(Calendar.HOUR_OF_DAY))
-                        .setMinute(calendar.get(Calendar.MINUTE))
-                        .setTimeFormat(TimeFormat.CLOCK_24H)
-                        // Use the simple version of the time-picker
-                        .setInputMode(MaterialTimePicker.INPUT_MODE_KEYBOARD)
-                        .build();
-                timePicker.show(getSupportFragmentManager(), "SelectionThirdStepActivity");
-            }
-        });
     }
 }

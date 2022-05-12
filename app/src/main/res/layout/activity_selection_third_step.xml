@@ -86,15 +86,12 @@
                 android:textAlignment="textStart"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/timeSelectTimeBtn"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/timeTimePicker"
+                android:name="activity.TimePickerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/gray_300"
-                android:text="@string/placeholder"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp" />
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
 

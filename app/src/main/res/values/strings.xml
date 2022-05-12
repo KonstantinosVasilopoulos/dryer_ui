@@ -41,4 +41,7 @@
     <string name="time_now_btn">Εκκίνηση τώρα</string>
     <string name="time_select_date_label">Επιλογή ημερομηνίας</string>
     <string name="time_select_time_label">Επιλογή ώρας</string>
+    <string name="time_divider" translatable="false">:</string>
+    <string name="double_zero" translatable="false">00</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
