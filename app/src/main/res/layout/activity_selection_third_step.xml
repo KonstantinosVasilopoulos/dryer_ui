@@ -65,15 +65,50 @@
                 android:textAlignment="textStart"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/timeSelectDateBtn"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/gray_300"
-                android:text="@string/placeholder"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp" />
+                android:background="@android:color/transparent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/timeDateLeftBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/gray_300"
+                    android:minWidth="0dp"
+                    android:text="@string/left_arrow"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/timeSelectDateBtn"
+                    android:layout_width="210dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/placeholder"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="0dp" />
+
+                <Button
+                    android:id="@+id/timeDateRightBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/gray_300"
+                    android:minWidth="0dp"
+                    android:text="@string/right_arrow"
+                    android:textAlignment="textEnd"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/timeSelectTimeLabel"

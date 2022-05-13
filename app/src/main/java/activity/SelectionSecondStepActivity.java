@@ -30,6 +30,21 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_second_step);
 
+        // Make a dictionary containing all the buttons' ids and their enum value
+        programmeBtnIds = new HashMap<>();
+        programmeBtnIds.put(R.id.programmeCottonsBtn, Programme.COTTONS);
+        programmeBtnIds.put(R.id.programmeMinimumIronBtn, Programme.MINIMUM_IRON);
+        programmeBtnIds.put(R.id.programmeWoollensBtn, Programme.WOOLLENS);
+        programmeBtnIds.put(R.id.programmeOuterwearBtn, Programme.OUTERWEAR);
+        programmeBtnIds.put(R.id.programmeProofingBtn, Programme.PROOFING);
+        programmeBtnIds.put(R.id.programmeExpressBtn, Programme.EXPRESS);
+        programmeBtnIds.put(R.id.programmeAutomaticPlusBtn, Programme.AUTOMATIC_PLUS);
+        programmeBtnIds.put(R.id.programmeShirtsBtn, Programme.SHIRTS);
+        programmeBtnIds.put(R.id.programmeDenimBtn, Programme.DENIM);
+        programmeBtnIds.put(R.id.programmeHygieneBtn, Programme.HYGIENE);
+        programmeBtnIds.put(R.id.programmeWarmAirBtn, Programme.WARM_AIR);
+        programmeBtnIds.put(R.id.programmeGentleSmoothingBtn, Programme.GENTLE_SMOOTHING);
+
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -44,30 +59,19 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         Bundle params = getIntent().getExtras();
         String routineName = params.getString("routine_name");
         Routine routine = RoutineDAO.getInstance(this).getRoutine(routineName);
-        if (routine != null) {
-            selectedProgramme = routine.getProgramme();
-        } else { // Select Cottons as preset
-            selectedProgramme = Programme.COTTONS;
+        selectedProgramme = routine.getProgramme();
+
+        // Find the selected programme's button
+        Button selectedBtn;
+        for (int programmeBtnId : programmeBtnIds.keySet()) {
+            if (selectedProgramme.equals(programmeBtnIds.get(programmeBtnId))) {
+                selectedBtn = (Button) findViewById(programmeBtnId);
+
+                // Highlight the button
+                selectedBtn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
+                break;
+            }
         }
-
-        // Highlight the cottons button
-        Button cottonsBtn = (Button) findViewById(R.id.programmeCottonsBtn);
-        cottonsBtn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
-
-        // Make a dictionary with all the buttons' ids and their enum value
-        programmeBtnIds = new HashMap<>();
-        programmeBtnIds.put(R.id.programmeCottonsBtn, Programme.COTTONS);
-        programmeBtnIds.put(R.id.programmeMinimumIronBtn, Programme.MINIMUM_IRON);
-        programmeBtnIds.put(R.id.programmeWoollensBtn, Programme.WOOLLENS);
-        programmeBtnIds.put(R.id.programmeOuterwearBtn, Programme.OUTERWEAR);
-        programmeBtnIds.put(R.id.programmeProofingBtn, Programme.PROOFING);
-        programmeBtnIds.put(R.id.programmeExpressBtn, Programme.EXPRESS);
-        programmeBtnIds.put(R.id.programmeAutomaticPlusBtn, Programme.AUTOMATIC_PLUS);
-        programmeBtnIds.put(R.id.programmeShirtsBtn, Programme.SHIRTS);
-        programmeBtnIds.put(R.id.programmeDenimBtn, Programme.DENIM);
-        programmeBtnIds.put(R.id.programmeHygieneBtn, Programme.HYGIENE);
-        programmeBtnIds.put(R.id.programmeWarmAirBtn, Programme.WARM_AIR);
-        programmeBtnIds.put(R.id.programmeGentleSmoothingBtn, Programme.GENTLE_SMOOTHING);
 
         // Add a listener to every programme button
         Button programmeBtn;
@@ -212,6 +216,12 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Save routine if edited
+                if (!selectedProgramme.equals(routine.getProgramme())) {
+                    routine.setProgramme(selectedProgramme);
+                    RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
+                }
+
                 // Navigate to the time/delay selection activity
                 Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionThirdStepActivity.class);
                 intent.putExtra("routine_name", routineName);

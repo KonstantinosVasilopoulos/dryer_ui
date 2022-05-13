@@ -187,7 +187,9 @@ public class TimePickerFragment extends Fragment {
                     if (hours < 0) {
                         // Circle back to 23
                         editable.append("23");
-                    } else {
+                    } else if (hours == 0) {
+                        setDoubleZero(editable);
+                    }  else {
                         editable.append(String.valueOf(hours));
                     }
                 } catch (NumberFormatException e) {
@@ -228,6 +230,8 @@ public class TimePickerFragment extends Fragment {
                     if (minutes < 0) {
                         // Circle back to 59 minutes
                         editable.append("59");
+                    } else if (minutes == 0) {
+                        setDoubleZero(editable);
                     } else {
                         editable.append(String.valueOf(minutes));
                     }

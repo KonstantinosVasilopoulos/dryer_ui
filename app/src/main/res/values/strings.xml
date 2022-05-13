@@ -43,5 +43,7 @@
     <string name="time_select_time_label">Επιλογή ώρας</string>
     <string name="time_divider" translatable="false">:</string>
     <string name="double_zero" translatable="false">00</string>
+    <string name="left_arrow" translatable="false">〈</string>
+    <string name="right_arrow" translatable="false">〉</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
