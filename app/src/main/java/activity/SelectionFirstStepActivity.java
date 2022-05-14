@@ -18,7 +18,6 @@ import model.Routine;
 import model.RoutineDAO;
 import utils.SelectionBarStep;
 
-// TODO: Have this activity accept a routine as parameter
 public class SelectionFirstStepActivity extends AppCompatActivity {
 
     private DryingLevel selectedDryingLevel;
@@ -32,23 +31,62 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_first_step);
 
+        // Check for a provided routine name
+        Bundle params = getIntent().getExtras();
+        String routineName;
+        Routine newRoutine;
+        RoutineDAO routines = RoutineDAO.getInstance(getApplicationContext());
+        if (params != null) {
+            // Retrieve the routine
+            routineName = params.getString("routine_name");
+            newRoutine = routines.getRoutine(routineName);
+
+        } else {
+            // Create new routine
+            final int routinesSize = routines.getRoutines().size();
+            routineName = "Routine " + String.valueOf(routinesSize);
+            newRoutine = new Routine(routineName);
+            routines.saveRoutine(newRoutine);
+        }
+
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         Bundle args = new Bundle();
         args.putString("current_step", SelectionBarStep.DRYING_LEVEL.name());
+        args.putString("routine_name", routineName);
         SelectionBarFragment selectionBarFragment = new SelectionBarFragment();
         selectionBarFragment.setArguments(args);
         transaction.add(R.id.dryingLevelSelectionBar, selectionBarFragment);
         transaction.commit();
 
-        // Find all drying level buttons and select the Normal drying level
+        // Find all drying level buttons
         selectedDryingLevel = DryingLevel.NORMAL;
         extraDryBtn = (Button) findViewById(R.id.programmeCottonsBtn);
         normalBtn = (Button) findViewById(R.id.programmeMinimumIronBtn);
         handIronBtn = (Button) findViewById(R.id.programmeWoollensBtn);
         machineIronBtn = (Button) findViewById(R.id.programmeOuterwearBtn);
-        selectDryingLevelBtn(normalBtn);
+
+        // Highlight the selected drying level
+        // Normal is the preset
+        switch (newRoutine.getLevel()) {
+            case EXTRA_DRY:
+                selectDryingLevelBtn(extraDryBtn);
+                break;
+
+            case NORMAL:
+            default:
+                selectDryingLevelBtn(normalBtn);
+                break;
+
+            case HAND_IRON:
+                selectDryingLevelBtn(handIronBtn);
+                break;
+
+            case MACHINE_IRON:
+                selectDryingLevelBtn(machineIronBtn);
+                break;
+        }
 
         // Create and set a listener for every drying level button
         extraDryBtn.setOnClickListener(new View.OnClickListener() {
@@ -153,13 +191,11 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create new routine
-                RoutineDAO routines = RoutineDAO.getInstance(getApplicationContext());
-                final int routinesSize = routines.getRoutines().size();
-                String routineName = "Routine " + String.valueOf(routinesSize);
-                Routine newRoutine = new Routine(routineName);
-                newRoutine.setLevel(selectedDryingLevel);
-                routines.saveRoutine(newRoutine);
+                // Update routine if the drying level was altered
+                if (!selectedDryingLevel.equals(newRoutine.getLevel())) {
+                    newRoutine.setLevel(selectedDryingLevel);
+                    routines.updateRoutine(newRoutine);
+                }
 
                 // Move to the activity which selects the new routine's programme
                 Intent intent = new Intent(SelectionFirstStepActivity.this, SelectionSecondStepActivity.class);

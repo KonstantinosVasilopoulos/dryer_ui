@@ -261,12 +261,16 @@ public class TimePickerFragment extends Fragment {
 
     // Return the time from the provided EditText view
     private int getTime(int viewId) {
-        EditText input = (EditText) getView().findViewById(viewId);
-        String str = input.getEditableText().toString();
-        try {
-            return Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            return 0;
+        if (getView() != null) {
+            EditText input = (EditText) getView().findViewById(viewId);
+            String str = input.getEditableText().toString();
+            try {
+                return Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                return 0;
+            }
         }
+
+        return 0;
     }
 }

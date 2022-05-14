@@ -23,10 +23,15 @@
         <!-- Font -->
         <item name="android:fontFamily">@font/proxima_nova_bold</item>
         <item name="fontFamily">@font/proxima_nova_bold</item> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
+
+        <!-- Snackbar text style -->
+        <item name="snackbarTextViewStyle">@style/Theme.IDry.Snackbar.TextView</item>
     </style>
 
-    <!-- Time-picker theme -->
-    <style name="Theme.IDry.DatetimePickerTheme" parent="Theme.Material3.DayNight.Dialog">
+    <!-- Snackbar style -->
+    <style name="Theme.IDry.Snackbar.TextView" parent="@style/Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

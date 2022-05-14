@@ -45,21 +45,22 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         programmeBtnIds.put(R.id.programmeWarmAirBtn, Programme.WARM_AIR);
         programmeBtnIds.put(R.id.programmeGentleSmoothingBtn, Programme.GENTLE_SMOOTHING);
 
-        // Create the selection bar
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        Bundle args = new Bundle();
-        args.putString("current_step", SelectionBarStep.PROGRAMME.name());
-        SelectionBarFragment selectionBarFragment = new SelectionBarFragment();
-        selectionBarFragment.setArguments(args);
-        transaction.add(R.id.programmeSelectionBar, selectionBarFragment);
-        transaction.commit();
-
         // Get the routine from the provided parameters
         Bundle params = getIntent().getExtras();
         String routineName = params.getString("routine_name");
         Routine routine = RoutineDAO.getInstance(this).getRoutine(routineName);
         selectedProgramme = routine.getProgramme();
+
+        // Create the selection bar
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("current_step", SelectionBarStep.PROGRAMME.name());
+        args.putString("routine_name", routineName);
+        SelectionBarFragment selectionBarFragment = new SelectionBarFragment();
+        selectionBarFragment.setArguments(args);
+        transaction.add(R.id.programmeSelectionBar, selectionBarFragment);
+        transaction.commit();
 
         // Find the selected programme's button
         Button selectedBtn;
@@ -208,6 +209,7 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Go back to the first selection activity
                 Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionFirstStepActivity.class);
+                intent.putExtra("routine_name", routineName);
                 startActivity(intent);
             }
         });
@@ -216,7 +218,7 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Save routine if edited
+                // Save routine if it's content was edited
                 if (!selectedProgramme.equals(routine.getProgramme())) {
                     routine.setProgramme(selectedProgramme);
                     RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);

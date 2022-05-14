@@ -6,10 +6,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.aueb.idry.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,20 +33,21 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_third_step);
 
+        // Retrieve the routine using the provided parameters
+        Bundle params = getIntent().getExtras();
+        String routineName = params.getString("routine_name");
+        Routine routine = RoutineDAO.getInstance().getRoutine(routineName);
+
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         Bundle args = new Bundle();
         args.putString("current_step", SelectionBarStep.TIME.name());
+        args.putString("routine_name", routineName);
         SelectionBarFragment selectionBarFragment = new SelectionBarFragment();
         selectionBarFragment.setArguments(args);
         transaction.add(R.id.timeSelectionBar, selectionBarFragment);
         transaction.commit();
-
-        // Get the routine from the provided parameters
-        Bundle params = getIntent().getExtras();
-        String routineName = params.getString("routine_name");
-        Routine routine = RoutineDAO.getInstance().getRoutine(routineName);
 
         // Get the date
         if (routine.getDelay() != 0L) {
@@ -57,8 +60,8 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
 
         // Set date button's label
         dateBtn = (Button) findViewById(R.id.timeSelectDateBtn);
-        Locale locale = getResources().getConfiguration().locale;
-        SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN, locale);
+        final Locale locale = getResources().getConfiguration().locale;
+        final SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN, locale);
         dateBtn.setText(format.format(date));
 
         // Add listeners to left & right arrow buttons for controlling the date
@@ -74,6 +77,7 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
                 calendar.setTime(date);
                 calendar.add(Calendar.DATE, -1); // 1 day
                 date = calendar.getTime();
+                Log.d("routine_date_right", date.toString());
 
                 // Display new date
                 displayDate();
@@ -89,6 +93,7 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
                 calendar.setTime(date);
                 calendar.add(Calendar.DATE, 1);
                 date = calendar.getTime();
+                Log.d("routine_date_right", date.toString());
 
                 // Display new date
                 displayDate();
@@ -109,11 +114,33 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: Add listener for going to the routine preview activity
+        // Add listener for going to the routine preview activity
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Retrieve date's hours and minutes from the time-picker fragment
+                Log.d("time_next_btn", "clicked");
+                TimePickerFragment timePicker = (TimePickerFragment) getSupportFragmentManager().findFragmentById(R.id.timeTimePicker);
+                if (timePicker != null) {
+                    Calendar calendar = Calendar.getInstance(locale);
+                    calendar.setTime(date);
+                    calendar.set(Calendar.HOUR, timePicker.getHours());
+                    calendar.set(Calendar.MINUTE, timePicker.getMinutes());
+                    calendar.set(Calendar.SECOND, 0);
+                    date = calendar.getTime();
 
+                    // Check that the given date is valid
+                    Date now = Calendar.getInstance(locale).getTime();
+                    if (date.compareTo(now) <= 0) {
+                        // Display error notification
+                        Snackbar.make(view, R.string.time_error_notification, Snackbar.LENGTH_SHORT).show();
+                        return; // Exit function since the date is invalid
+                    }
+
+                    // TODO: Save the routine's new date
+
+                    // TODO: Navigate to the routine preview activity
+                }
             }
         });
 
@@ -123,7 +150,10 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Set date to the current time
-                date = Calendar.getInstance(locale).getTime();
+                Calendar calendar = Calendar.getInstance(locale);
+                calendar.setTime(date);
+                calendar.set(Calendar.SECOND, 0);
+                date = calendar.getTime();
 
                 // TODO: Start routine preview activity
             }

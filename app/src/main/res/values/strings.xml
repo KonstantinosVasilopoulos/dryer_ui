@@ -45,5 +45,6 @@
     <string name="double_zero" translatable="false">00</string>
     <string name="left_arrow" translatable="false">〈</string>
     <string name="right_arrow" translatable="false">〉</string>
+    <string name="time_error_notification">Η ημερομηνία που επιλέξατε έχει ήδη περάσει.</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
