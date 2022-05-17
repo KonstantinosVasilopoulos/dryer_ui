@@ -137,7 +137,10 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
                         return; // Exit function since the date is invalid
                     }
 
-                    // TODO: Save the routine's new date
+                    // Save the routine's new date
+                    long delay = Math.abs(now.getTime() - date.getTime());
+                    routine.setDelay(delay);
+                    RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
                     // TODO: Navigate to the routine preview activity
                 }
@@ -149,11 +152,9 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
         nowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Set date to the current time
-                Calendar calendar = Calendar.getInstance(locale);
-                calendar.setTime(date);
-                calendar.set(Calendar.SECOND, 0);
-                date = calendar.getTime();
+                // Set routine delay to zero
+                routine.setDelay(0L);
+                RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
                 // TODO: Start routine preview activity
             }
