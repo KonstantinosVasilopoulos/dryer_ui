@@ -46,6 +46,7 @@ public class RoutineDAO {
             // Create an empty file if needed
             File file = new File(context.getFilesDir(), STORAGE_FILENAME);
             storagePath = file.getPath();
+            file.delete(); // -0
 
             // Create file if needed
             if (!file.exists()) {
@@ -64,7 +65,8 @@ public class RoutineDAO {
                     Routine routine = new Routine(
                             values[0],
                             DryingLevel.values()[Integer.parseInt(values[1])],
-                            Programme.values()[Integer.parseInt(values[2])]
+                            Programme.values()[Integer.parseInt(values[2])],
+                            Long.parseLong(values[3])
                     );
                     routines.add(routine);
                 }

@@ -60,7 +60,9 @@ public class RoutineFragment extends Fragment {
 
         // Set the button's text
         Button routineSelectionBtn = (Button) view.findViewById(R.id.routineSelectionBtn);
-        routineSelectionBtn.setText(routine.getName());
+        if (routine != null) {
+            routineSelectionBtn.setText(routine.getName());
+        }
     }
 
     public Routine getRoutine() {

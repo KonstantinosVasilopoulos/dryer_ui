@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="activity.SelectionSecondStepActivity">
+
+    <LinearLayout
+        android:id="@+id/programmeMainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/programmeSelectionBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/programmeLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/programme_label"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/programmeUpArrowBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@color/gray_200"
+            android:stateListAnimator="@null"
+            android:text="@string/up_arrow"
+            android:textSize="26sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <LinearLayout
+                android:id="@+id/programmeList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_200"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/programmeCottonsBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:padding="10dp"
+                    android:text="@string/programme_cottons_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeMinimumIronBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_minimum_iron_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeWoollensBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_woollens_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeOuterwearBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_outerwear_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeProofingBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_proofing_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeExpressBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_express_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeAutomaticPlusBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_automatic_plus_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeShirtsBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_shirts_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeDenimBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_denim_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeHygieneBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_hygiene_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeWarmAirBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_warm_air_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/programmeGentleSmoothingBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_300"
+                    android:text="@string/programme_gentle_smoothing_btn"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:cornerRadius="20dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/programmeDownArrowBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_200"
+            android:stateListAnimator="@null"
+            android:text="@string/down_arrow"
+            android:textSize="26sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/programmeControlLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/programmePreviousBtn"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/gray_400"
+            android:text="@string/previous_btn"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/programmeNextBtn"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/gray_400"
+            android:text="@string/next_btn"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
