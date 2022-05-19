@@ -87,7 +87,8 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="Ανοίξτε το πορτάκι που υποδεικνέται στην εικόνα"
+                android:text="@string/filter_guide_first_step_title"
+                android:paddingLeft="5dp"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -133,7 +134,8 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="Τραβήξτε προς τα έξω το φίλτρο από το χερούλι"
+                android:text="@string/filter_guide_second_step_title"
+                android:paddingLeft="5dp"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -190,7 +192,7 @@
             android:id="@+id/back_btn"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="Προηγουμενο"
+            android:text="@string/previous_btn"
             android:textSize="16sp" />
 
         <Button
@@ -198,7 +200,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Επόμενο"
+            android:text="@string/next_btn"
             android:textSize="16sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,9 +3,9 @@
     <string name="title_activity_filters_guide_first" translatable="false">FiltersGuideFirstActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label" translatable="false">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next">Επόμενο</string>
+    <string name="previous">Προηγούμενο</string>
     <string name="app_name" translatable="false">iDry</string>
     <string name="my_routines_label">Τα προγράμματα μου</string>
     <string name="routines_prompt">Επιλέξτε ένα από τα παρακάτω προγράμματα ή δημιουργήστε ένα καινούργιο</string>
@@ -26,4 +26,26 @@
     <string name="down_arrow" translatable="false">﹀</string>
     <string name="previous_btn">Προηγούμενο</string>
     <string name="next_btn">Επόμενο</string>
+    <string name="filter_guide_first_step_title">Ανοίξτε το πορτάκι που υποδεικνέται στην εικόνα</string>
+    <string name="filter_guide_second_step_title">Τραβήξτε προς τα έξω το φίλτρο από το χερούλι</string>
+    <string name="filter_guide_third_step_title">Αφαιρέστε το χερούλι από το φίλτρο</string>
+    <string name="filter_guide_fourth_step_title">Καθαρίστε το φίλτρο</string>
+    <string name="filter_guide_fourth_step_headtitle">Διαδικασία καθαρισμού</string>
+    <string name="filter_guide_fourth_step_txt1">Τοποθετήστε το φίλτρο κάτω από τρεχούμενο νερό.</string>
+    <string name="filter_guide_fourth_step_txt2">Στίψτε καλά το φίλτρο.</string>
+    <string name="filter_guide_fourth_step_txt3">Αφαιρέστε οποιοδήποτε ίχνος χνουδιού βρίσκεται πάνω στο χερούλι.</string>
+    <string name="filter_guide_fourth_step_warning_txt">Βεβαιωθείτε ότι το φίλτρο έχει στεγνώσει καλά πριν το τοποθετήσετε ξανά πίσω.</string>
+    <string name="filter_guide_fifth_step_title">Καθαρίστε τον εναλλακτή θερμότητας με μία σκούπα</string>
+    <string name="filter_guide_fifth_step_headtitle">Διαδικασία καθαρισμού</string>
+    <string name="filter_guide_fifth_step_side_warning_txt1">Αποφύγετε να ακουμπήσετε τις μεταλλικές ράβδους καθώς είναι ιδιαίτερα αιχμηρές.</string>
+    <string name="filter_guide_fifth_step_warning_txt2">Περάστε προσεκτικά την σκούπα πάνω από τις μεταλλικές ράβδους. Υπερβολική πιεση ή βιασύνη μπορεί να προκαλέσει βλάβη.</string>
+    <string name="filter_guide_sixth_step_title">Βάλτε το χερούλι πίσω στο φίλτρο</string>
+    <string name="filter_guide_seventh_step_title">Βάλτε το χερούλι με το φίλτρο στους δύο οδηγούς</string>
+    <string name="filter_guide_seventh_step_warning_txt">Βεβαιωθείτε ότι η κίτρινη τελεία βρίσκεται από την δεξιά πλευρά του χερουλιού.</string>
+    <string name="container_guide_first_step_title">Αφαιρέστε το δοχείο</string>
+    <string name="container_first_guide_step_warning_txt">Κρατήστε το δοχείο με κλίση προς τα πίσω καθώς το μετακινείτε προκειμένου να μην χηθεί το νερό που περιέχει.</string>
+    <string name="container_guide_second_step_title">Αδειάστε το νερό του δοχείο</string>
+    <string name="container_guide_third_step_title">Βάλτε το δοχείο πίσω στην θέση του</string>
+    <string name="container_guide_third_step_warning_txt">Το νερό που αδείασατε δεν προορίζεται για κατανάλωση. Πιθανή κατάποση του να οδηγήσει σε προβλήματα υγείας.</string>
+    <string name="filter_guide_fifth_step_txt">Για τον καθαρισμό χρησιμοποιείστε σκουπάκι ξεσκονίσματος ή ακροφύσιο ρωγμών.</string>
 </resources>

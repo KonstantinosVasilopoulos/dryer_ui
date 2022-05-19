@@ -85,7 +85,8 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="Καθαρίστε τον εναλλακτή θερμότητας με μία σκούπα"
+                android:text="@string/filter_guide_fifth_step_title"
+                android:paddingLeft="5dp"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -110,7 +111,7 @@
                 android:layout_width="250dp"
                 android:layout_height="20dp"
                 android:background="@color/gray_200"
-                android:text="Διαδικασία καθαρισμού"
+                android:text="@string/filter_guide_fifth_step_headtitle"
                 android:textAlignment="viewStart"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +125,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/square_text_shape"
-                android:text="Για τον καθαρισμό χρησιμοποιείστε σκουπάκι ξεσκονίσματος ή ακροφύσιο ρωγμών"
+                android:text="@string/filter_guide_fifth_step_txt"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +148,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Αποφύγετε να ακουμπήσετε τις μεταλλικές ράβδους καθώς είναι ιδιαίτερα αιχμηρές"
+                    android:text="@string/filter_guide_fifth_step_side_warning_txt1"
                     android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="italic"
@@ -185,7 +186,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Περάστε προσεκτικά την σκούπα πάνω από τις μεταλλικές ράβδους. Υπερβολική πιεση ή βιασύνη μπορεί να προκαλέσει βλάβη."
+                    android:text="@string/filter_guide_fifth_step_warning_txt2"
                     android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="italic"
@@ -220,7 +221,7 @@
             android:id="@+id/back_btn"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="Προηγουμενο"
+            android:text="@string/previous_btn"
             android:textSize="16sp" />
 
         <Button
@@ -228,7 +229,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Επόμενο"
+            android:text="@string/next_btn"
             android:textSize="16sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

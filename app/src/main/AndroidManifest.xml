@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry.MidnightMadness">
         <activity
+            android:name="activity.ProgramOverviewActivity"
+            android:exported="false" />
+        <activity
             android:name="activity.ContainerGuideSecondActivity"
             android:exported="true" />
         <activity
@@ -23,7 +26,7 @@
             android:exported="true" />
         <activity
             android:name="activity.FilterGuideFirstActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

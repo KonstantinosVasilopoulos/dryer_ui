@@ -86,10 +86,11 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="Βάλτε το δοχείο πίσω στην θέση του"
+                android:text="@string/container_guide_third_step_title"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:paddingLeft="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/cont_square_third_step"
                 app:layout_constraintStart_toEndOf="@+id/container_third_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/cont_square_third_step"
@@ -122,7 +123,7 @@
                     android:id="@+id/textView"
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
-                    android:text="Το νερό που αδείασατε δεν προορίζεται για κατανάλωση. Πιθανή κατάποση του να οδηγήσει σε προβλήματα υγείας."
+                    android:text="@string/container_guide_third_step_warning_txt"
                     android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="italic"
@@ -159,7 +160,7 @@
             android:id="@+id/back_btn"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="Προηγουμενο"
+            android:text="@string/previous_btn"
             android:textSize="16sp" />
 
         <Button
@@ -167,7 +168,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Επόμενο"
+            android:text="@string/next_btn"
             android:textSize="16sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
