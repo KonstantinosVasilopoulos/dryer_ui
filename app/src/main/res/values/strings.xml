@@ -46,5 +46,6 @@
     <string name="left_arrow" translatable="false">〈</string>
     <string name="right_arrow" translatable="false">〉</string>
     <string name="time_error_notification">Η ημερομηνία που επιλέξατε έχει ήδη περάσει.</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="main_start_btn_on">Ενεργοποίηση συσκευής</string>
+    <string name="main_notifications_label">Ειδοποιήσεις</string>
 </resources>
