@@ -26,6 +26,30 @@
     <string name="down_arrow" translatable="false">﹀</string>
     <string name="previous_btn">Προηγούμενο</string>
     <string name="next_btn">Επόμενο</string>
+    <string name="programme_label">Επιλέξτε ένα πρόγραμμα ρούχων</string>
+    <string name="programme_cottons_btn">Βαμβακερά</string>
+    <string name="programme_minimum_iron_btn">Ελάχιστο σιδέρωμα</string>
+    <string name="programme_woollens_btn">Μάλλινα</string>
+    <string name="programme_outerwear_btn">Εξωτερικά ενδύματα</string>
+    <string name="programme_proofing_btn">Μόνωση</string>
+    <string name="programme_express_btn">Σύντομο</string>
+    <string name="programme_automatic_plus_btn">Αυτόματο</string>
+    <string name="programme_shirts_btn">Μπλούζες</string>
+    <string name="programme_denim_btn">Τζην</string>
+    <string name="programme_hygiene_btn">Υγιεινό</string>
+    <string name="programme_warm_air_btn">Ζεστός αέρας</string>
+    <string name="programme_gentle_smoothing_btn">Απαλή λείανση</string>
+    <string name="second_fragment_label" translatable="false">Second fragment</string>
+    <string name="time_label">Επιλέξτε ώρα εκκίνησης</string>
+    <string name="time_now_btn">Εκκίνηση τώρα</string>
+    <string name="time_select_date_label">Επιλογή ημερομηνίας</string>
+    <string name="time_select_time_label">Επιλογή ώρας</string>
+    <string name="time_divider" translatable="false">:</string>
+    <string name="double_zero" translatable="false">00</string>
+    <string name="left_arrow" translatable="false">〈</string>
+    <string name="right_arrow" translatable="false">〉</string>
+    <string name="time_error_notification">Η ημερομηνία που επιλέξατε έχει ήδη περάσει.</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="filter_guide_first_step_title">Ανοίξτε το πορτάκι που υποδεικνέται στην εικόνα</string>
     <string name="filter_guide_second_step_title">Τραβήξτε προς τα έξω το φίλτρο από το χερούλι</string>
     <string name="filter_guide_third_step_title">Αφαιρέστε το χερούλι από το φίλτρο</string>

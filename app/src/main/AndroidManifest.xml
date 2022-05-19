@@ -10,6 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry.MidnightMadness">
         <activity
+            android:name="activity.SelectionSecondStepActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name="activity.FiltersGuideFirstActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.SelectionFirstStepActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name="activity.RoutineMenuActivity"
+            android:screenOrientation="portrait"
             android:name="activity.ProgramOverviewActivity"
             android:exported="false" />
         <activity
@@ -34,14 +47,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="activity.SelectionFirstStepActivity"
-            android:exported="true" />
+            android:name="activity.FiltersGuideSecondActivity"
+            android:exported="false" />
         <activity
-            android:name="activity.RoutineMenuActivity"
-            android:exported="true" />
-        <activity
-            android:name="activity.FilterGuideSecondActivity"
-            android:exported="true" />
-    </application>
-
+            android:name="activity.SelectionThirdStepActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
 </manifest>

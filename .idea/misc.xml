@@ -34,8 +34,13 @@
         <entry key="app/src/main/res/layout/activity_filter_guide_first.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_routine_menu.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selection_first_step.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_selection_name.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_selection_second_step.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_selection_third_step.xml" value="0.266796875" />
         <entry key="app/src/main/res/layout/fragment_routine.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_selection_bar.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/fragment_time_picker.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/idry_time_picker_layout.xml" value="0.3546875" />
       </map>
     </option>
   </component>
