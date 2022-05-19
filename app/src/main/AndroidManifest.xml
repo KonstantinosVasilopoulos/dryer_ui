@@ -23,6 +23,22 @@
         <activity
             android:name="activity.RoutineMenuActivity"
             android:screenOrientation="portrait"
+            android:name="activity.ProgramOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.ContainerGuideSecondActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.ContainerGuideFirstActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.FilterGuideFourthActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.FilterGuideThirdActivity"
+            android:exported="true" />
+        <activity
+            android:name="activity.FilterGuideFirstActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +53,4 @@
             android:name="activity.SelectionThirdStepActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
-    </application>
-
 </manifest>

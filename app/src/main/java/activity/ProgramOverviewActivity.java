@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.aueb.idry.R;
 
-public class FiltersGuideFirstActivity extends AppCompatActivity {
+public class ProgramOverviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter_guide_first);
+        setContentView(R.layout.activity_program_overview);
     }
 }
