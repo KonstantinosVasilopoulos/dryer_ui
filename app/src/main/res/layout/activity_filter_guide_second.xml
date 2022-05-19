@@ -88,13 +88,14 @@
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_third_step_title"
                 android:paddingLeft="5dp"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/square_third_step"
                 app:layout_constraintStart_toEndOf="@+id/filter_third_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/square_third_step"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <ImageView
                 android:id="@+id/dryer_img"
@@ -179,6 +180,7 @@
                 android:id="@+id/dryer_handle_img"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_fourth_step_txt1"
                 android:textSize="16sp"
@@ -192,6 +194,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:padding="5dp"
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_fourth_step_txt2"
                 android:textSize="16sp"
@@ -204,6 +207,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:padding="5dp"
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_fourth_step_txt3"
                 android:textSize="16sp"
@@ -229,6 +233,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:padding="5dp"
                     android:text="@string/filter_guide_fourth_step_warning_txt"
                     android:textAlignment="center"
                     android:textSize="16sp"

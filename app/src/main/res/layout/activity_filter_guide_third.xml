@@ -87,13 +87,14 @@
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_fifth_step_title"
                 android:paddingLeft="5dp"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/square_fifth_step"
                 app:layout_constraintStart_toEndOf="@+id/filter_fifth_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/square_fifth_step"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <ImageView
                 android:id="@+id/dryer_img"
@@ -125,6 +126,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/square_text_shape"
+                android:padding="5dp"
                 android:text="@string/filter_guide_fifth_step_txt"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -148,6 +150,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:padding="5dp"
                     android:text="@string/filter_guide_fifth_step_side_warning_txt1"
                     android:textAlignment="center"
                     android:textSize="16sp"
@@ -186,6 +189,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:padding="5dp"
                     android:text="@string/filter_guide_fifth_step_warning_txt2"
                     android:textAlignment="center"
                     android:textSize="16sp"

@@ -87,6 +87,7 @@
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
                 android:text="@string/container_guide_third_step_title"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -94,7 +95,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/cont_square_third_step"
                 app:layout_constraintStart_toEndOf="@+id/container_third_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/cont_square_third_step"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <ImageView
                 android:id="@+id/dryer_img"
@@ -123,6 +124,7 @@
                     android:id="@+id/textView"
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
+                    android:padding="5dp"
                     android:text="@string/container_guide_third_step_warning_txt"
                     android:textAlignment="center"
                     android:textSize="16sp"

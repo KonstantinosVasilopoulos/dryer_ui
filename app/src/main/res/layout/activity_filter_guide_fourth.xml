@@ -88,13 +88,14 @@
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_sixth_step_title"
                 android:paddingLeft="5dp"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/square_sixth_step"
                 app:layout_constraintStart_toEndOf="@+id/filter_sixth_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/square_sixth_step"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <ImageView
                 android:id="@+id/dryer_img"
@@ -135,13 +136,14 @@
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_seventh_step_title"
                 android:paddingLeft="5dp"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/square_seventh_step"
                 app:layout_constraintStart_toEndOf="@+id/filter_seventh_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/square_seventh_step"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <TextView
                 android:id="@+id/filter_seventh_step_ic"
@@ -190,6 +192,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:padding="5dp"
                     android:text="@string/filter_guide_seventh_step_warning_txt"
                     android:textAlignment="center"
                     android:textSize="16sp"

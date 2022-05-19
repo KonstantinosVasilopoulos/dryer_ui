@@ -89,13 +89,14 @@
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_first_step_title"
                 android:paddingLeft="5dp"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/square_first_step"
                 app:layout_constraintStart_toEndOf="@+id/filter_first_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/square_first_step"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <ImageView
                 android:id="@+id/dryer_img"
@@ -136,13 +137,14 @@
                 android:background="@drawable/square_text_shape"
                 android:text="@string/filter_guide_second_step_title"
                 android:paddingLeft="5dp"
+                android:gravity="center_vertical"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/square_second_step"
                 app:layout_constraintStart_toEndOf="@+id/filter_second_step_ic"
                 app:layout_constraintTop_toTopOf="@+id/square_second_step"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints,RtlCompat" />
 
             <TextView
                 android:id="@+id/filter_second_step_ic"
