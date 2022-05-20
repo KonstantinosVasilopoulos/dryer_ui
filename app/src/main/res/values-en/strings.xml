@@ -32,7 +32,10 @@
     <string name="time_now_btn">Start now</string>
     <string name="time_select_date_label">Date selection</string>
     <string name="time_select_time_label">Time selection</string>
-    <string name="time_error_notification">The date you have chosen has already passed.</string>
+    <string name="time_error_notification">Please choose a future date.</string>
     <string name="main_start_btn_on">Turn on</string>
     <string name="main_notifications_label">Notifications</string>
+    <string name="notification_filters">Clean the dryer\'s filters</string>
+    <string name="notification_container">Empty the water container</string>
+    <string name="main_help_btn">Help</string>
 </resources>

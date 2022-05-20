@@ -1,15 +1,23 @@
 package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.aueb.idry.R;
+import com.aueb.idry.T8816WP.TumbleDryer;
+import com.aueb.idry.T8816WP.TumbleDryerImp;
+
+import utils.Notifications;
 
 public class MainActivity extends AppCompatActivity {
     private final int TEXT_GROW_THRESHOLD = 10;
+    private final int NOTIFICATIONS_LAYOUT = R.id.mainNotificationsScrollLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +32,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Round the corners of the notifications' layout by allowing it to clip its corners
-        LinearLayout notificationsLayout = findViewById(R.id.mainNotificationsLayout);
+        LinearLayout notificationsLayout = findViewById(NOTIFICATIONS_LAYOUT);
         notificationsLayout.setClipToOutline(true);
 
-        // TODO: Get the dryer interface
+        // Get the dryer interface
+        TumbleDryer dryer = TumbleDryerImp.getInstance();
 
-        // TODO: Create notification fragments if required
-        // TODO: Filters notification
+        // Create notification fragments if required
+        // Filters notification
+        if (dryer.checkFilters()) {
+            addNotificationFragment(Notifications.FILTERS);
+        }
 
-        // TODO: Container notification
+        // Container notification
+        if (dryer.checkContainer()) {
+            addNotificationFragment(Notifications.CONTAINERS);
+        }
+    }
+
+    // Helper method
+    // Add a notification fragment
+    private void addNotificationFragment(Notifications type) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        Fragment fragment = new NotificationFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("notification", type);
+        fragment.setArguments(args);
+        transaction.add(NOTIFICATIONS_LAYOUT, fragment).commit();
     }
 }
