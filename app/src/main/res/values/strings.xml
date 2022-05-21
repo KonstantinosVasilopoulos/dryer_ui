@@ -3,6 +3,8 @@
     <string name="title_activity_filters_guide_first" translatable="false">FiltersGuideFirstActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="next">Επόμενο</string>
+    <string name="previous">Προηγούμενο</string>
     <string name="app_name" translatable="false">iDry</string>
     <string name="my_routines_label">Τα προγράμματα μου</string>
     <string name="routines_prompt">Επιλέξτε ένα από τα παρακάτω προγράμματα ή δημιουργήστε ένα καινούργιο</string>
@@ -47,4 +49,61 @@
     <string name="right_arrow" translatable="false">〉</string>
     <string name="time_error_notification">Η ημερομηνία που επιλέξατε έχει ήδη περάσει.</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="filter_guide_first_step_title">Ανοίξτε το πορτάκι που υποδεικνέται στην εικόνα</string>
+    <string name="filter_guide_second_step_title">Τραβήξτε προς τα έξω το φίλτρο από το χερούλι</string>
+    <string name="filter_guide_third_step_title">Αφαιρέστε το χερούλι από το φίλτρο</string>
+    <string name="filter_guide_fourth_step_title">Καθαρίστε το φίλτρο</string>
+    <string name="filter_guide_fourth_step_headtitle">Διαδικασία καθαρισμού</string>
+    <string name="filter_guide_fourth_step_txt1">Τοποθετήστε το φίλτρο κάτω από τρεχούμενο νερό.</string>
+    <string name="filter_guide_fourth_step_txt2">Στίψτε καλά το φίλτρο.</string>
+    <string name="filter_guide_fourth_step_txt3">Αφαιρέστε οποιοδήποτε ίχνος χνουδιού βρίσκεται πάνω στο χερούλι.</string>
+    <string name="filter_guide_fourth_step_warning_txt">Βεβαιωθείτε ότι το φίλτρο έχει στεγνώσει καλά πριν το τοποθετήσετε ξανά πίσω.</string>
+    <string name="filter_guide_fifth_step_title">Καθαρίστε τον εναλλακτή θερμότητας με μία σκούπα</string>
+    <string name="filter_guide_fifth_step_headtitle">Διαδικασία καθαρισμού</string>
+    <string name="filter_guide_fifth_step_side_warning_txt1">Αποφύγετε να ακουμπήσετε τις μεταλλικές ράβδους καθώς είναι ιδιαίτερα αιχμηρές.</string>
+    <string name="filter_guide_fifth_step_warning_txt2">Περάστε προσεκτικά την σκούπα πάνω από τις μεταλλικές ράβδους. Υπερβολική πιεση ή βιασύνη μπορεί να προκαλέσει βλάβη.</string>
+    <string name="filter_guide_sixth_step_title">Βάλτε το χερούλι πίσω στο φίλτρο</string>
+    <string name="filter_guide_seventh_step_title">Βάλτε το χερούλι με το φίλτρο στους δύο οδηγούς</string>
+    <string name="filter_guide_seventh_step_warning_txt">Βεβαιωθείτε ότι η κίτρινη τελεία βρίσκεται από την δεξιά πλευρά του χερουλιού.</string>
+    <string name="container_guide_first_step_title">Αφαιρέστε το δοχείο</string>
+    <string name="container_first_guide_step_warning_txt">Κρατήστε το δοχείο με κλίση προς τα πίσω καθώς το μετακινείτε προκειμένου να μην χηθεί το νερό που περιέχει.</string>
+    <string name="container_guide_second_step_title">Αδειάστε το νερό του δοχείο</string>
+    <string name="container_guide_third_step_title">Βάλτε το δοχείο πίσω στην θέση του</string>
+    <string name="container_guide_third_step_warning_txt">Το νερό που αδείασατε δεν προορίζεται για κατανάλωση. Πιθανή κατάποση του να οδηγήσει σε προβλήματα υγείας.</string>
+    <string name="filter_guide_fifth_step_txt">Για τον καθαρισμό χρησιμοποιείστε σκουπάκι ξεσκονίσματος ή ακροφύσιο ρωγμών.</string>
+    <string name="program_overview_duration_title">Διάρκεια προγράμματος</string>
+    <string name="confirm_btn">Επιβεβαίωση</string>
+    <string name="stop_program_btn">Διακοπή προγράμματος</string>
+    <string name="resume_btn">Συνέχιση</string>
+    <string name="program_overview_details_txt">Λεπτομέρειες προγράμματος</string>
+    <string name="program_overview_dryer_level_title">Επίπεδο ξυρότητας</string>
+    <string name="program_overview_clothes_programme_title">Πρόγραμμα ρούχων</string>
+    <string name="program_overview_delay_time_title">Χρόνος αναμονής για εκκίνηση</string>
+    <string name="day_label">μέρα</string>
+    <string name="days_label">μέρες</string>
+    <string name="hour_label">ώρα</string>
+    <string name="hours_label">ώρες</string>
+    <string name="minute_label">λεπτό</string>
+    <string name="minutes_label">λεπτά</string>
+    <string name="second_label">δευτερόλεπτο</string>
+    <string name="seconds_label">δευτερόλεπτα</string>
+    <string name="and_label">και</string>
+    <string name="program_overview_status_title">Κατάσταση</string>
+    <string name="program_overview_status_details_confirm_txt">Πατήστε το κουμπί \"Επιβεβαίωση\" για να θέσετε σε λειτουργία το μηχάνημα.</string>
+    <string name="program_overview_status_details_resume_txt">Πατήστε το κουμπί \"Συνέχιση\" για να θέσετε ξανά σε λειτουργία το μηχάνημα.</string>
+    <string name="program_overview_status_working">Σε λειτουργία</string>
+    <string name="program_overview_status_suspended">Σε αναμονή</string>
+    <string name="program_overview_dialog_message_save_routine">Επιθυμείς την αποθήκευση του συγκεκριμένου προγράμματος;</string>
+    <string name="yes_label">Ναι</string>
+    <string name="no_label">Όχι</string>
+    <string name="program_overview_dialog_message_rename_routine">Πληκτρολογήστε το όνομα που επιθυμείτε</string>
+    <string name="cancel_label">Ακύρωση</string>
+    <string name="confirm_label">Επιβεβαίωση</string>
+    <string name="program_overview_notification_message_not_saved">Το πρόγραμμα δεν αποθηκεύτηκε</string>
+    <string name="program_overview_notification_message_saved">Το πρόγραμμα αποθηκεύτηκε επιτυχώς</string>
+    <string name="program_overview_status_complete">Το πρόγραμμα ολοκληρώθηκε επιτυχώς</string>
+    <string name="program_overview_status_details_remove_clothes">Αφαιρέστε τα ρούχα από τον κάδο</string>
+    <string name="return_to_home_page_btn">Επιστροφή στην αρχική σελίδα</string>
+    <string name="program_overview_notification_message_name_match">Το όνομα που εισάγατε υπάρχει ήδη. Παρακαλώ πληκτρολογήστε κάποιο άλλο.</string>
+    <string name="program_overview_notification_message_empty_text">Το πεδίο είναι κενό. Παρακαλώ εισάγετε ένα όνομα.</string>
 </resources>
