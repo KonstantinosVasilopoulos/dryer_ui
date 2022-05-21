@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -16,7 +18,6 @@ import com.aueb.idry.T8816WP.TumbleDryerImp;
 import utils.Notifications;
 
 public class MainActivity extends AppCompatActivity {
-    private final int TEXT_GROW_THRESHOLD = 10;
     private final int NOTIFICATIONS_LAYOUT = R.id.mainNotificationsScrollLayout;
 
     @Override
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Resize the start button's text if it's too big
+        final int TEXT_GROW_THRESHOLD = 10;
         Button mainStartBtn = findViewById(R.id.mainStartBtnLabel);
         if (mainStartBtn.getText().length() < TEXT_GROW_THRESHOLD) {
             // Grow to 24sp
@@ -40,14 +42,29 @@ public class MainActivity extends AppCompatActivity {
 
         // Create notification fragments if required
         // Filters notification
-        if (dryer.checkFilters()) {
+//        if (dryer.checkFilters()) {
             addNotificationFragment(Notifications.FILTERS);
-        }
+//        }
 
         // Container notification
-        if (dryer.checkContainer()) {
+//        if (dryer.checkContainer()) {
             addNotificationFragment(Notifications.CONTAINERS);
-        }
+//        }
+
+        // Set listener for start button
+        mainStartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Turn on the dryer
+                if (!dryer.getPowerStatus()) {
+                    dryer.turnOn();
+                }
+
+                // Start the routine menu activity
+                Intent intent = new Intent(MainActivity.this, RoutineMenuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Helper method

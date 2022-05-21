@@ -20,7 +20,7 @@
         android:clickable="true"
         android:drawableStart="@drawable/warning_icon_sm"
         android:drawablePadding="8sp"
-        android:gravity="center_vertical"
+        android:gravity="start|center_vertical"
         android:minHeight="50dp"
         android:paddingStart="8dp"
         android:paddingTop="8sp"
