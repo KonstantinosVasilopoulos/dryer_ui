@@ -47,7 +47,12 @@
     <string name="double_zero" translatable="false">00</string>
     <string name="left_arrow" translatable="false">〈</string>
     <string name="right_arrow" translatable="false">〉</string>
-    <string name="time_error_notification">Η ημερομηνία που επιλέξατε έχει ήδη περάσει.</string>
+    <string name="time_error_notification">Παρακαλώ επιλέξτε μια μελλοντική ημερομηνία.</string>
+    <string name="main_start_btn_on">Ενεργοποίηση συσκευής</string>
+    <string name="main_notifications_label">Ειδοποιήσεις</string>
+    <string name="notification_filters">Καθαρίστε τα φίλτρα του στεγνωτηρίου</string>
+    <string name="notification_container">Αδειάστε το δοχείο νερού</string>
+    <string name="main_help_btn">Βοήθεια</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="filter_guide_first_step_title">Ανοίξτε το πορτάκι που υποδεικνέται στην εικόνα</string>
     <string name="filter_guide_second_step_title">Τραβήξτε προς τα έξω το φίλτρο από το χερούλι</string>

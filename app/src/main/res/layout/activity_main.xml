@@ -4,4 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.MainActivity"/>
+    tools:context="activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextClock
+            android:id="@+id/mainClock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="42sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/mainStartBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_button"
+            android:clickable="true"
+            android:elevation="12dp"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/mainStartBtnLabel"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:focusable="false"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/main_start_btn_on"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp">
+
+            <LinearLayout
+                android:id="@+id/mainNotificationsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/rounded_outline"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/mainNotificationsLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="@string/main_notifications_label"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/transparent"
+                    tools:ignore="SpeakableTextPresentCheck">
+
+                    <LinearLayout
+                        android:id="@+id/mainNotificationsScrollLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/mainHelpBtn"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/main_help_btn"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:cornerRadius="25dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

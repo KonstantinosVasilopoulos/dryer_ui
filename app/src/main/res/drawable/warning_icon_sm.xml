@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/warning_icon"
+        android:right="2000dp"
+        android:top="0dp"
+        android:bottom="2000dp" />
+</layer-list>

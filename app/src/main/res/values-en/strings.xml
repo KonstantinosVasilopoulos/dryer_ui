@@ -79,4 +79,10 @@
     <string name="no_label">No</string>
     <string name="cancel_label">Cancel</string>
     <string name="confirm_label">Confirm</string>
+    <string name="time_error_notification">Please choose a future date.</string>
+    <string name="main_start_btn_on">Turn on</string>
+    <string name="main_notifications_label">Notifications</string>
+    <string name="notification_filters">Clean the dryer\'s filters</string>
+    <string name="notification_container">Empty the water container</string>
+    <string name="main_help_btn">Help</string>
 </resources>
