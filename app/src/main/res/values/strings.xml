@@ -53,7 +53,6 @@
     <string name="notification_filters">Καθαρίστε τα φίλτρα του στεγνωτηρίου</string>
     <string name="notification_container">Αδειάστε το δοχείο νερού</string>
     <string name="main_help_btn">Βοήθεια</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="filter_guide_first_step_title">Ανοίξτε το πορτάκι που υποδεικνέται στην εικόνα</string>
     <string name="filter_guide_second_step_title">Τραβήξτε προς τα έξω το φίλτρο από το χερούλι</string>
     <string name="filter_guide_third_step_title">Αφαιρέστε το χερούλι από το φίλτρο</string>

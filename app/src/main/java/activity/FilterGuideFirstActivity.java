@@ -26,6 +26,15 @@ public class FilterGuideFirstActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // Go back to the main activity
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -142,8 +142,8 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
                     routine.setDelay(delay);
                     RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
-                    // TODO: Navigate to the routine preview activity
-                    Intent intent = new Intent(getApplicationContext(), ProgramOverviewActivity.class);
+                    // Navigate to the routine preview activity
+                    Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
                     intent.putExtra("routine_name", routineName);
                     startActivity(intent);
                 }
@@ -159,7 +159,10 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
                 routine.setDelay(0L);
                 RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
-                // TODO: Start routine preview activity
+                // Start routine preview activity
+                Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
+                intent.putExtra("routine_name", routineName);
+                startActivity(intent);
             }
         });
     }

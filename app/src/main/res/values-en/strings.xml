@@ -32,7 +32,6 @@
     <string name="time_now_btn">Start now</string>
     <string name="time_select_date_label">Date selection</string>
     <string name="time_select_time_label">Time selection</string>
-    <string name="time_error_notification">The date you have chosen has already passed.</string>
     <string name="container_guide_first_step_title">Remove the container</string>
     <string name="filter_guide_first_step_title">Open the fine filter door as indicated in the image</string>
     <string name="filter_guide_second_step_title">Pull the filter out by the handle</string>
@@ -85,4 +84,17 @@
     <string name="notification_filters">Clean the dryer\'s filters</string>
     <string name="notification_container">Empty the water container</string>
     <string name="main_help_btn">Help</string>
+    <string name="program_overview_status_details_confirm_txt">Click on \"Confirm\" to start your routine.</string>
+    <string name="program_overview_status_details_resume_txt">Click on \"Continue\" to restart your routine.</string>
+    <string name="program_overview_status_working">Operational</string>
+    <string name="program_overview_status_suspended">Standby</string>
+    <string name="program_overview_dialog_message_save_routine">Do you wish to save this routine?</string>
+    <string name="program_overview_dialog_message_rename_routine">Type the name you desire</string>
+    <string name="program_overview_notification_message_not_saved">The routine was not saved</string>
+    <string name="program_overview_notification_message_saved">The routine was saved successfully</string>
+    <string name="program_overview_status_complete">The routine was completed successfully</string>
+    <string name="program_overview_status_details_remove_clothes">Empty the bin</string>
+    <string name="return_to_home_page_btn">Back to home</string>
+    <string name="program_overview_notification_message_name_match">This name already exists. Please type another.</string>
+    <string name="program_overview_notification_message_empty_text">The field is empty. Please input a name.</string>
 </resources>

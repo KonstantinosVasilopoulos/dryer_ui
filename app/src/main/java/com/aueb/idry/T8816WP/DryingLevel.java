@@ -1,9 +1,5 @@
 package com.aueb.idry.T8816WP;
 
-import android.content.res.Resources;
-
-import androidx.annotation.NonNull;
-
 import com.aueb.idry.R;
 
 public enum DryingLevel {
@@ -32,7 +28,5 @@ public enum DryingLevel {
         }
     };
 
-    public int getStringId() {
-        return 0;
-    }
+    public abstract int getStringId();
 }

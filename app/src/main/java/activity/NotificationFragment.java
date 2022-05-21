@@ -63,7 +63,7 @@ public class NotificationFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         // Start filters' guide activity
-                        Intent intent = new Intent(getActivity(), FiltersGuideFirstActivity.class);
+                        Intent intent = new Intent(getActivity(), FilterGuideFirstActivity.class);
                         startActivity(intent);
                     }
                 });

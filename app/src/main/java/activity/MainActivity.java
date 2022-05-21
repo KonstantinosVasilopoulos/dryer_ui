@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Create notification fragments if required
         // Filters notification
-//        if (dryer.checkFilters()) {
+        if (dryer.checkFilters()) {
             addNotificationFragment(Notifications.FILTERS);
-//        }
+        }
 
         // Container notification
-//        if (dryer.checkContainer()) {
+        if (dryer.checkContainer()) {
             addNotificationFragment(Notifications.CONTAINERS);
-//        }
+        }
 
         // Set listener for start button
         mainStartBtn.setOnClickListener(new View.OnClickListener() {

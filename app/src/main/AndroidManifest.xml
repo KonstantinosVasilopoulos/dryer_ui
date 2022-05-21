@@ -23,7 +23,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name="activity.FiltersGuideFirstActivity"
+            android:name="activity.FilterGuideFirstActivity"
             android:exported="false" />
         <activity
             android:name="activity.SelectionFirstStepActivity"
@@ -34,10 +34,20 @@
             android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name="activity.FiltersGuideSecondActivity"
+            android:name="activity.FilterGuideSecondActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.FilterGuideThirdActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.FilterGuideFourthActivity"
             android:exported="false" />
         <activity
             android:name="activity.SelectionThirdStepActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name="activity.ProgramOverviewActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
     </application>
