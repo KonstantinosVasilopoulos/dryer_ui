@@ -35,6 +35,9 @@ public interface TumbleDryer {
     public StartStopButtonState getStartStopButtonState();
     public void pressStartStop();
 
+    // Calculate routine's duration based on its settings
+    public long calculateDuration(DryingLevel dryingLevel, Programme programme);
+
     // Programme selector
     public Programme getProgramme();
     public void setProgramme(Programme programme);

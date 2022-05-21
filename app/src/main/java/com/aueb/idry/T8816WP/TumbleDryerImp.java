@@ -178,47 +178,7 @@ public class TumbleDryerImp implements TumbleDryer {
 
             case FLASHING:
                 perfectDry = estimatePerfectDry();
-                long MILLIS_IN_HOUR = 3600000L;
-                long duration = 0L;
-
-                // Calculate the duration of the selected program
-                switch (programme) {
-                    // Set end time for each program
-                    case COTTONS:
-                    case WOOLLENS:
-                    case SHIRTS:
-                    case GENTLE_SMOOTHING:
-                    case PROOFING:
-                        duration += MILLIS_IN_HOUR;
-                        break;
-
-                    case MINIMUM_IRON:
-                    case EXPRESS:
-                    case AUTOMATIC_PLUS:
-                    case DENIM:
-                        duration += MILLIS_IN_HOUR / 2;
-                        break;
-
-                    case OUTERWEAR:
-                    case HYGIENE:
-                    case WARM_AIR:
-                        duration += MILLIS_IN_HOUR * 3 / 4;
-                        break;
-                }
-
-                switch (dryingLevel) {
-                    case EXTRA_DRY:
-                        duration += MILLIS_IN_HOUR / 4;
-                        break;
-
-                    case HAND_IRON:
-                        duration += MILLIS_IN_HOUR / 6;
-                        break;
-
-                    case MACHINE_IRON:
-                        duration += MILLIS_IN_HOUR / 8;
-                        break;
-                }
+                long duration = calculateDuration(dryingLevel, programme);
 
                 // Determine the exact end time of the program
                 Calendar calendar = Calendar.getInstance();
@@ -234,6 +194,53 @@ public class TumbleDryerImp implements TumbleDryer {
                 running = !running;
                 break;
         }
+    }
+
+    @Override
+    public long calculateDuration(DryingLevel dryingLevel, Programme programme) {
+        long MILLIS_IN_HOUR = 3600000L;
+        long duration = 0L;
+
+        // Calculate the duration of the selected program
+        switch (programme) {
+            // Set end time for each program
+            case COTTONS:
+            case WOOLLENS:
+            case SHIRTS:
+            case GENTLE_SMOOTHING:
+            case PROOFING:
+                duration += MILLIS_IN_HOUR;
+                break;
+
+            case MINIMUM_IRON:
+            case EXPRESS:
+            case AUTOMATIC_PLUS:
+            case DENIM:
+                duration += MILLIS_IN_HOUR / 2;
+                break;
+
+            case OUTERWEAR:
+            case HYGIENE:
+            case WARM_AIR:
+                duration += MILLIS_IN_HOUR * 3 / 4;
+                break;
+        }
+
+        switch (dryingLevel) {
+            case EXTRA_DRY:
+                duration += MILLIS_IN_HOUR / 4;
+                break;
+
+            case HAND_IRON:
+                duration += MILLIS_IN_HOUR / 6;
+                break;
+
+            case MACHINE_IRON:
+                duration += MILLIS_IN_HOUR / 8;
+                break;
+        }
+
+        return duration;
     }
 
     // Programme selector
