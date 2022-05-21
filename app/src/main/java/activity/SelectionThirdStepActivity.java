@@ -143,6 +143,9 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
                     RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
                     // TODO: Navigate to the routine preview activity
+                    Intent intent = new Intent(getApplicationContext(), ProgramOverviewActivity.class);
+                    intent.putExtra("routine_name", routineName);
+                    startActivity(intent);
                 }
             }
         });

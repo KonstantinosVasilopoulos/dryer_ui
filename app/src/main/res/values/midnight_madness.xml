@@ -33,5 +33,10 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
     </style>
+    
+    <!-- Dialog style -->
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/gray_200</item>
+    </style>
 
 </resources>

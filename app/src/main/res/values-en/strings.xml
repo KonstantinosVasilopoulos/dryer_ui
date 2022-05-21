@@ -57,4 +57,26 @@
     <string name="filter_guide_fifth_step_txt">For the filter cleaning use a dusting brush or crevice nozzle.</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="confirm_btn">Confirm</string>
+    <string name="program_overview_duration_title">Program duration</string>
+    <string name="stop_program_btn">Stop program</string>
+    <string name="resume_btn">Resume</string>
+    <string name="program_overview_details_txt">Programme details</string>
+    <string name="program_overview_dryer_level_title">Dryer level</string>
+    <string name="program_overview_clothes_programme_title">Clothes programme</string>
+    <string name="program_overview_delay_time_title">Waiting time to start</string>
+    <string name="day_label">day</string>
+    <string name="days_label">days</string>
+    <string name="hour_label">hour</string>
+    <string name="hours_label">hours</string>
+    <string name="minute_label">minute</string>
+    <string name="minutes_label">minutes</string>
+    <string name="second_label">second</string>
+    <string name="seconds_label">seconds</string>
+    <string name="and_label">and</string>
+    <string name="program_overview_status_title">Status</string>
+    <string name="yes_label">Yes</string>
+    <string name="no_label">No</string>
+    <string name="cancel_label">Cancel</string>
+    <string name="confirm_label">Confirm</string>
 </resources>
