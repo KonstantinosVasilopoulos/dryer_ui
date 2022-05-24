@@ -76,7 +76,5 @@ public enum Programme {
         }
     };
 
-    public int getStringId() {
-        return 0;
-    }
+    public abstract int getStringId();
 }

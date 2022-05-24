@@ -32,16 +32,38 @@
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_routine.xml" value="0.2774252039891206" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_second.xml" value="0.16304347826086957" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_selection_bar.xml" value="0.28558476881233" />
+        <entry key="app/src/main/res/drawable-v21/round_button.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable-v23/warning_icon_responsive.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable-v23/warning_icon_sm.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/fast_forward_anim.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/fast_forwards_anim.xml" value="0.3335" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.327" />
+        <entry key="app/src/main/res/drawable/notification_btn.xml" value="0.1905" />
+        <entry key="app/src/main/res/drawable/notification_button.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/round_button.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/rounded_outline.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/square_second_shape.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/square_shape.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/square_step_shape.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/square_text_shape.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/square_warning_shape.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/warning_icon_responsive.xml" value="0.3335" />
+        <entry key="app/src/main/res/drawable/warning_icon_sm.xml" value="0.3335" />
         <entry key="app/src/main/res/font/font.xml" value="0.3859375" />
         <entry key="app/src/main/res/font/proxima_nova.xml" value="0.3859375" />
         <entry key="app/src/main/res/font/proxima_nova_bold.xml" value="0.3859375" />
         <entry key="app/src/main/res/layout/activity_filter_guide_first.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_filters_guide_second.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3161231884057971" />
+        <entry key="app/src/main/res/layout/activity_program_overview.xml" value="0.3161231884057971" />
         <entry key="app/src/main/res/layout/activity_routine_menu.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selection_first_step.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selection_name.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selection_second_step.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selection_third_step.xml" value="0.266796875" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_routine.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_selection_bar.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_time_picker.xml" value="0.35572916666666665" />
@@ -49,6 +71,7 @@
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
