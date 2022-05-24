@@ -106,4 +106,6 @@
     <string name="return_to_home_page_btn">Επιστροφή στην αρχική σελίδα</string>
     <string name="program_overview_notification_message_name_match">Το όνομα που εισάγατε υπάρχει ήδη. Παρακαλώ πληκτρολογήστε κάποιο άλλο.</string>
     <string name="program_overview_notification_message_empty_text">Το πεδίο είναι κενό. Παρακαλώ εισάγετε ένα όνομα.</string>
+    <string name="door_guide_title">Τοποθετήστε τα ρούχα στον κάδο</string>
+    <string name="door_guide_close_door_title">Κλείστε την πόρτα όταν είστε έτοιμοι να προχωρήσετε</string>
 </resources>
