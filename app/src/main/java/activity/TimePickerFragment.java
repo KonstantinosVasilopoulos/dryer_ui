@@ -22,7 +22,7 @@ public class TimePickerFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static TimePickerFragment newInstance(String param1, String param2) {
+    public static TimePickerFragment newInstance() {
         return new TimePickerFragment();
     }
 

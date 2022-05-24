@@ -50,6 +50,12 @@
             android:name="activity.ProgramOverviewActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name="activity.ContainerGuideFirstActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.ContainerGuideSecondActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

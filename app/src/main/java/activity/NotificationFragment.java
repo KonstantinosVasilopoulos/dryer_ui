@@ -74,9 +74,9 @@ public class NotificationFragment extends Fragment {
                 notificationLabel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // TODO: Start container's guide activity
-//                        Intent intent = new Intent(getActivity(), );
-//                        startActivity(intent);
+                        // Start container's guide activity
+                        Intent intent = new Intent(getActivity(), ContainerGuideFirstActivity.class);
+                        startActivity(intent);
                     }
                 });
                 break;
