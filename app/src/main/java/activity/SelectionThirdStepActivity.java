@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.aueb.idry.R;
@@ -24,7 +23,7 @@ import utils.SelectionBarStep;
 
 public class SelectionThirdStepActivity extends AppCompatActivity {
 
-    private Date date;
+    private volatile Date date;
     private Button dateBtn;
     private static final String DATE_PATTERN = "EEEE dd MMMM";
 
@@ -50,119 +49,110 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
         transaction.commit();
 
         // Get the date
+        final Locale locale = getResources().getConfiguration().locale;
         if (routine.getDelay() != 0L) {
             // Routine's date
-            date = new Date(routine.getDelay());
+            Calendar calendar = Calendar.getInstance(locale);
+            final long routineTime = calendar.getTime().getTime() + routine.getDelay();
+            calendar.setTimeInMillis(routineTime);
+            date = calendar.getTime();
+
         } else {
             // Current time
-            date = Calendar.getInstance().getTime();
+            date = Calendar.getInstance(locale).getTime();
         }
 
         // Set date button's label
-        dateBtn = (Button) findViewById(R.id.timeSelectDateBtn);
-        final Locale locale = getResources().getConfiguration().locale;
+        dateBtn = findViewById(R.id.timeSelectDateBtn);
         displayDate();
 
         // Add listeners to left & right arrow buttons for controlling the date
-        Button dateLeftBtn = (Button) findViewById(R.id.timeDateLeftBtn);
-        Button dateRightBtn = (Button) findViewById(R.id.timeDateRightBtn);
+        Button dateLeftBtn = findViewById(R.id.timeDateLeftBtn);
+        Button dateRightBtn = findViewById(R.id.timeDateRightBtn);
 
         // Left arrow button
-        dateLeftBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Roll back one day
-                Calendar calendar = Calendar.getInstance(locale);
-                calendar.setTime(date);
-                calendar.add(Calendar.DATE, -1); // 1 day
-                date = calendar.getTime();
-                Log.d("routine_date_right", date.toString());
+        dateLeftBtn.setOnClickListener(view -> {
+            // Roll back one day
+            Calendar calendar = Calendar.getInstance(locale);
+            calendar.setTime(date);
+            calendar.add(Calendar.DATE, -1); // 1 day
+            date = calendar.getTime();
+            Log.d("routine_date_left", date.toString());
 
-                // Display new date
-                displayDate();
-            }
+            // Display new date
+            displayDate();
         });
 
         // Right arrow button
-        dateRightBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Add one day
-                Calendar calendar = Calendar.getInstance(locale);
-                calendar.setTime(date);
-                calendar.add(Calendar.DATE, 1);
-                date = calendar.getTime();
-                Log.d("routine_date_right", date.toString());
+        dateRightBtn.setOnClickListener(view -> {
+            // Add one day
+            Calendar calendar = Calendar.getInstance(locale);
+            calendar.setTime(date);
+            calendar.add(Calendar.DATE, 1);
+            date = calendar.getTime();
+            Log.d("routine_date_right", date.toString());
 
-                // Display new date
-                displayDate();
-            }
+            // Display new date
+            displayDate();
         });
 
         // Previous & next buttons
-        Button previousBtn = (Button) findViewById(R.id.timePreviousBtn);
-        Button nextBtn = (Button) findViewById(R.id.timeNextBtn);
+        Button previousBtn = findViewById(R.id.timePreviousBtn);
+        Button nextBtn = findViewById(R.id.timeNextBtn);
 
         // Set listener for going back to the second step activity
-        previousBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SelectionThirdStepActivity.this, SelectionSecondStepActivity.class);
-                intent.putExtra("routine_name", routineName);
-                startActivity(intent);
-            }
+        previousBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(SelectionThirdStepActivity.this, SelectionSecondStepActivity.class);
+            intent.putExtra("routine_name", routineName);
+            startActivity(intent);
         });
 
         // Add listener for going to the routine preview activity
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Retrieve date's hours and minutes from the time-picker fragment
-                Log.d("time_next_btn", "clicked");
-                TimePickerFragment timePicker = (TimePickerFragment) getSupportFragmentManager().findFragmentById(R.id.timeTimePicker);
-                if (timePicker != null) {
-                    Calendar calendar = Calendar.getInstance(locale);
-                    calendar.setTime(date);
-                    calendar.set(Calendar.HOUR, timePicker.getHours());
-                    calendar.set(Calendar.MINUTE, timePicker.getMinutes());
-                    calendar.set(Calendar.SECOND, 0);
-                    date = calendar.getTime();
+        nextBtn.setOnClickListener(view -> {
+            // Retrieve date's hours and minutes from the time-picker fragment
+            Log.d("time_next_btn", "clicked");
+            TimePickerFragment timePicker = (TimePickerFragment) getSupportFragmentManager().findFragmentById(R.id.timeTimePicker);
+            if (timePicker != null) {
+                Calendar calendar = Calendar.getInstance(locale);
+                calendar.setTime(date);
+                calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHours());
+                calendar.set(Calendar.MINUTE, timePicker.getMinutes());
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                date = calendar.getTime();
 
-                    // Check that the given date is valid
-                    Date now = Calendar.getInstance(locale).getTime();
-                    if (date.compareTo(now) <= 0) {
-                        // Display error notification
-                        Snackbar.make(view, R.string.time_error_notification, Snackbar.LENGTH_SHORT).show();
-                        return; // Exit function since the date is invalid
-                    }
-
-                    // Save the routine's new date
-                    long delay = Math.abs(now.getTime() - date.getTime());
-                    routine.setDelay(delay);
-                    RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
-
-                    // Navigate to the routine preview activity
-                    Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
-                    intent.putExtra("routine_name", routineName);
-                    startActivity(intent);
+                // Check that the given date is valid
+                Date now = Calendar.getInstance(locale).getTime();
+                if (date.compareTo(now) <= 0) {
+                    // Display error notification
+                    Snackbar.make(view, R.string.time_error_notification, Snackbar.LENGTH_SHORT).show();
+                    return; // Exit function since the date is invalid
                 }
-            }
-        });
 
-        // Set listener for the start now button
-        Button nowBtn = (Button) findViewById(R.id.timeNowBtn);
-        nowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Set routine delay to zero
-                routine.setDelay(0L);
+                // Save the routine's new date
+                long delay = Math.abs(now.getTime() - date.getTime());
+                Log.d("delay", String.valueOf(delay)); // -0
+                routine.setDelay(delay);
                 RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
-                // Start routine preview activity
+                // Navigate to the routine preview activity
                 Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
                 intent.putExtra("routine_name", routineName);
                 startActivity(intent);
             }
+        });
+
+        // Set listener for the start now button
+        Button nowBtn = findViewById(R.id.timeNowBtn);
+        nowBtn.setOnClickListener(view -> {
+            // Set routine delay to zero
+            routine.setDelay(0L);
+            RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
+
+            // Start routine preview activity
+            Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
+            intent.putExtra("routine_name", routineName);
+            startActivity(intent);
         });
     }
 
