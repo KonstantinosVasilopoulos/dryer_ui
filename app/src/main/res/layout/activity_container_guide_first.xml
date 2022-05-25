@@ -226,18 +226,22 @@
         android:layout_marginBottom="50dp">
 
         <Button
-            android:id="@+id/back_btn"
+            android:id="@+id/container_guide_first_return_btn"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="@string/previous_btn"
+            android:backgroundTint="@color/gray_400"
+            android:text="@string/return_btn"
+            android:textAllCaps="false"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/next_btn"
+            android:id="@+id/container_guide_first_next_btn"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray_400"
             android:layout_marginStart="10dp"
             android:text="@string/next_btn"
+            android:textAllCaps="false"
             android:textSize="16sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -112,4 +112,5 @@
     <string name="program_overview_notification_message_empty_text">Το πεδίο είναι κενό. Παρακαλώ εισάγετε ένα όνομα.</string>
     <string name="door_guide_title">Τοποθετήστε τα ρούχα στον κάδο</string>
     <string name="door_guide_close_door_title">Κλείστε την πόρτα όταν είστε έτοιμοι να προχωρήσετε</string>
+    <string name="return_btn">Επιστροφή</string>
 </resources>

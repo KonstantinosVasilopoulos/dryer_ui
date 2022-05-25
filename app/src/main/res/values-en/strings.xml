@@ -99,4 +99,5 @@
     <string name="program_overview_notification_message_empty_text">The field is empty. Please input a name.</string>
     <string name="door_guide_close_door_title">Close the door whenever you feel ready to proceed</string>
     <string name="door_guide_title">Put your clothes in the bucket</string>
+    <string name="return_btn">Return</string>
 </resources>
