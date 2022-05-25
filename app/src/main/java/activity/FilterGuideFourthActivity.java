@@ -11,32 +11,26 @@ import com.aueb.idry.R;
 
 public class FilterGuideFourthActivity extends AppCompatActivity {
 
-    Button nextButton, backButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_guide_fourth);
 
-        backButton = findViewById(R.id.back_btn);
-        nextButton = findViewById(R.id.next_btn);
-    }
+        Button backBtn = (Button) findViewById(R.id.filter_guide_fourth_back_btn);
+        Button returnBtn = (Button) findViewById(R.id.filter_guide_fourth_return_btn);
 
-    protected void onStart() {
-        super.onStart();
-
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FilterGuideThirdActivity.class);
+                Intent intent = new Intent(FilterGuideFourthActivity.this, FilterGuideThirdActivity.class);
                 startActivity(intent);
             }
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(FilterGuideFourthActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
