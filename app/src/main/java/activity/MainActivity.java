@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // Start the routine menu activity
-                Intent intent = new Intent(MainActivity.this, RoutineMenuActivity.class);
+                //Intent intent = new Intent(MainActivity.this, RoutineMenuActivity.class);
+                Intent intent = new Intent(MainActivity.this, DoorGuideActivity.class);
+                intent.putExtra("className", "RoutineMenuActivity");
                 startActivity(intent);
             }
         });

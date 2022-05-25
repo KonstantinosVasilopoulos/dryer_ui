@@ -14,31 +14,33 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name="activity.DoorGuideActivity"
+            android:exported="true" />
+        <activity
             android:name="activity.SelectionSecondStepActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="activity.FilterGuideFirstActivity"
             android:exported="false" />
         <activity
             android:name="activity.SelectionFirstStepActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="activity.RoutineMenuActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="activity.FilterGuideSecondActivity"
             android:exported="false" />
         <activity
             android:name="activity.FilterGuideThirdActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="activity.FilterGuideFourthActivity"
             android:exported="false" />

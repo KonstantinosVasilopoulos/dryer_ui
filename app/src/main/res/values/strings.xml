@@ -111,4 +111,7 @@
     <string name="open_door_btn">Άνοιγμα πόρτας</string>
     <string name="settings_btn_description">Κουμπί ρυθμίσεων</string>
     <string name="door_unlocked_message">Η πόρτα ξεκλείδωσε</string>
+    <string name="door_guide_title">Τοποθετήστε τα ρούχα στον κάδο</string>
+    <string name="door_guide_close_door_title">Κλείστε την πόρτα όταν είστε έτοιμοι να προχωρήσετε</string>
+    <string name="return_btn">Επιστροφή</string>
 </resources>

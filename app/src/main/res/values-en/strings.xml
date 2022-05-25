@@ -100,4 +100,7 @@
     <string name="open_door_btn">Open door</string>
     <string name="settings_btn_description">Settings button</string>
     <string name="door_unlocked_message">Door unlocked</string>
+    <string name="door_guide_close_door_title">Close the door whenever you feel ready to proceed</string>
+    <string name="door_guide_title">Put your clothes in the bucket</string>
+    <string name="return_btn">Return</string>
 </resources>
