@@ -32,6 +32,24 @@
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_routine.xml" value="0.2774252039891206" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_second.xml" value="0.16304347826086957" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_selection_bar.xml" value="0.28558476881233" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_container_guide_first.xml" value="0.2265625" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_container_guide_second.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_door_guide.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_filter_guide_first.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_filter_guide_fourth.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_filter_guide_second.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_filter_guide_third.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_main.xml" value="0.24814814814814815" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_program_overview.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_routine_menu.xml" value="0.24814814814814815" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_selection_first_step.xml" value="0.24814814814814815" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_selection_second_step.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/activity_selection_third_step.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/fragment_notification.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/fragment_routine.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/fragment_selection_bar.xml" value="0.24814814814814815" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/fragment_time_picker.xml" value="0.27447916666666666" />
+        <entry key="..\:/dryer_ui/app/src/main/res/layout/settings.xml" value="0.4" />
         <entry key="app/src/main/res/drawable-v21/round_button.xml" value="0.3335" />
         <entry key="app/src/main/res/drawable-v23/warning_icon_responsive.xml" value="0.3335" />
         <entry key="app/src/main/res/drawable-v23/warning_icon_sm.xml" value="0.3335" />

@@ -103,4 +103,10 @@
     <string name="door_guide_close_door_title">Close the door whenever you feel ready to proceed</string>
     <string name="door_guide_title">Put your clothes in the bucket</string>
     <string name="return_btn">Return</string>
+    <string name="settingskey">Settings</string>
+    <string name="soundkey">Sound</string>
+    <string name="lang">Language</string>
+    <string name="notif">Notifications</string>
+    <string name="VI">Voice Instructions</string>
+    <string name="VC">Voice Commands</string>
 </resources>
