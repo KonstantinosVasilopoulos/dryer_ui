@@ -33,18 +33,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="activity.RoutineMenuActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="activity.ProgramOverviewActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="activity.ContainerGuideFirstActivity"
-            android:exported="true" />
-        <activity
-            android:name="activity.ContainerGuideSecondActivity"
-            android:exported="true" />
         <activity
             android:name="activity.FilterGuideSecondActivity"
             android:exported="false" />
@@ -58,7 +48,16 @@
             android:name="activity.SelectionThirdStepActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
-
+        <activity
+            android:name="activity.ProgramOverviewActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name="activity.ContainerGuideFirstActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.ContainerGuideSecondActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

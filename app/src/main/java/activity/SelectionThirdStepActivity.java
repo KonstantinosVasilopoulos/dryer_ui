@@ -61,8 +61,7 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
         // Set date button's label
         dateBtn = (Button) findViewById(R.id.timeSelectDateBtn);
         final Locale locale = getResources().getConfiguration().locale;
-        final SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN, locale);
-        dateBtn.setText(format.format(date));
+        displayDate();
 
         // Add listeners to left & right arrow buttons for controlling the date
         Button dateLeftBtn = (Button) findViewById(R.id.timeDateLeftBtn);
