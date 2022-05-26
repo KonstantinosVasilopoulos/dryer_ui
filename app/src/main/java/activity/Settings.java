@@ -1,15 +1,15 @@
 package activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aueb.idry.R;
+
+import java.util.Locale;
 
 public class Settings extends AppCompatActivity {
     boolean notification;
@@ -33,8 +33,15 @@ public class Settings extends AppCompatActivity {
         NotifSwitcher.setChecked(true);
         VoiceInstrSwitcher.setChecked(false);
         VoiceCommandsSwitcher.setChecked(false);
-        GreekSwitcher.setChecked(false);
-        EnglishSwitcher.setChecked(true);
+        if(Locale.getDefault().getLanguage().equals("en")) {
+            GreekSwitcher.setChecked(false);
+            EnglishSwitcher.setChecked(true);
+            
+        }else{
+            GreekSwitcher.setChecked(true);
+            EnglishSwitcher.setChecked(false);
+        }
+
 
         /* ENGLISH SWITCER */
         EnglishSwitcher.setOnClickListener(view -> {
