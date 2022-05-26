@@ -72,8 +72,8 @@ public class Settings extends AppCompatActivity {
         /* returnn button */
         returnn.setOnClickListener(view -> {
            //go in the previus page
-            ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
-            settingsBtn.setOnClickListener(v -> {
+            Button gobackbutton= view.findViewById(R.id.returnfromsettings);
+            gobackbutton.setOnClickListener(v -> {
                 // TODO: Navigate to the settings activity
 //                finish();
                 onBackPressed();
