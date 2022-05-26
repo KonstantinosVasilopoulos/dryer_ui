@@ -1,5 +1,6 @@
 package activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -57,7 +58,11 @@ public class FunctionButtonsFragment extends Fragment {
         ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
         settingsBtn.setOnClickListener(v -> {
             // TODO: Navigate to the settings activity
+                startActivity(new Intent( getActivity(), Settings.class));
         });
+
+
+
 
         // Door unlock button
         doorUnlockBtn.setOnClickListener(v -> {

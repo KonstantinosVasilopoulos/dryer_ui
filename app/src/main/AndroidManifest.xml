@@ -9,32 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry.MidnightMadness">
-
-        <!-- Launcher activity -->
-<!--        <activity-->
-<!--            android:name="activity.MainActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-
-        <!---SETTINGS-->
+        <!-- //Launcher activity-->
         <activity
-        android:name="activity.Settings"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+            android:name="activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
+
+<!--        -SETTINGS-->
 <!--        <activity-->
-<!--            android:name="activity.Settings"-->
-<!--            android:exported="false" />-->
-        <!-- Filter guide activities -->
+<!--        android:name="activity.Settings"-->
+<!--        android:exported="true">-->
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
+<!--    </activity>-->
+
+        <activity
+            android:name="activity.Settings"
+            android:exported="false" />
+         Filter guide activities
         <activity
             android:name="activity.FilterGuideFirstActivity"
             android:exported="false" />

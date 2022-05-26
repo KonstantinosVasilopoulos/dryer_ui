@@ -64,9 +64,7 @@ public class Settings extends AppCompatActivity {
         VoiceInstrSwitcher.setOnClickListener(view -> setVOICE_INSTRUCTION(VoiceInstrSwitcher.isChecked()));
 
         /* VOICE COMMANDS SWITCER */
-        VoiceCommandsSwitcher.setOnClickListener(view -> {
-            setVOICE_COMMANDS(VoiceCommandsSwitcher.isChecked());
-        });
+        VoiceCommandsSwitcher.setOnClickListener(view -> setVOICE_COMMANDS(VoiceCommandsSwitcher.isChecked()));
 
 
         /* returnn button */
