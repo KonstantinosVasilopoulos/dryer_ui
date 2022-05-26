@@ -1,8 +1,10 @@
 package activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,6 +72,12 @@ public class Settings extends AppCompatActivity {
         /* returnn button */
         returnn.setOnClickListener(view -> {
            //go in the previus page
+            ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
+            settingsBtn.setOnClickListener(v -> {
+                // TODO: Navigate to the settings activity
+//                finish();
+                onBackPressed();
+            });
         });
     }
 
