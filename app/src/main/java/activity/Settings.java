@@ -78,13 +78,8 @@ public class Settings extends AppCompatActivity {
 
         /* returnn button */
         returnn.setOnClickListener(view -> {
-           //go in the previus page
-            Button gobackbutton= view.findViewById(R.id.returnfromsettings);
-            gobackbutton.setOnClickListener(v -> {
-                // TODO: Navigate to the settings activity
-//                finish();
-                onBackPressed();
-            });
+            // go in the previous page
+            finish();
         });
     }
 
