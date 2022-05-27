@@ -113,4 +113,12 @@
     <string name="door_guide_title">Τοποθετήστε τα ρούχα στον κάδο</string>
     <string name="door_guide_close_door_title">Κλείστε την πόρτα όταν είστε έτοιμοι να προχωρήσετε</string>
     <string name="return_btn">Επιστροφή</string>
+    <string name="gr" translatable="false">Ελληνικά</string>
+    <string name="en" translatable="false">English</string>
+    <string name="settingskey">Ρυθμίσεις</string>
+    <string name="soundkey">Ήχος</string>
+    <string name="lang">Γλώσσα</string>
+    <string name="notif">Ειδοποιήσεις</string>
+    <string name="VI">Φωνητικές Οδηγίες</string>
+    <string name="VC">Φωνητικές Εντολές</string>
 </resources>

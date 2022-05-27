@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/soundview"
+        android:layout_width="326dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="14dp"
+        android:background="@color/gray_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSettSetting"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/settsoundLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textSettSound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/soundkey"
+                android:textAlignment="viewStart" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textSettVC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/VC"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/switchSettVC"
+        app:layout_constraintEnd_toStartOf="@+id/switchSettVC"
+        app:layout_constraintStart_toStartOf="@+id/soundview"
+        app:layout_constraintTop_toBottomOf="@+id/switchsettVI"
+        app:layout_constraintVertical_bias="0.58000004" />
+
+    <TextView
+        android:id="@+id/textSettSetting"
+        android:layout_width="168dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/settingskey"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:id="@+id/SettLanguageView"
+        android:layout_width="326dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="28dp"
+        android:textColor="#616161"
+        android:background="@color/gray_200"
+        app:layout_constraintEnd_toEndOf="@+id/soundview"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/soundview"
+        app:layout_constraintTop_toBottomOf="@+id/soundview"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/settlangLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lang"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Switch
+        android:id="@+id/switchsettnot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/purple_200"
+        android:minHeight="48dp"
+        android:rotationX="-13"
+        app:layout_constraintBottom_toBottomOf="@+id/soundview"
+        app:layout_constraintEnd_toEndOf="@+id/soundview"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@+id/textSettNot"
+        app:layout_constraintTop_toTopOf="@+id/soundview"
+        app:layout_constraintVertical_bias="0.2"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+    <!-- text to be displayed whenever current state is checked-->
+    <TextView
+        android:id="@+id/textSettNot"
+        android:layout_width="126dp"
+        android:layout_height="30dp"
+        android:text="@string/notif"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/switchsettnot"
+        app:layout_constraintEnd_toEndOf="@+id/soundview"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="@+id/soundview"
+        app:layout_constraintTop_toTopOf="@+id/switchsettnot" />
+
+
+
+    <TextView
+        android:id="@+id/textSettVI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/VI"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/switchsettVI"
+        app:layout_constraintEnd_toStartOf="@+id/switchsettVI"
+        app:layout_constraintStart_toStartOf="@+id/soundview"
+        app:layout_constraintTop_toTopOf="@+id/switchsettVI"
+        app:layout_constraintVertical_bias="0.36" />
+
+    <Switch
+        android:id="@+id/switchsettVI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/purple_200"
+        android:minHeight="48dp"
+        android:rotationX="-13"
+        app:layout_constraintBottom_toBottomOf="@+id/soundview"
+        app:layout_constraintEnd_toEndOf="@+id/soundview"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/switchsettnot"
+        app:layout_constraintTop_toBottomOf="@+id/switchsettnot"
+        app:layout_constraintVertical_bias="0.19"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/switchSettVC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/purple_200"
+        android:minHeight="48dp"
+        android:rotationX="-13"
+
+        app:layout_constraintBottom_toBottomOf="@+id/soundview"
+        app:layout_constraintEnd_toEndOf="@+id/soundview"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/switchsettnot"
+        app:layout_constraintTop_toBottomOf="@+id/switchsettVI"
+        app:layout_constraintVertical_bias="0.3"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="-1518dp" />
+
+    <TextView
+        android:id="@+id/textSettEN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/en"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/SettLanguageView"
+        app:layout_constraintStart_toStartOf="@+id/textSettVC"
+        app:layout_constraintTop_toBottomOf="@+id/textSettVC" />
+
+    <Switch
+        android:id="@+id/switchsetEN"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/SettLanguageView"
+        app:layout_constraintEnd_toEndOf="@+id/switchSettVC"
+        app:layout_constraintStart_toStartOf="@+id/switchSettVC"
+        app:layout_constraintTop_toBottomOf="@+id/switchSettVC"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/textSettGR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gr"
+        app:layout_constraintBottom_toBottomOf="@+id/SettLanguageView"
+        app:layout_constraintEnd_toEndOf="@+id/textSettEN"
+        app:layout_constraintStart_toStartOf="@+id/textSettEN"
+        app:layout_constraintTop_toBottomOf="@+id/textSettEN" />
+
+    <Switch
+        android:id="@+id/switchSettGr"
+        android:layout_width="57dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/SettLanguageView"
+        app:layout_constraintEnd_toEndOf="@+id/switchsetEN"
+        app:layout_constraintStart_toStartOf="@+id/switchsetEN"
+        app:layout_constraintTop_toBottomOf="@+id/switchsetEN"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Button
+        android:id="@+id/returnfromsettings"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gray_400"
+        android:text="@string/return_btn"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textSettSetting"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textSettSetting"
+        app:layout_constraintTop_toBottomOf="@+id/SettLanguageView"
+        app:layout_constraintVertical_bias="0.284"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
