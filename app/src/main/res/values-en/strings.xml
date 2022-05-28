@@ -97,7 +97,16 @@
     <string name="return_to_home_page_btn">Back to home</string>
     <string name="program_overview_notification_message_name_match">This name already exists. Please type another.</string>
     <string name="program_overview_notification_message_empty_text">The field is empty. Please input a name.</string>
+    <string name="open_door_btn">Open door</string>
+    <string name="settings_btn_description">Settings button</string>
+    <string name="door_unlocked_message">Door unlocked</string>
     <string name="door_guide_close_door_title">Close the door whenever you feel ready to proceed</string>
     <string name="door_guide_title">Put your clothes in the bucket</string>
     <string name="return_btn">Return</string>
+    <string name="settingskey">Settings</string>
+    <string name="soundkey">Sound</string>
+    <string name="lang">Language</string>
+    <string name="notif">Notifications</string>
+    <string name="VI">Voice Instructions</string>
+    <string name="VC">Voice Commands</string>
 </resources>

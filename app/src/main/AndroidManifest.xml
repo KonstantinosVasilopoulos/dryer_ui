@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IDry.MidnightMadness">
+
+        <!-- Launcher activity-->
         <activity
             android:name="activity.MainActivity"
             android:exported="true">
@@ -17,48 +19,58 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name="activity.DoorGuideActivity"
-            android:exported="true" />
-        <activity
-            android:name="activity.SelectionSecondStepActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:name="activity.Settings"
+            android:exported="false" />
+
+        <!-- Filter guide activities -->
         <activity
             android:name="activity.FilterGuideFirstActivity"
             android:exported="false" />
-        <activity
-            android:name="activity.SelectionFirstStepActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="activity.RoutineMenuActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="activity.ProgramOverviewActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="activity.ContainerGuideFirstActivity"
-            android:exported="true" />
-        <activity
-            android:name="activity.ContainerGuideSecondActivity"
-            android:exported="true" />
         <activity
             android:name="activity.FilterGuideSecondActivity"
             android:exported="false" />
         <activity
             android:name="activity.FilterGuideThirdActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name="activity.FilterGuideFourthActivity"
             android:exported="false" />
+
+        <!-- Container guide activities -->
+        <activity
+            android:name="activity.ContainerGuideFirstActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.ContainerGuideSecondActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="activity.DoorGuideActivity"
+            android:exported="false" />
+
+        <!-- Routine related activities -->
+        <activity
+            android:name="activity.RoutineMenuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="activity.SelectionFirstStepActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="activity.SelectionSecondStepActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="activity.SelectionThirdStepActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
-
+        <activity
+            android:name="activity.ProgramOverviewActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="activity.SelectionFirstStepActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/dryingLevelFunctionBtns"
+        android:name="activity.FunctionButtonsFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/selectionMainLayout"
         android:layout_width="0dp"
@@ -54,7 +63,7 @@
             android:padding="10dp">
 
             <Button
-                android:id="@+id/programmeCottonsBtn"
+                android:id="@+id/dryingLevelExtraDryBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_300"
@@ -65,7 +74,7 @@
                 app:cornerRadius="20dp" />
 
             <Button
-                android:id="@+id/programmeMinimumIronBtn"
+                android:id="@+id/dryingLevelNormalBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_300"
@@ -75,7 +84,7 @@
                 app:cornerRadius="20dp" />
 
             <Button
-                android:id="@+id/programmeWoollensBtn"
+                android:id="@+id/dryingLevelHandIronBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_300"
@@ -85,7 +94,7 @@
                 app:cornerRadius="20dp" />
 
             <Button
-                android:id="@+id/programmeOuterwearBtn"
+                android:id="@+id/dryingLevelMachineIronBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_300"
@@ -122,7 +131,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/programmePreviousBtn"
+            android:id="@+id/dryingLevelPreviousBtn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -133,7 +142,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/programmeNextBtn"
+            android:id="@+id/dryingLevelNextBtn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

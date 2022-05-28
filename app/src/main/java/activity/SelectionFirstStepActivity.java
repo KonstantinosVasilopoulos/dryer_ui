@@ -62,10 +62,10 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
 
         // Find all drying level buttons
         selectedDryingLevel = DryingLevel.NORMAL;
-        extraDryBtn = (Button) findViewById(R.id.programmeCottonsBtn);
-        normalBtn = (Button) findViewById(R.id.programmeMinimumIronBtn);
-        handIronBtn = (Button) findViewById(R.id.programmeWoollensBtn);
-        machineIronBtn = (Button) findViewById(R.id.programmeOuterwearBtn);
+        extraDryBtn = (Button) findViewById(R.id.dryingLevelExtraDryBtn);
+        normalBtn = (Button) findViewById(R.id.dryingLevelNormalBtn);
+        handIronBtn = (Button) findViewById(R.id.dryingLevelHandIronBtn);
+        machineIronBtn = (Button) findViewById(R.id.dryingLevelMachineIronBtn);
 
         // Highlight the selected drying level
         // Normal is the preset
@@ -177,8 +177,8 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         });
 
         // Add listeners to the button's controlling the routine creation/selection flow
-        final Button previousBtn = (Button) findViewById(R.id.programmePreviousBtn);
-        final Button nextBtn = (Button) findViewById(R.id.programmeNextBtn);
+        final Button previousBtn = (Button) findViewById(R.id.dryingLevelPreviousBtn);
+        final Button nextBtn = (Button) findViewById(R.id.dryingLevelNextBtn);
         previousBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
