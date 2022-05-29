@@ -58,7 +58,9 @@ public class FunctionButtonsFragment extends Fragment {
         ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
         settingsBtn.setOnClickListener(v -> {
             // Navigate to the settings activity
-            startActivity(new Intent( getActivity(), Settings.class));
+            Intent intent = new Intent(getActivity(), Settings.class);
+            intent.putExtra("className", getActivity().getClass());
+            startActivity(intent);
         });
 
         // Door unlock button
