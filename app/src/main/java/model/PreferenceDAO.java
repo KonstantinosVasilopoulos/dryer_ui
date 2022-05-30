@@ -31,6 +31,7 @@ public class PreferenceDAO {
         try {
             file = new File(context.getFilesDir(), FILENAME);
 
+            file.delete();
             if (!file.exists()) {
                 file.createNewFile();
             }

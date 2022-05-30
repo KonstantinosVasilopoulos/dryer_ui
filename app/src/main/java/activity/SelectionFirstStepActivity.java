@@ -8,12 +8,17 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.DryingLevel;
 
+import java.util.Locale;
+
+import model.Preference;
+import model.PreferenceDAO;
 import model.Routine;
 import model.RoutineDAO;
 import utils.SelectionBarStep;
@@ -25,11 +30,16 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
     private Button normalBtn;
     private Button handIronBtn;
     private Button machineIronBtn;
+    private TextToSpeech tts;
+    private Preference preference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_first_step);
+
+        // Get preferences
+        preference = PreferenceDAO.getInstance(getApplicationContext()).retrievePreference();
 
         // Check for a provided routine name
         Bundle params = getIntent().getExtras();
@@ -235,6 +245,7 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         selectedDryingLevel = level;
     }
 
+    // Helper methods
     // Apply stylistic changes to the selected drying level button
     private void selectDryingLevelBtn(Button btn) {
         // De-highlight the previously selected button
@@ -259,5 +270,20 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
 
         // Highlight the button
         btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
+    }
+
+    // Initialize text-to-speech
+    private void initTextToSpeech() {
+        tts = new TextToSpeech(getApplicationContext(), i -> {
+            if (i != TextToSpeech.ERROR) {
+                // Check language availability
+                Locale locale = getResources().getConfiguration().locale;
+                if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                    tts.setLanguage(locale);
+                } else {
+                    tts.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
     }
 }
