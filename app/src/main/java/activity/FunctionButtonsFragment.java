@@ -1,6 +1,5 @@
 package activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -22,11 +21,15 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
 
+import model.Preference;
+import model.PreferenceDAO;
+
 public class FunctionButtonsFragment extends Fragment {
 
     private Button doorUnlockBtn;
     private TumbleDryer dryer;
     private TextToSpeech tts;
+    private Preference preference;
 
     public FunctionButtonsFragment() {
         // Required empty public constructor
@@ -40,7 +43,10 @@ public class FunctionButtonsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initTextToSpeech();
+        preference = PreferenceDAO.getInstance(getContext()).retrievePreference();
+        if (preference.getVoiceInstructions()) {
+            initTextToSpeech();
+        }
     }
 
     @Override
@@ -65,9 +71,11 @@ public class FunctionButtonsFragment extends Fragment {
         ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
         settingsBtn.setOnClickListener(v -> {
             // Navigate to the settings activity
-            Intent intent = new Intent(getActivity(), Settings.class);
-            intent.putExtra("className", getActivity().getClass());
-            startActivity(intent);
+            if (getActivity() != null) {
+                Intent intent = new Intent(getActivity(), Settings.class);
+                intent.putExtra("className", getActivity().getClass());
+                startActivity(intent);
+            }
         });
 
         // Door unlock button
@@ -77,8 +85,10 @@ public class FunctionButtonsFragment extends Fragment {
             hideDoorUnlockBtn();
 
             // Use speech-to-text to inform the user that the door is now unlocked
-            String toSpeak = getString(R.string.tts_door_unlocked);
-            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
+            if (preference.getVoiceInstructions()) {
+                String toSpeak = getString(R.string.tts_door_unlocked);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
+            }
 
             // Display a pop-up informing the use that the door is now unlocked
             Snackbar.make(v, R.string.door_unlocked_message, Snackbar.LENGTH_SHORT).show();
@@ -102,8 +112,10 @@ public class FunctionButtonsFragment extends Fragment {
     public void onStop() {
         super.onStop();
 
-        tts.stop();
-        tts.shutdown();
+        if (preference.getVoiceInstructions()) {
+            tts.stop();
+            tts.shutdown();
+        }
     }
 
     public void displayDoorUnlockBtn() {

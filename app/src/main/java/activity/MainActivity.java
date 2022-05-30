@@ -58,8 +58,10 @@ public class MainActivity extends AdvancedAppActivity {
                 dryer.turnOn();
 
                 // Use text-to-speech to inform the user
-                String toSpeak = getString(R.string.tts_turn_on);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+                if (preference.getVoiceInstructions()) {
+                    String toSpeak = getString(R.string.tts_turn_on);
+                    tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+                }
             }
 
             // Unlock the dryer's door
@@ -68,9 +70,11 @@ public class MainActivity extends AdvancedAppActivity {
             }
 
             // Wait for the text-to-speech to finish talking
-            boolean isSpeaking = tts.isSpeaking();
-            while (isSpeaking) {
-                isSpeaking = tts.isSpeaking();
+            if (preference.getVoiceInstructions()) {
+                boolean isSpeaking = tts.isSpeaking();
+                while (isSpeaking) {
+                    isSpeaking = tts.isSpeaking();
+                }
             }
 
             // Start the routine menu activity
