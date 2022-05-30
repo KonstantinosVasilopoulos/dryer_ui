@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -14,14 +15,22 @@ import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
+import java.util.Locale;
+
+import model.Preference;
+import model.PreferenceDAO;
 import utils.Notifications;
 
 public class MainActivity extends AppCompatActivity {
+    private TextToSpeech tts;
+    private Preference preference;
     private final int NOTIFICATIONS_LAYOUT = R.id.mainNotificationsScrollLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preference = PreferenceDAO.getInstance(this).retrievePreference();
+        LanguageHelper.setLocale(this, preference.getLanguageName());
         setContentView(R.layout.activity_main);
 
         // Resize the start button's text if it's too big
@@ -39,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         // Get the dryer interface
         TumbleDryer dryer = TumbleDryerImp.getInstance();
 
+        // text-to-speech initialization
+        if (preference.getVoiceInstructions()) {
+            initTextToSpeech();
+        }
+
         // Create notification fragments if required
         // Filters notification
         if (dryer.checkFilters()) {
@@ -55,11 +69,25 @@ public class MainActivity extends AppCompatActivity {
             // Turn on the dryer
             if (!dryer.getPowerStatus()) {
                 dryer.turnOn();
+
+                // Use text-to-speech to inform the user
+                if (preference.getVoiceInstructions()) {
+                    String toSpeak = getString(R.string.tts_turn_on);
+                    tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+                }
             }
 
             // Unlock the dryer's door
             if (dryer.isClosed()) {
                 dryer.openDoor();
+            }
+
+            // Wait for the text-to-speech to finish talking
+            if (preference.getVoiceInstructions()) {
+                boolean isSpeaking = tts.isSpeaking();
+                while (isSpeaking) {
+                    isSpeaking = tts.isSpeaking();
+                }
             }
 
             // Start the routine menu activity
@@ -70,7 +98,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Helper method
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if (preference.getVoiceInstructions()) {
+            initTextToSpeech();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (preference.getVoiceInstructions()) {
+            tts.stop();
+            tts.shutdown();
+        }
+    }
+
+    // Helper methods
     // Add a notification fragment
     private void addNotificationFragment(Notifications type) {
         FragmentManager fm = getSupportFragmentManager();
@@ -80,5 +127,20 @@ public class MainActivity extends AppCompatActivity {
         args.putSerializable("notification", type);
         fragment.setArguments(args);
         transaction.add(NOTIFICATIONS_LAYOUT, fragment).commit();
+    }
+
+    // Initialize the text-to-speech component
+    private void initTextToSpeech() {
+        tts = new TextToSpeech(getApplicationContext(), i -> {
+            if (i != TextToSpeech.ERROR) {
+                // Check language availability
+                Locale locale = getResources().getConfiguration().locale;
+                if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                    tts.setLanguage(locale);
+                } else {
+                    tts.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
     }
 }

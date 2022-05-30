@@ -121,4 +121,6 @@
     <string name="notif">Ειδοποιήσεις</string>
     <string name="VI">Φωνητικές Οδηγίες</string>
     <string name="VC">Φωνητικές Εντολές</string>
+    <string name="tts_turn_on">Η συσκευή ενεργοποιήθηκε</string>
+    <string name="tts_door_unlocked">Η πόρτα άνοιξε</string>
 </resources>

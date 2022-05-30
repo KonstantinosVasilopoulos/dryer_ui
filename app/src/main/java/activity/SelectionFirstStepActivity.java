@@ -36,17 +36,20 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         String routineName;
         Routine newRoutine;
         RoutineDAO routines = RoutineDAO.getInstance(getApplicationContext());
+        boolean editMode;
         if (params != null) {
             // Retrieve the routine
             routineName = params.getString("routine_name");
             newRoutine = routines.getRoutine(routineName);
+            editMode = true;
 
         } else {
             // Create new routine
-            final int routinesSize = routines.getRoutines().size();
+            final int routinesSize = routines.getRoutines().size() + 1;
             routineName = "Routine " + String.valueOf(routinesSize);
             newRoutine = new Routine(routineName);
             routines.saveRoutine(newRoutine);
+            editMode = false;
         }
 
         // Create the selection bar
@@ -182,6 +185,11 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         previousBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Delete unsaved routine
+                if (!editMode) {
+                    routines.removeRoutine(routineName);
+                }
+
                 // Return to the routines' menu activity
                 Intent intent = new Intent(SelectionFirstStepActivity.this, RoutineMenuActivity.class);
                 startActivity(intent);

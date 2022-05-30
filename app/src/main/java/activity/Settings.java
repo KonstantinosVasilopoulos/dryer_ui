@@ -1,124 +1,132 @@
 package activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.aueb.idry.R;
-
+import org.json.JSONException;
 import java.util.Locale;
+import model.Preference;
+import model.PreferenceDAO;
 
 public class Settings extends AppCompatActivity {
-    boolean notification;
-    boolean VOICE_INSTRUCTION;
-    boolean VOICE_COMMANDS;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private Switch notificationsSwitcher, voiceInstructionsSwitcher,
+            voiceCommandsSwitcher, englishSwitcher, greekSwitcher;
+
+    private Class classToIntent;
+
+    private Preference preference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.settings);
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch NotifSwitcher = findViewById(R.id.switchsettnot);
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch VoiceInstrSwitcher = findViewById(R.id.switchsettVI);
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch VoiceCommandsSwitcher = findViewById(R.id.switchSettVC);
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch EnglishSwitcher = findViewById(R.id.switchsetEN);
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch GreekSwitcher = findViewById(R.id.switchSettGr);
-        Button returnn = findViewById(R.id.returnfromsettings);
         super.onCreate(savedInstanceState);
-        NotifSwitcher.setChecked(true);
-        VoiceInstrSwitcher.setChecked(false);
-        VoiceCommandsSwitcher.setChecked(false);
-        if(Locale.getDefault().getLanguage().equals("en")) {
-            GreekSwitcher.setChecked(false);
-            EnglishSwitcher.setChecked(true);
-            
-        }else{
-            GreekSwitcher.setChecked(true);
-            EnglishSwitcher.setChecked(false);
+        setContentView(R.layout.settings);
+
+        Bundle param = getIntent().getExtras();
+
+        if (param != null) {
+            classToIntent = (Class) param.getSerializable("className");
         }
 
+        preference = PreferenceDAO.getInstance(this).retrievePreference();
+
+        notificationsSwitcher = findViewById(R.id.switchsettnot);
+
+        voiceInstructionsSwitcher = findViewById(R.id.switchsettVI);
+
+        voiceCommandsSwitcher = findViewById(R.id.switchSettVC);
+
+        englishSwitcher = findViewById(R.id.switchsetEN);
+
+        greekSwitcher = findViewById(R.id.switchSettGr);
+
+        setSwitchers(preference);
+
+        Button returnBtn = findViewById(R.id.returnfromsettings);
+
+        //notificationSwitcher.setChecked(true);
+        //voiceInstructionsSwitcher.setChecked(false);
+        //voiceCommandsSwitcher.setChecked(false);
+        if(Locale.getDefault().getLanguage().equals("en")) {
+            greekSwitcher.setChecked(false);
+            englishSwitcher.setChecked(true);
+            
+        }else{
+            greekSwitcher.setChecked(true);
+            englishSwitcher.setChecked(false);
+        }
 
         /* ENGLISH SWITCER */
-        EnglishSwitcher.setOnClickListener(view -> {
-            if (EnglishSwitcher.isChecked()) {
-                GreekSwitcher.setChecked(false);
-                lan( true );
-            }else{
-                GreekSwitcher.setChecked(true);
-                lan( false);
+        englishSwitcher.setOnClickListener(view -> {
+            if (englishSwitcher.isChecked()) {
+                setLanguage(true);
             }
+            else {
+                setLanguage(false);
+            }
+
         });
 
         /* GREEK SWITCER */
-        GreekSwitcher.setOnClickListener(view -> {
-            if (GreekSwitcher.isChecked()){
-                EnglishSwitcher.setChecked(false);
-                lan( false);
+        greekSwitcher.setOnClickListener(view -> {
+            if (greekSwitcher.isChecked()) {
+                setLanguage(false);
             }
-            else{
-                EnglishSwitcher.setChecked(true);
-                lan( true);
+            else {
+                setLanguage(true);
             }
         });
 
-        /* NOTIFICATIONS SWITCER */
-        NotifSwitcher.setOnClickListener(view -> setNotification(NotifSwitcher.isChecked()));
+        /* Return button */
+        returnBtn.setOnClickListener(view -> {
+            // go in the previous page
+            preference.setNotifications(notificationsSwitcher.isChecked());
+            preference.setVoiceInstructions(voiceInstructionsSwitcher.isChecked());
+            preference.setVoiceCommands(voiceCommandsSwitcher.isChecked());
+            preference.setLanguage(greekSwitcher.isChecked());
+            try {
+                PreferenceDAO.getInstance(this).savePreference(preference);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        /* VOICE INSTRUCTIONS SWITCER */
-        VoiceInstrSwitcher.setOnClickListener(view -> setVOICE_INSTRUCTION(VoiceInstrSwitcher.isChecked()));
-
-        /* VOICE COMMANDS SWITCER */
-        VoiceCommandsSwitcher.setOnClickListener(view -> setVOICE_COMMANDS(VoiceCommandsSwitcher.isChecked()));
-
-
-        /* returnn button */
-        returnn.setOnClickListener(view -> {
-           //go in the previus page
-            Button gobackbutton= view.findViewById(R.id.returnfromsettings);
-            gobackbutton.setOnClickListener(v -> {
-                // TODO: Navigate to the settings activity
-//                finish();
-                onBackPressed();
-            });
+            Intent intent = new Intent(getApplicationContext(), classToIntent);
+            startActivity(intent);
+            finish();
         });
     }
-
-    private void lan( boolean b ) {
-        /* change language? */
-        if (b) {
-            LanguageHelper.setLocale(this, "en");
-        } else {
-            LanguageHelper.setLocale(this , "gr");
+    private void setSwitchers(Preference preference) {
+        if (preference == null) {
+            setLanguage(Locale.getDefault().getLanguage().equals("en"));
+        }
+        else {
+            notificationsSwitcher.setChecked(preference.getNotifications());
+            voiceInstructionsSwitcher.setChecked(preference.getVoiceInstructions());
+            voiceCommandsSwitcher.setChecked(preference.getVoiceCommands());
+            setLanguage(!preference.getLanguage());
         }
     }
 
-    public boolean NotificationOn(){
-        return notification;
-    }
-
-    private void setNotification(boolean a){
-        notification=a;
-    }
-
-    private void setVOICE_INSTRUCTION(boolean a) {
-        VOICE_INSTRUCTION = a;
-    }
-
-    public boolean VOICE_INSTRUCTIONOn(){
-        return VOICE_INSTRUCTION;
-    }
-
-    public boolean VOICE_COMMANDSOn(){
-        return VOICE_COMMANDS;
-    }
-
-    private void setVOICE_COMMANDS(boolean a) {
-        VOICE_COMMANDS = a;
+    private void setLanguage( boolean language) {
+        /* change language? */
+        if (language) {
+            LanguageHelper.setLocale(this, "en");
+            englishSwitcher.setChecked(true);
+            greekSwitcher.setChecked(false);
+        } else {
+            LanguageHelper.setLocale(this , "gr");
+            englishSwitcher.setChecked(false);
+            greekSwitcher.setChecked(true);
+        }
+//        Intent intent = getIntent();
+//        finish();
+//        startActivity(intent);
     }
 
 }

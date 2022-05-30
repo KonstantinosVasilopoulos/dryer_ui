@@ -39,6 +39,7 @@ public class ProgramOverviewActivity extends AppCompatActivity {
     // This helps us to understand if we are able to start the duration count down timer.
     private boolean activityStatus = false;
     private boolean durationStarted = false;
+    private boolean savePreference = true;
 
     // Textviews initialization
     private TextView programDuration;
@@ -107,7 +108,7 @@ public class ProgramOverviewActivity extends AppCompatActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         Bundle args = new Bundle();
         args.putString("current_step", SelectionBarStep.PREVIEW.name());
-
+        args.putString("routine_name", routineName);
         SelectionBarFragment selectionBarFragment = new SelectionBarFragment();
         selectionBarFragment.setArguments(args);
         transaction.add(R.id.programmeOverviewBar, selectionBarFragment);
@@ -133,6 +134,15 @@ public class ProgramOverviewActivity extends AppCompatActivity {
 
         dryerLevel.setText(getString(routine.getLevel().getStringId()));
         clothesProgram.setText(routine.getProgramme().getStringId());
+
+        previousBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SelectionThirdStepActivity.class);
+                intent.putExtra("routine_name", routineName);
+                startActivity(intent);
+            }
+        });
 
         confirmResumeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,6 +210,10 @@ public class ProgramOverviewActivity extends AppCompatActivity {
         returnToHomeBtn.setVisibility(View.VISIBLE);
         statusLayout.setVisibility(View.GONE);
         removeClothesNotificationLayout.setVisibility(View.VISIBLE);
+
+        if (!savePreference) {
+            RoutineDAO.getInstance().removeRoutine(routineName);
+        }
     }
 
     private void showSaveDialogInterface() {
@@ -211,7 +225,6 @@ public class ProgramOverviewActivity extends AppCompatActivity {
                             showRenameDialogInterface();
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
-                            RoutineDAO.getInstance().removeRoutine(routineName);
                             Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -238,7 +251,6 @@ public class ProgramOverviewActivity extends AppCompatActivity {
                         // Does nothing
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
-                        RoutineDAO.getInstance().removeRoutine(routineName);
                         Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -266,9 +278,11 @@ public class ProgramOverviewActivity extends AppCompatActivity {
                 }
                 else if (!RoutineDAO.getInstance().containsName(newRoutineName) || (routineName == newRoutineName)) {
                     routine.setName(newRoutineName);
+                    routineName = newRoutineName;
                     RoutineDAO.getInstance().saveRoutine(routine);
                     Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_saved), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_saved, Snackbar.LENGTH_SHORT).show();
+                    savePreference = true;
                     alertDialog.dismiss();
                 }
                 else {

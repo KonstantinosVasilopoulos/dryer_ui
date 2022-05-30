@@ -1,5 +1,6 @@
 package activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.aueb.idry.R;
 
@@ -59,9 +61,42 @@ public class RoutineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Set the button's text
-        Button routineSelectionBtn = (Button) view.findViewById(R.id.routineSelectionBtn);
+        Button routineSelectionBtn = view.findViewById(R.id.routineSelectionBtn);
         if (routine != null) {
             routineSelectionBtn.setText(routine.getName());
+
+            // Connect the routine with its preview activity
+            routineSelectionBtn.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ProgramOverviewActivity.class);
+                intent.putExtra("routine_name", routine.getName());
+                startActivity(intent);
+            });
+
+            // Set listener for the edit button
+            ImageButton editBtn = view.findViewById(R.id.routineEditBtn);
+            editBtn.setOnClickListener(v -> {
+                // Head to the first selection step for this routine
+                Intent intent = new Intent(getContext(), SelectionFirstStepActivity.class);
+                intent.putExtra("routine_name", routine.getName());
+                startActivity(intent);
+            });
+
+            // Set listener for the delete button
+            ImageButton deleteBtn = view.findViewById(R.id.routineDeleteBtn);
+            deleteBtn.setOnClickListener(v -> {
+                // TODO: Create dialog to avoid accidental deletions
+
+                // Delete the routine
+                RoutineDAO routines = RoutineDAO.getInstance(getContext());
+                if (routines.containsName(routine.getName())) {
+                    routines.removeRoutine(routine.getName());
+
+                    // Self-destruct
+                    if (getActivity() != null) {
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(RoutineFragment.this).commit();
+                    }
+                }
+            });
         }
     }
 

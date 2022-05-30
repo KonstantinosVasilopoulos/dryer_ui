@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,17 @@ import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Locale;
+
+import model.Preference;
+import model.PreferenceDAO;
+
 public class FunctionButtonsFragment extends Fragment {
 
     private Button doorUnlockBtn;
     private TumbleDryer dryer;
+    private TextToSpeech tts;
+    private Preference preference;
 
     public FunctionButtonsFragment() {
         // Required empty public constructor
@@ -34,6 +42,11 @@ public class FunctionButtonsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        preference = PreferenceDAO.getInstance(getContext()).retrievePreference();
+        if (preference.getVoiceInstructions()) {
+            initTextToSpeech();
+        }
     }
 
     @Override
@@ -57,18 +70,25 @@ public class FunctionButtonsFragment extends Fragment {
         // Settings button
         ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
         settingsBtn.setOnClickListener(v -> {
-            // TODO: Navigate to the settings activity
-                startActivity(new Intent( getActivity(), Settings.class));
+            // Navigate to the settings activity
+            if (getActivity() != null) {
+                Intent intent = new Intent(getActivity(), Settings.class);
+                intent.putExtra("className", getActivity().getClass());
+                startActivity(intent);
+            }
         });
-
-
-
 
         // Door unlock button
         doorUnlockBtn.setOnClickListener(v -> {
             // Open the door and hide this button
             dryer.openDoor();
             hideDoorUnlockBtn();
+
+            // Use speech-to-text to inform the user that the door is now unlocked
+            if (preference.getVoiceInstructions()) {
+                String toSpeak = getString(R.string.tts_door_unlocked);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
+            }
 
             // Display a pop-up informing the use that the door is now unlocked
             Snackbar.make(v, R.string.door_unlocked_message, Snackbar.LENGTH_SHORT).show();
@@ -88,6 +108,16 @@ public class FunctionButtonsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (preference.getVoiceInstructions()) {
+            tts.stop();
+            tts.shutdown();
+        }
+    }
+
     public void displayDoorUnlockBtn() {
         if (doorUnlockBtn != null) {
             doorUnlockBtn.setVisibility(View.VISIBLE);
@@ -98,5 +128,21 @@ public class FunctionButtonsFragment extends Fragment {
         if (doorUnlockBtn != null) {
             doorUnlockBtn.setVisibility(View.GONE);
         }
+    }
+
+    // Helper method
+    // Initialize the text-to-speech component
+    private void initTextToSpeech() {
+        tts = new TextToSpeech(getContext(), i -> {
+            if (i != TextToSpeech.ERROR) {
+                // Check language availability
+                Locale locale = getResources().getConfiguration().locale;
+                if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                    tts.setLanguage(locale);
+                } else {
+                    tts.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
     }
 }
