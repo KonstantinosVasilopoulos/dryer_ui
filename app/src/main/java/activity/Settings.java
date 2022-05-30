@@ -65,10 +65,10 @@ public class Settings extends AppCompatActivity {
         /* ENGLISH SWITCER */
         englishSwitcher.setOnClickListener(view -> {
             if (englishSwitcher.isChecked()) {
-                setLanguage(true);
+                setLanguage(true, true);
             }
             else {
-                setLanguage(false);
+                setLanguage(false, true);
             }
 
         });
@@ -76,44 +76,31 @@ public class Settings extends AppCompatActivity {
         /* GREEK SWITCER */
         greekSwitcher.setOnClickListener(view -> {
             if (greekSwitcher.isChecked()) {
-                setLanguage(false);
+                setLanguage(false, true);
             }
             else {
-                setLanguage(true);
+                setLanguage(true, true);
             }
         });
 
         /* Return button */
         returnBtn.setOnClickListener(view -> {
-            // go in the previous page
-            preference.setNotifications(notificationsSwitcher.isChecked());
-            preference.setVoiceInstructions(voiceInstructionsSwitcher.isChecked());
-            preference.setVoiceCommands(voiceCommandsSwitcher.isChecked());
-            preference.setLanguage(greekSwitcher.isChecked());
-            try {
-                PreferenceDAO.getInstance(this).savePreference(preference);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Intent intent = new Intent(getApplicationContext(), classToIntent);
-            startActivity(intent);
-            finish();
+            intentClass();
         });
     }
     private void setSwitchers(Preference preference) {
         if (preference == null) {
-            setLanguage(Locale.getDefault().getLanguage().equals("en"));
+            setLanguage(Locale.getDefault().getLanguage().equals("en"), false);
         }
         else {
             notificationsSwitcher.setChecked(preference.getNotifications());
             voiceInstructionsSwitcher.setChecked(preference.getVoiceInstructions());
             voiceCommandsSwitcher.setChecked(preference.getVoiceCommands());
-            setLanguage(!preference.getLanguage());
+            setLanguage(!preference.getLanguage(), false);
         }
     }
 
-    private void setLanguage( boolean language) {
+    private void setLanguage( boolean language, boolean restartActivity) {
         /* change language? */
         if (language) {
             LanguageHelper.setLocale(this, "en");
@@ -124,11 +111,41 @@ public class Settings extends AppCompatActivity {
             englishSwitcher.setChecked(false);
             greekSwitcher.setChecked(true);
         }
-//        Intent intent = getIntent();
-//        finish();
-//        startActivity(intent);
+
+        if (restartActivity) {
+            savePreference();
+            Intent intent = getIntent();
+            startActivity(intent);
+            finish();
+        }
     }
 
+    private void savePreference() {
+        preference.setNotifications(notificationsSwitcher.isChecked());
+        preference.setVoiceInstructions(voiceInstructionsSwitcher.isChecked());
+        preference.setVoiceCommands(voiceCommandsSwitcher.isChecked());
+        preference.setLanguage(greekSwitcher.isChecked());
+
+        try {
+            PreferenceDAO.getInstance(this).savePreference(preference);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void intentClass() {
+        savePreference();
+
+        Intent intent = new Intent(getApplicationContext(), classToIntent);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        intentClass();
+    }
 }
 
 
