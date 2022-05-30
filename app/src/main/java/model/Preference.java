@@ -52,7 +52,7 @@ public class Preference {
 
     public String getLanguageName() {
         if (getLanguage()) {
-            return "gr";
+            return "el";
         }
         return "en";
     }

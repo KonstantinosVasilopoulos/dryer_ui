@@ -33,6 +33,20 @@ public class PreferenceDAO {
 
             if (!file.exists()) {
                 file.createNewFile();
+
+                // Initialize default preferences
+                Preference defaultPreference = new Preference(
+                        true,
+                        false,
+                        false,
+                        true
+                );
+
+                try {
+                    savePreference(defaultPreference);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

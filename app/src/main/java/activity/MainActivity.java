@@ -17,17 +17,20 @@ import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import java.util.Locale;
 
+import model.Preference;
 import model.PreferenceDAO;
 import utils.Notifications;
 
 public class MainActivity extends AppCompatActivity {
     private TextToSpeech tts;
+    private Preference preference;
     private final int NOTIFICATIONS_LAYOUT = R.id.mainNotificationsScrollLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LanguageHelper.setLocale(this, PreferenceDAO.getInstance(this).retrievePreference().getLanguageName());
+        preference = PreferenceDAO.getInstance(this).retrievePreference();
+        LanguageHelper.setLocale(this, preference.getLanguageName());
         setContentView(R.layout.activity_main);
 
         // Resize the start button's text if it's too big
@@ -45,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
         // Get the dryer interface
         TumbleDryer dryer = TumbleDryerImp.getInstance();
 
-        initTextToSpeech();
+        // text-to-speech initialization
+        if (preference.getVoiceInstructions()) {
+            initTextToSpeech();
+        }
 
         // Create notification fragments if required
         // Filters notification
@@ -65,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
                 dryer.turnOn();
 
                 // Use text-to-speech to inform the user
-                String toSpeak = getString(R.string.tts_turn_on);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+                if (preference.getVoiceInstructions()) {
+                    String toSpeak = getString(R.string.tts_turn_on);
+                    tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+                }
             }
 
             // Unlock the dryer's door
@@ -75,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // Wait for the text-to-speech to finish talking
-            boolean isSpeaking = tts.isSpeaking();
-            while (isSpeaking) {
-                isSpeaking = tts.isSpeaking();
+            if (preference.getVoiceInstructions()) {
+                boolean isSpeaking = tts.isSpeaking();
+                while (isSpeaking) {
+                    isSpeaking = tts.isSpeaking();
+                }
             }
 
             // Start the routine menu activity
@@ -92,15 +102,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
 
-        initTextToSpeech();
+        if (preference.getVoiceInstructions()) {
+            initTextToSpeech();
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        tts.stop();
-        tts.shutdown();
+        if (preference.getVoiceInstructions()) {
+            tts.stop();
+            tts.shutdown();
+        }
     }
 
     // Helper methods

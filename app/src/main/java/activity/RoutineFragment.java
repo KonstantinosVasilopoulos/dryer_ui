@@ -84,6 +84,8 @@ public class RoutineFragment extends Fragment {
             // Set listener for the delete button
             ImageButton deleteBtn = view.findViewById(R.id.routineDeleteBtn);
             deleteBtn.setOnClickListener(v -> {
+                // TODO: Create dialog to avoid accidental deletions
+
                 // Delete the routine
                 RoutineDAO routines = RoutineDAO.getInstance(getContext());
                 if (routines.containsName(routine.getName())) {
