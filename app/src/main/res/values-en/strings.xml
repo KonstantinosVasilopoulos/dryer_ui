@@ -109,4 +109,6 @@
     <string name="notif">Notifications</string>
     <string name="VI">Voice Instructions</string>
     <string name="VC">Voice Commands</string>
+    <string name="tts_turn_on">Machine turned on</string>
+    <string name="tts_door_unlocked">Door unlocked</string>
 </resources>
