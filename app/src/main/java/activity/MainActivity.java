@@ -17,6 +17,7 @@ import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import java.util.Locale;
 
+import model.PreferenceDAO;
 import utils.Notifications;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageHelper.setLocale(this, PreferenceDAO.getInstance(this).retrievePreference().getLanguageName());
         setContentView(R.layout.activity_main);
 
         // Resize the start button's text if it's too big
