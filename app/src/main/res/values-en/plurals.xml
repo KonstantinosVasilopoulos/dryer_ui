@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="tts_preview_hours">
+        <item quantity="one">Your routine will last %d hour</item>
+        <item quantity="other">Your routine will last %d hours</item>
+    </plurals>
+    <plurals name="tts_preview_minutes">
+        <item quantity="one">and %d minute</item>
+        <item quantity="other">and %d minutes</item>
+    </plurals>
+</resources>

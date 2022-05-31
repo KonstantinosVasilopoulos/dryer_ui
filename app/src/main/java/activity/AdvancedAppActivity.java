@@ -2,10 +2,13 @@ package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import model.Preference;
 import model.PreferenceDAO;
@@ -15,10 +18,11 @@ Activity class containing more app-specific functionality
 Included:
     - Preferences instance
     - Text-to-speech
- */
+*/
 public abstract class AdvancedAppActivity extends AppCompatActivity {
     protected Preference preference;
     protected TextToSpeech tts;
+    protected Map<String, Object> extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         if (preference.getVoiceInstructions()) {
             initTextToSpeech();
         }
+
+        // Initialize dictionary that stores the activities extras
+        extras = new HashMap<>();
     }
 
     @Override
@@ -40,6 +47,31 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         if (preference.getVoiceInstructions()) {
             initTextToSpeech();
         }
+
+        // Restart activity in case of a language change
+        finish();
+        Intent intent = getIntent();
+        for (String name : extras.keySet()) {
+            // Cast extra to its required type
+            switch (name) {
+                case "routine_name":
+                    intent.putExtra(name, (String) extras.get(name));
+                    break;
+
+                case "edit_mode":
+                    intent.putExtra(name, (Boolean) extras.get(name));
+                    break;
+
+                default:
+                    // Try to convert the extra into a string
+                    try {
+                        intent.putExtra(name, (String) extras.get(name));
+                    } catch (ClassCastException e) {
+                        e.printStackTrace();
+                    }
+            }
+        }
+        startActivity(intent);
     }
 
     @Override
@@ -65,5 +97,10 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Set extras dictionary in routine-related activities
+    protected void setRoutineActivityExtras(String routineName) {
+        extras.put("routine_name", routineName);
     }
 }

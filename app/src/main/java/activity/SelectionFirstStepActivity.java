@@ -1,6 +1,5 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,55 +7,47 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
-import android.view.View;
 import android.widget.Button;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.DryingLevel;
 
-import java.util.Locale;
-
-import model.Preference;
-import model.PreferenceDAO;
 import model.Routine;
 import model.RoutineDAO;
 import utils.SelectionBarStep;
 
-public class SelectionFirstStepActivity extends AppCompatActivity {
+public class SelectionFirstStepActivity extends AdvancedAppActivity {
 
     private DryingLevel selectedDryingLevel;
     private Button extraDryBtn;
     private Button normalBtn;
     private Button handIronBtn;
     private Button machineIronBtn;
-    private TextToSpeech tts;
-    private Preference preference;
+    private String routineName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_first_step);
 
-        // Get preferences
-        preference = PreferenceDAO.getInstance(getApplicationContext()).retrievePreference();
-
         // Check for a provided routine name
         Bundle params = getIntent().getExtras();
-        String routineName;
         Routine newRoutine;
         RoutineDAO routines = RoutineDAO.getInstance(getApplicationContext());
         boolean editMode;
         if (params != null) {
             // Retrieve the routine
             routineName = params.getString("routine_name");
+            setRoutineActivityExtras(routineName);
             newRoutine = routines.getRoutine(routineName);
             editMode = true;
 
         } else {
             // Create new routine
             final int routinesSize = routines.getRoutines().size() + 1;
-            routineName = "Routine " + String.valueOf(routinesSize);
+            routineName = "Routine " + routinesSize;
             newRoutine = new Routine(routineName);
             routines.saveRoutine(newRoutine);
             editMode = false;
@@ -75,10 +66,10 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
 
         // Find all drying level buttons
         selectedDryingLevel = DryingLevel.NORMAL;
-        extraDryBtn = (Button) findViewById(R.id.dryingLevelExtraDryBtn);
-        normalBtn = (Button) findViewById(R.id.dryingLevelNormalBtn);
-        handIronBtn = (Button) findViewById(R.id.dryingLevelHandIronBtn);
-        machineIronBtn = (Button) findViewById(R.id.dryingLevelMachineIronBtn);
+        extraDryBtn = findViewById(R.id.dryingLevelExtraDryBtn);
+        normalBtn = findViewById(R.id.dryingLevelNormalBtn);
+        handIronBtn = findViewById(R.id.dryingLevelHandIronBtn);
+        machineIronBtn = findViewById(R.id.dryingLevelMachineIronBtn);
 
         // Highlight the selected drying level
         // Normal is the preset
@@ -102,150 +93,144 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
         }
 
         // Create and set a listener for every drying level button
-        extraDryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onDryingLevelBtnClicked(DryingLevel.EXTRA_DRY);
-            }
-        });
+        extraDryBtn.setOnClickListener(v -> onDryingLevelBtnClicked(DryingLevel.EXTRA_DRY));
 
-        normalBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onDryingLevelBtnClicked(DryingLevel.NORMAL);
-            }
-        });
+        normalBtn.setOnClickListener(v -> onDryingLevelBtnClicked(DryingLevel.NORMAL));
 
-        handIronBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onDryingLevelBtnClicked(DryingLevel.HAND_IRON);
-            }
-        });
+        handIronBtn.setOnClickListener(v -> onDryingLevelBtnClicked(DryingLevel.HAND_IRON));
 
-        machineIronBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onDryingLevelBtnClicked(DryingLevel.MACHINE_IRON);
-            }
-        });
+        machineIronBtn.setOnClickListener(v -> onDryingLevelBtnClicked(DryingLevel.MACHINE_IRON));
 
         // Apply a listener to the arrow buttons
-        final Button upArrowBtn = (Button) findViewById(R.id.dryingLevelUpArrowBtn);
-        final Button downArrowBtn = (Button) findViewById(R.id.dryingLevelDownArrowBtn);
-        upArrowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Switch to the previous drying level
-                switch (selectedDryingLevel) {
-                    case EXTRA_DRY:
-                        selectDryingLevelBtn(machineIronBtn);
-                        selectedDryingLevel = DryingLevel.MACHINE_IRON;
-                        break;
+        final Button upArrowBtn = findViewById(R.id.dryingLevelUpArrowBtn);
+        final Button downArrowBtn = findViewById(R.id.dryingLevelDownArrowBtn);
+        upArrowBtn.setOnClickListener(v -> {
+            // Switch to the previous drying level
+            switch (selectedDryingLevel) {
+                case EXTRA_DRY:
+                    selectDryingLevelBtn(machineIronBtn);
+                    selectedDryingLevel = DryingLevel.MACHINE_IRON;
+                    break;
 
-                    case NORMAL:
-                        selectDryingLevelBtn(extraDryBtn);
-                        selectedDryingLevel = DryingLevel.EXTRA_DRY;
-                        break;
+                case NORMAL:
+                    selectDryingLevelBtn(extraDryBtn);
+                    selectedDryingLevel = DryingLevel.EXTRA_DRY;
+                    break;
 
-                    case HAND_IRON:
-                        selectDryingLevelBtn(normalBtn);
-                        selectedDryingLevel = DryingLevel.NORMAL;
-                        break;
+                case HAND_IRON:
+                    selectDryingLevelBtn(normalBtn);
+                    selectedDryingLevel = DryingLevel.NORMAL;
+                    break;
 
-                    case MACHINE_IRON:
-                        selectDryingLevelBtn(handIronBtn);
-                        selectedDryingLevel = DryingLevel.HAND_IRON;
-                        break;
-                }
+                case MACHINE_IRON:
+                    selectDryingLevelBtn(handIronBtn);
+                    selectedDryingLevel = DryingLevel.HAND_IRON;
+                    break;
             }
         });
 
-        downArrowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Switch to the next drying level (going down)
-                switch (selectedDryingLevel) {
-                    case EXTRA_DRY:
-                        selectDryingLevelBtn(normalBtn);
-                        selectedDryingLevel = DryingLevel.NORMAL;
-                        break;
+        downArrowBtn.setOnClickListener(v -> {
+            // Switch to the next drying level (going down)
+            switch (selectedDryingLevel) {
+                case EXTRA_DRY:
+                    selectDryingLevelBtn(normalBtn);
+                    selectedDryingLevel = DryingLevel.NORMAL;
+                    break;
 
-                    case NORMAL:
-                        selectDryingLevelBtn(handIronBtn);
-                        selectedDryingLevel = DryingLevel.HAND_IRON;
-                        break;
+                case NORMAL:
+                    selectDryingLevelBtn(handIronBtn);
+                    selectedDryingLevel = DryingLevel.HAND_IRON;
+                    break;
 
-                    case HAND_IRON:
-                        selectDryingLevelBtn(machineIronBtn);
-                        selectedDryingLevel = DryingLevel.MACHINE_IRON;
-                        break;
+                case HAND_IRON:
+                    selectDryingLevelBtn(machineIronBtn);
+                    selectedDryingLevel = DryingLevel.MACHINE_IRON;
+                    break;
 
-                    case MACHINE_IRON:
-                        selectDryingLevelBtn(extraDryBtn);
-                        selectedDryingLevel = DryingLevel.EXTRA_DRY;
-                        break;
-                }
+                case MACHINE_IRON:
+                    selectDryingLevelBtn(extraDryBtn);
+                    selectedDryingLevel = DryingLevel.EXTRA_DRY;
+                    break;
             }
         });
 
         // Add listeners to the button's controlling the routine creation/selection flow
-        final Button previousBtn = (Button) findViewById(R.id.dryingLevelPreviousBtn);
-        final Button nextBtn = (Button) findViewById(R.id.dryingLevelNextBtn);
-        previousBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Delete unsaved routine
-                if (!editMode) {
-                    routines.removeRoutine(routineName);
-                }
-
-                // Return to the routines' menu activity
-                Intent intent = new Intent(SelectionFirstStepActivity.this, RoutineMenuActivity.class);
-                startActivity(intent);
+        final Button previousBtn = findViewById(R.id.dryingLevelPreviousBtn);
+        final Button nextBtn = findViewById(R.id.dryingLevelNextBtn);
+        previousBtn.setOnClickListener(v -> {
+            // Delete unsaved routine
+            if (!editMode) {
+                routines.removeRoutine(routineName);
             }
+
+            // Return to the routines' menu activity
+            Intent intent = new Intent(SelectionFirstStepActivity.this, RoutineMenuActivity.class);
+            startActivity(intent);
         });
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Update routine if the drying level was altered
-                if (!selectedDryingLevel.equals(newRoutine.getLevel())) {
-                    newRoutine.setLevel(selectedDryingLevel);
-                    routines.updateRoutine(newRoutine);
-                }
-
-                // Move to the activity which selects the new routine's programme
-                Intent intent = new Intent(SelectionFirstStepActivity.this, SelectionSecondStepActivity.class);
-                intent.putExtra("routine_name", routineName);
-                startActivity(intent);
+        nextBtn.setOnClickListener(v -> {
+            // Update routine if the drying level was altered
+            if (!selectedDryingLevel.equals(newRoutine.getLevel())) {
+                newRoutine.setLevel(selectedDryingLevel);
+                routines.updateRoutine(newRoutine);
             }
+
+            // Move to the activity which selects the new routine's programme
+            Intent intent = new Intent(SelectionFirstStepActivity.this, SelectionSecondStepActivity.class);
+            intent.putExtra("routine_name", routineName);
+            startActivity(intent);
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (preference.getVoiceInstructions()) {
+            // Wait for 1 seconds before speaking
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                // Prompt the use to select a drying level
+                String toSpeak = getString(R.string.tts_first_step_prompt);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_first_step_prompt");
+            }, 1000);
+        }
+    }
+
     public void onDryingLevelBtnClicked(DryingLevel level) {
+        String toSpeak;
         switch (level) {
             case EXTRA_DRY:
                 selectDryingLevelBtn(extraDryBtn);
+                toSpeak = getString(R.string.tts_extra_dry_selected);
                 break;
 
             case NORMAL:
+            default:
                 selectDryingLevelBtn(normalBtn);
+                toSpeak = getString(R.string.tts_normal_selected);
                 break;
 
             case HAND_IRON:
                 selectDryingLevelBtn(handIronBtn);
+                toSpeak = getString(R.string.tts_hand_iron_selected);
                 break;
 
             case MACHINE_IRON:
                 selectDryingLevelBtn(machineIronBtn);
+                toSpeak = getString(R.string.tts_machine_iron_selected);
                 break;
         }
 
         selectedDryingLevel = level;
+
+        // Inform the user about the selected drying level via the microphone
+        if (preference.getVoiceInstructions()) {
+            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_drying_level_selected");
+        }
     }
 
-    // Helper methods
+    // Helper method
     // Apply stylistic changes to the selected drying level button
     private void selectDryingLevelBtn(Button btn) {
         // De-highlight the previously selected button
@@ -270,20 +255,5 @@ public class SelectionFirstStepActivity extends AppCompatActivity {
 
         // Highlight the button
         btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
-    }
-
-    // Initialize text-to-speech
-    private void initTextToSpeech() {
-        tts = new TextToSpeech(getApplicationContext(), i -> {
-            if (i != TextToSpeech.ERROR) {
-                // Check language availability
-                Locale locale = getResources().getConfiguration().locale;
-                if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                    tts.setLanguage(locale);
-                } else {
-                    tts.setLanguage(Locale.ENGLISH);
-                }
-            }
-        });
     }
 }

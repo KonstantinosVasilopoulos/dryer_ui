@@ -1,6 +1,5 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,16 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aueb.idry.R;
-import com.aueb.idry.T8816WP.DryingLevel;
-import com.aueb.idry.T8816WP.Programme;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
-import com.google.android.material.snackbar.Snackbar;
 
 import model.Routine;
 import model.RoutineDAO;
 import utils.SelectionBarStep;
 
-public class ProgramOverviewActivity extends AppCompatActivity {
+public class ProgramOverviewActivity extends AdvancedAppActivity {
     // Routine basic variables initialization
     private String routineName;
     private long duration;
@@ -102,6 +100,7 @@ public class ProgramOverviewActivity extends AppCompatActivity {
         Bundle params = getIntent().getExtras();
         routineName = params.getString("routine_name");
         routine = RoutineDAO.getInstance().getRoutine(routineName);
+        setRoutineActivityExtras(routine.getName());
 
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
@@ -193,6 +192,13 @@ public class ProgramOverviewActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
     private void onFinishDelayCountDownTimer() {
         delayLayout.setVisibility(View.GONE);
         statusLayout.setVisibility(View.VISIBLE);
@@ -225,11 +231,22 @@ public class ProgramOverviewActivity extends AppCompatActivity {
                             showRenameDialogInterface();
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
+                            readRoutineInfo();
                             Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
         };
+
+        // Have the text-to-speech instance ask the user
+        if (preference.getVoiceInstructions()) {
+            // Play after 1 seconds
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                final String toSpeak = getString(R.string.tts_preview_save_dialog);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_save_dialog");
+            }, 500);
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
         builder.setTitle(R.string.program_overview_dialog_message_save_routine)
@@ -251,6 +268,7 @@ public class ProgramOverviewActivity extends AppCompatActivity {
                         // Does nothing
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
+                        readRoutineInfo();
                         Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -273,25 +291,59 @@ public class ProgramOverviewActivity extends AppCompatActivity {
                 String newRoutineName;
                 newRoutineName = editText.getText().toString();
                 if (newRoutineName.trim().equals("")) {
+
+                    // Play audio error message
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        final String toSpeak = getString(R.string.tts_preview_empty_name);
+                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_empty_name");
+                    }, 500);
+
                     Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_empty_text), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_empty_text, Snackbar.LENGTH_SHORT).show();
                 }
-                else if (!RoutineDAO.getInstance().containsName(newRoutineName) || (routineName == newRoutineName)) {
+                else if (!RoutineDAO.getInstance().containsName(newRoutineName) || (routineName.equals(newRoutineName))) {
                     routine.setName(newRoutineName);
                     routineName = newRoutineName;
                     RoutineDAO.getInstance().saveRoutine(routine);
                     Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_saved), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_saved, Snackbar.LENGTH_SHORT).show();
                     savePreference = true;
+                    readRoutineInfo(); // Audio message
                     alertDialog.dismiss();
                 }
                 else {
+                    // Play audio error message
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        final String toSpeak = getString(R.string.tts_preview_different_name);
+                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_different_name");
+                    }, 500);
+
                     Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_name_match), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_name_match, Snackbar.LENGTH_SHORT).show();
                 }
 
             }
         });
+    }
+
+    // Read the user's choice out loud
+    private void readRoutineInfo() {
+        if (preference.getVoiceInstructions()) {
+            // Play after 1 seconds
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                final int hours = (int) (duration / 3600000);
+                final int minutes = ((int) (duration / 60000)) - hours * 60;
+                final String levelStr = getString(routine.getLevel().getStringId());
+                String programmeStr = getString(routine.getProgramme().getStringId());
+                String toSpeak = getResources().getQuantityString(R.plurals.tts_preview_hours, hours, hours)
+                        + " " + getResources().getQuantityString(R.plurals.tts_preview_minutes, minutes, minutes)
+                        + " " + getString(R.string.tts_preview_level_programme, levelStr, programmeStr);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null, "tts_preview");
+            }, 1000);
+        }
     }
 
     private class MyCountDownTimer {

@@ -1,13 +1,13 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.widget.Button;
 
 import com.aueb.idry.R;
@@ -20,10 +20,11 @@ import model.Routine;
 import model.RoutineDAO;
 import utils.SelectionBarStep;
 
-public class SelectionSecondStepActivity extends AppCompatActivity {
+public class SelectionSecondStepActivity extends AdvancedAppActivity {
 
     private Programme selectedProgramme;
     private Map<Integer, Programme> programmeBtnIds;
+    private String routineName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,8 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
 
         // Get the routine from the provided parameters
         Bundle params = getIntent().getExtras();
-        String routineName = params.getString("routine_name");
+        routineName = params.getString("routine_name");
+        setRoutineActivityExtras(routineName);
         Routine routine = RoutineDAO.getInstance(this).getRoutine(routineName);
         selectedProgramme = routine.getProgramme();
 
@@ -66,7 +68,7 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         Button selectedBtn;
         for (int programmeBtnId : programmeBtnIds.keySet()) {
             if (selectedProgramme.equals(programmeBtnIds.get(programmeBtnId))) {
-                selectedBtn = (Button) findViewById(programmeBtnId);
+                selectedBtn = findViewById(programmeBtnId);
 
                 // Highlight the button
                 selectedBtn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
@@ -77,168 +79,166 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
         // Add a listener to every programme button
         Button programmeBtn;
         for (int programmeBtnId : programmeBtnIds.keySet()) {
-            programmeBtn = (Button) findViewById(programmeBtnId);
-            programmeBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    selectProgramme(programmeBtnId);
-                }
-            });
+            programmeBtn = findViewById(programmeBtnId);
+            programmeBtn.setOnClickListener(view -> selectProgramme(programmeBtnId));
         }
 
         // Set listeners for up and down arrow keys
-        Button upArrowBtn = (Button) findViewById(R.id.programmeUpArrowBtn);
-        upArrowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (selectedProgramme) {
-                    case COTTONS:
-                    default:
-                        selectProgramme(R.id.programmeGentleSmoothingBtn);
-                        break;
+        Button upArrowBtn = findViewById(R.id.programmeUpArrowBtn);
+        upArrowBtn.setOnClickListener(view -> {
+            switch (selectedProgramme) {
+                case COTTONS:
+                default:
+                    selectProgramme(R.id.programmeGentleSmoothingBtn);
+                    break;
 
-                    case MINIMUM_IRON:
-                        selectProgramme(R.id.programmeCottonsBtn);
-                        break;
+                case MINIMUM_IRON:
+                    selectProgramme(R.id.programmeCottonsBtn);
+                    break;
 
-                    case WOOLLENS:
-                        selectProgramme(R.id.programmeMinimumIronBtn);
-                        break;
+                case WOOLLENS:
+                    selectProgramme(R.id.programmeMinimumIronBtn);
+                    break;
 
-                    case OUTERWEAR:
-                        selectProgramme(R.id.programmeWoollensBtn);
-                        break;
+                case OUTERWEAR:
+                    selectProgramme(R.id.programmeWoollensBtn);
+                    break;
 
-                    case PROOFING:
-                        selectProgramme(R.id.programmeOuterwearBtn);
-                        break;
+                case PROOFING:
+                    selectProgramme(R.id.programmeOuterwearBtn);
+                    break;
 
-                    case EXPRESS:
-                        selectProgramme(R.id.programmeProofingBtn);
-                        break;
+                case EXPRESS:
+                    selectProgramme(R.id.programmeProofingBtn);
+                    break;
 
-                    case AUTOMATIC_PLUS:
-                        selectProgramme(R.id.programmeExpressBtn);
-                        break;
+                case AUTOMATIC_PLUS:
+                    selectProgramme(R.id.programmeExpressBtn);
+                    break;
 
-                    case SHIRTS:
-                        selectProgramme(R.id.programmeAutomaticPlusBtn);
-                        break;
+                case SHIRTS:
+                    selectProgramme(R.id.programmeAutomaticPlusBtn);
+                    break;
 
-                    case DENIM:
-                        selectProgramme(R.id.programmeShirtsBtn);
-                        break;
+                case DENIM:
+                    selectProgramme(R.id.programmeShirtsBtn);
+                    break;
 
-                    case HYGIENE:
-                        selectProgramme(R.id.programmeDenimBtn);
-                        break;
+                case HYGIENE:
+                    selectProgramme(R.id.programmeDenimBtn);
+                    break;
 
-                    case WARM_AIR:
-                        selectProgramme(R.id.programmeHygieneBtn);
-                        break;
+                case WARM_AIR:
+                    selectProgramme(R.id.programmeHygieneBtn);
+                    break;
 
-                    case GENTLE_SMOOTHING:
-                        selectProgramme(R.id.programmeWarmAirBtn);
-                        break;
-                }
+                case GENTLE_SMOOTHING:
+                    selectProgramme(R.id.programmeWarmAirBtn);
+                    break;
             }
         });
 
         // Down arrow
-        Button downArrowBtn = (Button) findViewById(R.id.programmeDownArrowBtn);
-        downArrowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (selectedProgramme) {
-                    case COTTONS:
-                    default:
-                        selectProgramme(R.id.programmeMinimumIronBtn);
-                        break;
+        Button downArrowBtn = findViewById(R.id.programmeDownArrowBtn);
+        downArrowBtn.setOnClickListener(view -> {
+            switch (selectedProgramme) {
+                case COTTONS:
+                default:
+                    selectProgramme(R.id.programmeMinimumIronBtn);
+                    break;
 
-                    case MINIMUM_IRON:
-                        selectProgramme(R.id.programmeWoollensBtn);
-                        break;
+                case MINIMUM_IRON:
+                    selectProgramme(R.id.programmeWoollensBtn);
+                    break;
 
-                    case WOOLLENS:
-                        selectProgramme(R.id.programmeOuterwearBtn);
-                        break;
+                case WOOLLENS:
+                    selectProgramme(R.id.programmeOuterwearBtn);
+                    break;
 
-                    case OUTERWEAR:
-                        selectProgramme(R.id.programmeProofingBtn);
-                        break;
+                case OUTERWEAR:
+                    selectProgramme(R.id.programmeProofingBtn);
+                    break;
 
-                    case PROOFING:
-                        selectProgramme(R.id.programmeExpressBtn);
-                        break;
+                case PROOFING:
+                    selectProgramme(R.id.programmeExpressBtn);
+                    break;
 
-                    case EXPRESS:
-                        selectProgramme(R.id.programmeAutomaticPlusBtn);
-                        break;
+                case EXPRESS:
+                    selectProgramme(R.id.programmeAutomaticPlusBtn);
+                    break;
 
-                    case AUTOMATIC_PLUS:
-                        selectProgramme(R.id.programmeShirtsBtn);
-                        break;
+                case AUTOMATIC_PLUS:
+                    selectProgramme(R.id.programmeShirtsBtn);
+                    break;
 
-                    case SHIRTS:
-                        selectProgramme(R.id.programmeDenimBtn);
-                        break;
+                case SHIRTS:
+                    selectProgramme(R.id.programmeDenimBtn);
+                    break;
 
-                    case DENIM:
-                        selectProgramme(R.id.programmeHygieneBtn);
-                        break;
+                case DENIM:
+                    selectProgramme(R.id.programmeHygieneBtn);
+                    break;
 
-                    case HYGIENE:
-                        selectProgramme(R.id.programmeWarmAirBtn);
-                        break;
+                case HYGIENE:
+                    selectProgramme(R.id.programmeWarmAirBtn);
+                    break;
 
-                    case WARM_AIR:
-                        selectProgramme(R.id.programmeGentleSmoothingBtn);
-                        break;
+                case WARM_AIR:
+                    selectProgramme(R.id.programmeGentleSmoothingBtn);
+                    break;
 
-                    case GENTLE_SMOOTHING:
-                        selectProgramme(R.id.programmeCottonsBtn);
-                        break;
-                }
+                case GENTLE_SMOOTHING:
+                    selectProgramme(R.id.programmeCottonsBtn);
+                    break;
             }
         });
 
         // Set listeners for previous and next buttons
-        Button previousBtn = (Button) findViewById(R.id.programmePreviousBtn);
-        previousBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go back to the first selection activity
-                Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionFirstStepActivity.class);
-                intent.putExtra("routine_name", routineName);
-                startActivity(intent);
-            }
+        Button previousBtn = findViewById(R.id.programmePreviousBtn);
+        previousBtn.setOnClickListener(view -> {
+            // Go back to the first selection activity
+            Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionFirstStepActivity.class);
+            intent.putExtra("routine_name", routineName);
+            startActivity(intent);
         });
 
-        Button nextBtn = (Button) findViewById(R.id.programmeNextBtn);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Save routine if it's content was edited
-                if (!selectedProgramme.equals(routine.getProgramme())) {
-                    routine.setProgramme(selectedProgramme);
-                    RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
-                }
-
-                // Navigate to the time/delay selection activity
-                Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionThirdStepActivity.class);
-                intent.putExtra("routine_name", routineName);
-                startActivity(intent);
+        Button nextBtn = findViewById(R.id.programmeNextBtn);
+        nextBtn.setOnClickListener(view -> {
+            // Save routine if it's content was edited
+            if (!selectedProgramme.equals(routine.getProgramme())) {
+                routine.setProgramme(selectedProgramme);
+                RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
             }
+
+            // Navigate to the time/delay selection activity
+            Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionThirdStepActivity.class);
+            intent.putExtra("routine_name", routineName);
+            startActivity(intent);
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Play prompt
+        if (preference.getVoiceInstructions()) {
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                final String toSpeak = getString(R.string.tts_second_step_prompt);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_second_step_prompt");
+            }, 1000);
+        }
+    }
+
+    // Helper method
     // React to a programme button click by highlighting it
     private void selectProgramme(int btnId) {
         if (programmeBtnIds != null) {
             // De-highlight the previously selected button
             for (int programmeBtnId : programmeBtnIds.keySet()) {
                 if (selectedProgramme.equals(programmeBtnIds.get(programmeBtnId))) {
-                    Button previousBtn = (Button) findViewById(programmeBtnId);
+                    Button previousBtn = findViewById(programmeBtnId);
                     previousBtn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_300));
                     break;
                 }
@@ -248,7 +248,7 @@ public class SelectionSecondStepActivity extends AppCompatActivity {
             selectedProgramme = programmeBtnIds.get(btnId);
 
             // Highlight the selected button
-            Button btn = (Button) findViewById(btnId);
+            Button btn = findViewById(btnId);
             btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
         }
     }

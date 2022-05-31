@@ -111,4 +111,16 @@
     <string name="VC">Voice Commands</string>
     <string name="tts_turn_on">Machine turned on</string>
     <string name="tts_door_unlocked">Door unlocked</string>
+    <string name="tts_first_step_prompt">Select drying level</string>
+    <string name="tts_extra_dry_selected">Extra dry selected</string>
+    <string name="tts_normal_selected">Normal selected</string>
+    <string name="tts_hand_iron_selected">Hand iron selected</string>
+    <string name="tts_machine_iron_selected">Machine iron selected</string>
+    <string name="tts_second_step_prompt">Select program</string>
+    <string name="tts_third_step_prompt">Select starting time</string>
+    <string name="tts_third_step_invalid_date">Please choose a future date</string>
+    <string name="tts_preview_level_programme">Its drying level is %s and its program is %s</string>
+    <string name="tts_preview_save_dialog">Would you like to save your routine?</string>
+    <string name="tts_preview_empty_name">Please enter a name</string>
+    <string name="tts_preview_different_name">Please enter a different name</string>
 </resources>
