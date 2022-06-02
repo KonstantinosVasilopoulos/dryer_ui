@@ -202,12 +202,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="100dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/programmeMainLayout">
 
         <Button
             android:id="@+id/programmePreviousBtn"
@@ -216,6 +216,7 @@
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:backgroundTint="@color/gray_400"
+            android:singleLine="true"
             android:text="@string/previous_btn"
             android:textAllCaps="false"
             android:textSize="16sp" />
