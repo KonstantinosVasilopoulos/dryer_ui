@@ -1,6 +1,7 @@
 package activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Switch;
@@ -49,15 +50,13 @@ public class Settings extends AppCompatActivity {
         }
 
         /* ENGLISH SWITCER */
-        englishSwitcher.setOnClickListener(view -> setLanguage(englishSwitcher.isChecked()));
+        englishSwitcher.setOnClickListener(view -> setLanguage(englishSwitcher.isChecked(), true));
 
         /* GREEK SWITCER */
-        greekSwitcher.setOnClickListener(view -> setLanguage(!greekSwitcher.isChecked()));
+        greekSwitcher.setOnClickListener(view -> setLanguage(!greekSwitcher.isChecked(), true));
 
         /* Return button */
-        returnBtn.setOnClickListener(view -> {
-            intentClass();
-        });
+        returnBtn.setOnClickListener(view -> finishSettings());
     }
 
     private void setSwitchers(Preference preference) {
@@ -105,17 +104,15 @@ public class Settings extends AppCompatActivity {
         }
     }
 
-    private void intentClass() {
+    // Save preferences and head back to the previous activity in the activity stack
+    private void finishSettings() {
         savePreference();
-
-        Intent intent = new Intent(getApplicationContext(), classToIntent);
-        startActivity(intent);
         finish();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        intentClass();
+        finishSettings();
     }
 }

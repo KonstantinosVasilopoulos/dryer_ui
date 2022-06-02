@@ -1,6 +1,5 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -18,7 +17,7 @@ import java.util.Set;
 import model.Routine;
 import model.RoutineDAO;
 
-public class RoutineMenuActivity extends AppCompatActivity {
+public class RoutineMenuActivity extends AdvancedAppActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
