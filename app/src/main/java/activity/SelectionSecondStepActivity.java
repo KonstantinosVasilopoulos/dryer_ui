@@ -53,6 +53,9 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
         Routine routine = RoutineDAO.getInstance(this).getRoutine(routineName);
         selectedProgramme = routine.getProgramme();
 
+        // Get the edit mode from the parameters
+        boolean editMode = params.getBoolean("edit_mode", true);
+
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -199,6 +202,7 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
             // Go back to the first selection activity
             Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionFirstStepActivity.class);
             intent.putExtra("routine_name", routineName);
+            intent.putExtra("edit_mode", editMode);
             startActivity(intent);
         });
 
@@ -213,6 +217,7 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
             // Navigate to the time/delay selection activity
             Intent intent = new Intent(SelectionSecondStepActivity.this, SelectionThirdStepActivity.class);
             intent.putExtra("routine_name", routineName);
+            intent.putExtra("edit_mode", editMode);
             startActivity(intent);
         });
     }

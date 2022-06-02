@@ -42,7 +42,9 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
             routineName = params.getString("routine_name");
             setRoutineActivityExtras(routineName);
             newRoutine = routines.getRoutine(routineName);
-            editMode = true;
+
+            // Check for a provided edit mode
+            editMode = params.getBoolean("edit_mode", true);
 
         } else {
             // Create new routine
@@ -178,6 +180,7 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
             // Move to the activity which selects the new routine's programme
             Intent intent = new Intent(SelectionFirstStepActivity.this, SelectionSecondStepActivity.class);
             intent.putExtra("routine_name", routineName);
+            intent.putExtra("edit_mode", editMode);
             startActivity(intent);
         });
     }

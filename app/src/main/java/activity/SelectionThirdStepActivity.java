@@ -40,6 +40,9 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         setRoutineActivityExtras(routineName);
         Routine routine = RoutineDAO.getInstance().getRoutine(routineName);
 
+        // Get the edit mode from the parameters
+        boolean editMode = params.getBoolean("edit_mode", true);
+
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -107,6 +110,7 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         previousBtn.setOnClickListener(view -> {
             Intent intent = new Intent(SelectionThirdStepActivity.this, SelectionSecondStepActivity.class);
             intent.putExtra("routine_name", routineName);
+            intent.putExtra("edit_mode", editMode);
             startActivity(intent);
         });
 
@@ -141,13 +145,13 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
 
                 // Save the routine's new date
                 long delay = Math.abs(now.getTime() - date.getTime());
-                Log.d("delay", String.valueOf(delay)); // -0
                 routine.setDelay(delay);
                 RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
                 // Navigate to the routine preview activity
                 Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
                 intent.putExtra("routine_name", routineName);
+                intent.putExtra("edit_mode", editMode);
                 startActivity(intent);
             }
         });
@@ -162,6 +166,7 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
             // Start routine preview activity
             Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
             intent.putExtra("routine_name", routineName);
+            intent.putExtra("edit_mode", editMode);
             startActivity(intent);
         });
     }

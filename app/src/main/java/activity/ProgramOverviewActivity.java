@@ -38,6 +38,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
     private boolean activityStatus = false;
     private boolean durationStarted = false;
     private boolean savePreference = true;
+    private boolean editMode;
 
     // Textviews initialization
     private TextView programDuration;
@@ -102,6 +103,9 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         routine = RoutineDAO.getInstance().getRoutine(routineName);
         setRoutineActivityExtras(routine.getName());
 
+        // Get the edit mode from the parameters
+        editMode = params.getBoolean("edit_mode", true);
+
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -139,6 +143,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SelectionThirdStepActivity.class);
                 intent.putExtra("routine_name", routineName);
+                intent.putExtra("edit_mode", editMode);
                 startActivity(intent);
             }
         });
@@ -309,7 +314,12 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                     Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_saved), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_saved, Snackbar.LENGTH_SHORT).show();
                     savePreference = true;
-                    readRoutineInfo(); // Audio message
+
+                    // Activate edit mode to not delete the routine if the user backtracks
+                    editMode = true;
+
+                    // Play audio message reading the routine's information and dismiss this dialog
+                    readRoutineInfo();
                     alertDialog.dismiss();
                 }
                 else {
