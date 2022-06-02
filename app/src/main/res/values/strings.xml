@@ -123,4 +123,22 @@
     <string name="VC">Φωνητικές Εντολές</string>
     <string name="tts_turn_on">Η συσκευή ενεργοποιήθηκε</string>
     <string name="tts_door_unlocked">Η πόρτα άνοιξε</string>
+    <string name="tts_first_step_prompt">Επιλέξτε στάθμη ξυρότητας</string>
+    <string name="tts_extra_dry_selected">Πολύ ξηρά</string>
+    <string name="tts_normal_selected">Κανονικό</string>
+    <string name="tts_hand_iron_selected">Σίδερο χεριού</string>
+    <string name="tts_machine_iron_selected">Σίδερο μηχανής</string>
+    <string name="tts_second_step_prompt">Επιλέξτε πρόγραμμα</string>
+    <string name="tts_third_step_prompt">Επιλέξτε ώρα εκκίνησης</string>
+    <string name="tts_third_step_invalid_date">Παρακαλώ επιλέξτε μελλοντική ημερομηνία</string>
+    <string name="tts_preview_level_programme">με στάθμη %s και πρόγραμμα %s</string>
+    <string name="tts_preview_save_dialog">Θα επιθυμούσατε να αποθηκεύσετε το πρόγραμμα σας;</string>
+    <string name="tts_preview_empty_name">Παρακαλώ εισάγετε κάποιο όνομα</string>
+    <string name="tts_preview_different_name">Παρακαλώ εισάγετε ένα διαφορετικό όνομα</string>
+    <string name="tts_first_container">Αφαιρέστε το δοχείο και αδειάστε το νερό</string>
+    <string name="tts_second_container">Τοποθετήστε το δοχείο πίσω στην θέση του</string>
+    <string name="tts_first_filter">Ανοίξτε το πορτάκι του φίλτρου και τραβήξτε το χερούλι προς το μέρος σας</string>
+    <string name="tts_second_filter">Αφαιρέστε το χερούλι και πλύντε το φίλτρο</string>
+    <string name="tts_third_filter">Καθαρίστε τον εναλλακτή θερμότητας με μία σκούπα</string>
+    <string name="tts_fourth_filter">Επανατοποθετήστε το χερούλι και μετά βάλτε το φίλτρο πίσω στο στεγνωτήριο</string>
 </resources>

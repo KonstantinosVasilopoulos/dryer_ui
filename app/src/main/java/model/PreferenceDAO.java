@@ -27,10 +27,8 @@ public class PreferenceDAO {
     }
 
     private PreferenceDAO(Context context) {
-
         try {
             file = new File(context.getFilesDir(), FILENAME);
-
             if (!file.exists()) {
                 file.createNewFile();
 

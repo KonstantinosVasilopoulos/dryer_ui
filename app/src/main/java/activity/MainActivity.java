@@ -1,6 +1,5 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,21 +14,14 @@ import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
-import java.util.Locale;
-
-import model.Preference;
-import model.PreferenceDAO;
 import utils.Notifications;
 
-public class MainActivity extends AppCompatActivity {
-    private TextToSpeech tts;
-    private Preference preference;
+public class MainActivity extends AdvancedAppActivity {
     private final int NOTIFICATIONS_LAYOUT = R.id.mainNotificationsScrollLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preference = PreferenceDAO.getInstance(this).retrievePreference();
         LanguageHelper.setLocale(this, preference.getLanguageName());
         setContentView(R.layout.activity_main);
 
@@ -47,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the dryer interface
         TumbleDryer dryer = TumbleDryerImp.getInstance();
-
-        // text-to-speech initialization
-        if (preference.getVoiceInstructions()) {
-            initTextToSpeech();
-        }
 
         // Create notification fragments if required
         // Filters notification
@@ -98,26 +85,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        if (preference.getVoiceInstructions()) {
-            initTextToSpeech();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (preference.getVoiceInstructions()) {
-            tts.stop();
-            tts.shutdown();
-        }
-    }
-
-    // Helper methods
+    // Helper method
     // Add a notification fragment
     private void addNotificationFragment(Notifications type) {
         FragmentManager fm = getSupportFragmentManager();
@@ -127,20 +95,5 @@ public class MainActivity extends AppCompatActivity {
         args.putSerializable("notification", type);
         fragment.setArguments(args);
         transaction.add(NOTIFICATIONS_LAYOUT, fragment).commit();
-    }
-
-    // Initialize the text-to-speech component
-    private void initTextToSpeech() {
-        tts = new TextToSpeech(getApplicationContext(), i -> {
-            if (i != TextToSpeech.ERROR) {
-                // Check language availability
-                Locale locale = getResources().getConfiguration().locale;
-                if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                    tts.setLanguage(locale);
-                } else {
-                    tts.setLanguage(Locale.ENGLISH);
-                }
-            }
-        });
     }
 }

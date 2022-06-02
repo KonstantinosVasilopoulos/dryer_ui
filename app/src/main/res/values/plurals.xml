@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="tts_preview_hours">
+        <item quantity="one">Η ρουτίνα σας θα διαρκέσει %d ώρα</item>
+        <item quantity="other">Η ρουτίνα σας θα διαρκέσει %d ώρες</item>
+    </plurals>
+    <plurals name="tts_preview_minutes">
+        <item quantity="one">και %d λεπτό</item>
+        <item quantity="other">και %d λεπτά</item>
+    </plurals>
+</resources>

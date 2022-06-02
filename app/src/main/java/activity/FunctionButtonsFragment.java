@@ -73,7 +73,6 @@ public class FunctionButtonsFragment extends Fragment {
             // Navigate to the settings activity
             if (getActivity() != null) {
                 Intent intent = new Intent(getActivity(), Settings.class);
-                intent.putExtra("className", getActivity().getClass());
                 startActivity(intent);
             }
         });
