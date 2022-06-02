@@ -89,7 +89,7 @@
     <string name="program_overview_status_working">Operational</string>
     <string name="program_overview_status_suspended">Standby</string>
     <string name="program_overview_dialog_message_save_routine">Do you wish to save this routine?</string>
-    <string name="program_overview_dialog_message_rename_routine">Type the name you desire</string>
+    <string name="program_overview_dialog_message_rename_routine">Type the routine\'s name</string>
     <string name="program_overview_notification_message_not_saved">The routine was not saved</string>
     <string name="program_overview_notification_message_saved">The routine was saved successfully</string>
     <string name="program_overview_status_complete">The routine was completed successfully</string>
@@ -111,4 +111,22 @@
     <string name="VC">Voice Commands</string>
     <string name="tts_turn_on">Machine turned on</string>
     <string name="tts_door_unlocked">Door unlocked</string>
+    <string name="tts_first_step_prompt">Select drying level</string>
+    <string name="tts_extra_dry_selected">Extra dry selected</string>
+    <string name="tts_normal_selected">Normal selected</string>
+    <string name="tts_hand_iron_selected">Hand iron selected</string>
+    <string name="tts_machine_iron_selected">Machine iron selected</string>
+    <string name="tts_second_step_prompt">Select program</string>
+    <string name="tts_third_step_prompt">Select starting time</string>
+    <string name="tts_third_step_invalid_date">Please choose a future date</string>
+    <string name="tts_preview_level_programme">Its drying level is %s and its program is %s</string>
+    <string name="tts_preview_save_dialog">Would you like to save your routine?</string>
+    <string name="tts_preview_empty_name">Please enter a name</string>
+    <string name="tts_preview_different_name">Please enter a different name</string>
+    <string name="tts_first_container">Remove the container and empty its water</string>
+    <string name="tts_second_container">Slide the container back into the dryer</string>
+    <string name="tts_first_filter">Open the filter\'s door and pull the handle</string>
+    <string name="tts_second_filter">Remove the handle and wash the filter</string>
+    <string name="tts_third_filter">Clean the heat exchanger with the help of a vacuum cleaner</string>
+    <string name="tts_fourth_filter">Reattach the handle and then slide the filter back into the dryer</string>
 </resources>

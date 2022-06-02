@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -46,8 +47,16 @@ public class RoutineMenuActivity extends AppCompatActivity {
 
         transaction.commit();
 
+        // Resize button text if needed
+        Button newRoutineBtn = findViewById(R.id.newRoutineBtn);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        final int screenWidth = displayMetrics.widthPixels;
+        if (screenWidth < 74) {
+            newRoutineBtn.setTextSize(14.f);
+        }
+
         // Add listener to the button responsible for creating new routines
-        Button newRoutineBtn = (Button) findViewById(R.id.newRoutineBtn);
         newRoutineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
