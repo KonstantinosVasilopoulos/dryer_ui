@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.aueb.idry.R;
@@ -18,21 +17,12 @@ public class Settings extends AppCompatActivity {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch notificationsSwitcher, voiceInstructionsSwitcher,
             voiceCommandsSwitcher, englishSwitcher, greekSwitcher;
-
-    private Class classToIntent;
-
     private Preference preference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-
-        Bundle param = getIntent().getExtras();
-
-        if (param != null) {
-            classToIntent = (Class) param.getSerializable("className");
-        }
 
         preference = PreferenceDAO.getInstance(this).retrievePreference();
 
@@ -50,44 +40,25 @@ public class Settings extends AppCompatActivity {
 
         Button returnBtn = findViewById(R.id.returnfromsettings);
 
-        //notificationSwitcher.setChecked(true);
-        //voiceInstructionsSwitcher.setChecked(false);
-        //voiceCommandsSwitcher.setChecked(false);
         if(Locale.getDefault().getLanguage().equals("en")) {
             greekSwitcher.setChecked(false);
             englishSwitcher.setChecked(true);
-            
-        }else{
+
+        } else{
             greekSwitcher.setChecked(true);
             englishSwitcher.setChecked(false);
         }
 
         /* ENGLISH SWITCER */
-        englishSwitcher.setOnClickListener(view -> {
-            if (englishSwitcher.isChecked()) {
-                setLanguage(true, true);
-            }
-            else {
-                setLanguage(false, true);
-            }
-
-        });
+        englishSwitcher.setOnClickListener(view -> setLanguage(englishSwitcher.isChecked(), true));
 
         /* GREEK SWITCER */
-        greekSwitcher.setOnClickListener(view -> {
-            if (greekSwitcher.isChecked()) {
-                setLanguage(false, true);
-            }
-            else {
-                setLanguage(true, true);
-            }
-        });
+        greekSwitcher.setOnClickListener(view -> setLanguage(!greekSwitcher.isChecked(), true));
 
         /* Return button */
-        returnBtn.setOnClickListener(view -> {
-            intentClass();
-        });
+        returnBtn.setOnClickListener(view -> finishSettings());
     }
+
     private void setSwitchers(Preference preference) {
         if (preference == null) {
             setLanguage(Locale.getDefault().getLanguage().equals("en"), false);
@@ -107,7 +78,7 @@ public class Settings extends AppCompatActivity {
             englishSwitcher.setChecked(true);
             greekSwitcher.setChecked(false);
         } else {
-            LanguageHelper.setLocale(this , "gr");
+            LanguageHelper.setLocale(this , "el");
             englishSwitcher.setChecked(false);
             greekSwitcher.setChecked(true);
         }
@@ -133,22 +104,15 @@ public class Settings extends AppCompatActivity {
         }
     }
 
-    private void intentClass() {
+    // Save preferences and head back to the previous activity in the activity stack
+    private void finishSettings() {
         savePreference();
-
-        Intent intent = new Intent(getApplicationContext(), classToIntent);
-        startActivity(intent);
         finish();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        intentClass();
+        finishSettings();
     }
 }
-
-
-
-
-

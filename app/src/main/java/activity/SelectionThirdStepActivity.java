@@ -1,11 +1,12 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.Button;
 
@@ -21,10 +22,11 @@ import model.Routine;
 import model.RoutineDAO;
 import utils.SelectionBarStep;
 
-public class SelectionThirdStepActivity extends AppCompatActivity {
+public class SelectionThirdStepActivity extends AdvancedAppActivity {
 
     private volatile Date date;
     private Button dateBtn;
+    private String routineName;
     private static final String DATE_PATTERN = "EEEE dd MMMM";
 
     @Override
@@ -34,8 +36,12 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
 
         // Retrieve the routine using the provided parameters
         Bundle params = getIntent().getExtras();
-        String routineName = params.getString("routine_name");
+        routineName = params.getString("routine_name");
+        setRoutineActivityExtras(routineName);
         Routine routine = RoutineDAO.getInstance().getRoutine(routineName);
+
+        // Get the edit mode from the parameters
+        boolean editMode = params.getBoolean("edit_mode", true);
 
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
@@ -104,6 +110,7 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
         previousBtn.setOnClickListener(view -> {
             Intent intent = new Intent(SelectionThirdStepActivity.this, SelectionSecondStepActivity.class);
             intent.putExtra("routine_name", routineName);
+            intent.putExtra("edit_mode", editMode);
             startActivity(intent);
         });
 
@@ -126,18 +133,25 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
                 if (date.compareTo(now) <= 0) {
                     // Display error notification
                     Snackbar.make(view, R.string.time_error_notification, Snackbar.LENGTH_SHORT).show();
-                    return; // Exit function since the date is invalid
+
+                    // Play audio error message
+                    if (preference.getVoiceInstructions()) {
+                        String toSpeak = getString(R.string.tts_third_step_invalid_date);
+                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_invalid_date");
+                    }
+
+                    return; // Exit the function since the date is invalid
                 }
 
                 // Save the routine's new date
                 long delay = Math.abs(now.getTime() - date.getTime());
-                Log.d("delay", String.valueOf(delay)); // -0
                 routine.setDelay(delay);
                 RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
                 // Navigate to the routine preview activity
                 Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
                 intent.putExtra("routine_name", routineName);
+                intent.putExtra("edit_mode", editMode);
                 startActivity(intent);
             }
         });
@@ -152,8 +166,23 @@ public class SelectionThirdStepActivity extends AppCompatActivity {
             // Start routine preview activity
             Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
             intent.putExtra("routine_name", routineName);
+            intent.putExtra("edit_mode", editMode);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Play prompt
+        if (preference.getVoiceInstructions()) {
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                final String toSpeak = getString(R.string.tts_third_step_prompt);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_third_step_prompt");
+            }, 1000);
+        }
     }
 
     // Helper method

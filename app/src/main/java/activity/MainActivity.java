@@ -1,12 +1,12 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -14,16 +14,15 @@ import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
-import model.PreferenceDAO;
 import utils.Notifications;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AdvancedAppActivity {
     private final int NOTIFICATIONS_LAYOUT = R.id.mainNotificationsScrollLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LanguageHelper.setLocale(this, PreferenceDAO.getInstance(this).retrievePreference().getLanguageName());
+        LanguageHelper.setLocale(this, preference.getLanguageName());
         setContentView(R.layout.activity_main);
 
         // Resize the start button's text if it's too big
@@ -57,11 +56,25 @@ public class MainActivity extends AppCompatActivity {
             // Turn on the dryer
             if (!dryer.getPowerStatus()) {
                 dryer.turnOn();
+
+                // Use text-to-speech to inform the user
+                if (preference.getVoiceInstructions()) {
+                    String toSpeak = getString(R.string.tts_turn_on);
+                    tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+                }
             }
 
             // Unlock the dryer's door
             if (dryer.isClosed()) {
                 dryer.openDoor();
+            }
+
+            // Wait for the text-to-speech to finish talking
+            if (preference.getVoiceInstructions()) {
+                boolean isSpeaking = tts.isSpeaking();
+                while (isSpeaking) {
+                    isSpeaking = tts.isSpeaking();
+                }
             }
 
             // Start the routine menu activity
