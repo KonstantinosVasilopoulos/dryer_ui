@@ -94,9 +94,6 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         statusLayout = (LinearLayout) findViewById(R.id.program_overview_statusLayout);
         removeClothesNotificationLayout = (LinearLayout) findViewById(R.id.program_overview_status_details_removeClothesLayout);
 
-        // Show the first Dialog Interface about saving the routine
-        showSaveDialogInterface();
-
         // Retrieve the routine using the provided parameters
         Bundle params = getIntent().getExtras();
         routineName = params.getString("routine_name");
@@ -105,6 +102,11 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
 
         // Get the edit mode from the parameters
         editMode = params.getBoolean("edit_mode", true);
+
+        // Show the first Dialog Interface about saving the routine
+        if (!editMode) {
+            showSaveDialogInterface();
+        }
 
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();

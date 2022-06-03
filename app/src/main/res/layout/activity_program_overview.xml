@@ -37,16 +37,16 @@
             android:id="@+id/program_overview_durationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/square_second_shape">
+            android:background="@drawable/square_second_shape"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/square_shape"
                 android:padding="5dp"
-                android:textSize="24sp"
-                android:text="@string/program_overview_duration_title" />
+                android:text="@string/program_overview_duration_title"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/programme_overview_duration_txt"
@@ -60,13 +60,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/program_overview_completedSuccessfullyLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:background="@drawable/square_second_shape"
             android:orientation="vertical"
-            android:background="@drawable/square_second_shape" >
+            android:visibility="gone">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -110,16 +110,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
             android:layout_marginTop="25dp"
-            android:text="@string/program_overview_details_txt" />
+            android:text="@string/program_overview_details_txt"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:orientation="vertical"
-            android:background="@drawable/square_second_shape" >
+            android:background="@drawable/square_second_shape"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:padding="15dp"
-                android:text="Dryer level"/>
+                android:text="Dryer level" />
 
         </LinearLayout>
 
@@ -142,8 +142,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:background="@drawable/square_second_shape" >
+            android:background="@drawable/square_second_shape"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:padding="15dp"
-                android:text="Clothes programme"/>
+                android:text="Clothes programme" />
 
         </LinearLayout>
 
@@ -167,8 +167,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:background="@drawable/square_second_shape" >
+            android:background="@drawable/square_second_shape"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -193,8 +193,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:background="@drawable/square_second_shape" >
+            android:background="@drawable/square_second_shape"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -218,59 +218,60 @@
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:padding="5dp"
-                android:textSize="16dp"
-                android:text="@string/program_overview_status_details_confirm_txt"/>
+                android:text="@string/program_overview_status_details_confirm_txt"
+                android:textSize="16dp" />
 
 
         </LinearLayout>
 
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/program_overview_status_details_removeClothesLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        android:background="@drawable/square_second_shape" >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/program_overview_status_details_removeClothesLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/square_shape"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:ignore="MissingConstraints">
+            android:layout_marginTop="15dp"
+            android:background="@drawable/square_second_shape"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:text="@string/program_overview_status_details_remove_clothes"
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@color/gray_400"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toStartOf="@+id/textView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/square_shape"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                app:srcCompat="@android:drawable/ic_dialog_alert" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:ignore="MissingConstraints">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/program_overview_status_details_remove_clothes"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/gray_400"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintEnd_toStartOf="@+id/textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView"
+                    app:srcCompat="@android:drawable/ic_dialog_alert" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -280,12 +281,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="100dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/programmeMainLayout">
 
         <Button
             android:id="@+id/overview_previous_btn"
@@ -309,7 +310,6 @@
             android:textSize="16sp" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/overview_stop_btn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
@@ -317,10 +317,10 @@
             android:backgroundTint="#D22525"
             android:text="@string/stop_program_btn"
             android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/overview_return_to_home_page_btn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
@@ -328,7 +328,8 @@
             android:backgroundTint="@color/gray_400"
             android:text="@string/return_to_home_page_btn"
             android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
