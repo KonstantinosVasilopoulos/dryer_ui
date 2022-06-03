@@ -1,7 +1,6 @@
 package model;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.collection.ArraySet;
 
@@ -16,6 +15,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * The RoutineDAO class provides basic CRUD operations for the Routine model. This class is also a
+ * Singleton, which means that only one instance of the class exists and can be accessed everywhere
+ * in the project.
+ *
+ * @author Konstantinos Vasilopoulos
+ * @see Routine
+ */
 public class RoutineDAO {
 
     // Singleton
@@ -26,11 +33,21 @@ public class RoutineDAO {
     private String storagePath;
     private final String STORAGE_FILENAME = "routines.csv";
 
-    // Warning: instance might be null!
+    /**
+     * Method for accessing the singleton without providing any parameters. Please ensure that the
+     * singleton exists before calling, otherwise this method will return null.
+     * @return the single instance of the RoutineDAO or null
+     */
     public static RoutineDAO getInstance() {
         return instance;
     }
 
+    /**
+     * Return the singleton instance. Create the instance if this is the first time this method
+     * called.
+     * @param context the Android application's context
+     * @return the single instance of the RoutineDAO
+     */
     public static RoutineDAO getInstance(Context context) {
         if (instance == null) {
             instance = new RoutineDAO(context);
@@ -39,6 +56,11 @@ public class RoutineDAO {
         return instance;
     }
 
+    /**
+     * Private constructor for this class. Accesses the application's storage and retrieves the
+     * routines.
+     * @param context the Android application's context
+     */
     private RoutineDAO(Context context) {
         // Initialize the routines set by loading the routines from storage
         routines = new ArraySet<>();
@@ -98,7 +120,12 @@ public class RoutineDAO {
         }
     }
 
-    // Finds whether a routine named with the provided string exists
+    /**
+     * Finds whether a routine whose name matches the provided string. A routine's name serves as a
+     * unique ID; two or more routines cannot have the same name.
+     * @param name the name to be queried.
+     * @return true if a routine named 'name' exists or false if it doesn't
+     */
     public boolean containsName(String name) {
         for (Routine routine : routines) {
             if (routine.getName().equals(name)) {
@@ -109,6 +136,10 @@ public class RoutineDAO {
         return false;
     }
 
+    /**
+     * Save a new routine to permanent storage.
+     * @param routine the new routine to be saved
+     */
     public void saveRoutine(Routine routine) {
         if (!containsName(routine.getName())) {
             try {
@@ -129,6 +160,11 @@ public class RoutineDAO {
         }
     }
 
+    /**
+     * Remove a saved routine. Only the routine's name is required to find the routine and delete it,
+     * since two or more routines cannot have the same name.
+     * @param name the routine's name
+     */
     public void removeRoutine(String name) {
         if (containsName(name)) {
             try {
@@ -158,7 +194,12 @@ public class RoutineDAO {
         }
     }
 
-    // Routines are updated based on their name
+    /**
+     * Update an already existing routine. The provided routine's name has to match an already
+     * existing routine, which will be updated. In case the routine's name has to be updated, first
+     * delete the old routine and add the updated one(don't use this method in such a case!).
+     * @param updatedRoutine the updated routine which has the same name as the old one
+     */
     public void updateRoutine(Routine updatedRoutine) {
         if (containsName(updatedRoutine.getName())) {
             // Search and replace the routine having the same name
@@ -189,7 +230,11 @@ public class RoutineDAO {
         }
     }
 
-    // Search for a routine using its name
+    /**
+     * Search for a saved routine using its name.
+     * @param name the routine's name
+     * @return the routine or null
+     */
     public Routine getRoutine(String name) {
         if (containsName(name)) {
             for (Routine routine : routines) {
@@ -202,7 +247,11 @@ public class RoutineDAO {
         return null;
     }
 
+    /**
+     * Return a copy of the set holding all saved routines.
+     * @return the set containing all routines saved
+     */
     public Set<Routine> getRoutines() {
-        return routines;
+        return new ArraySet<>(routines);
     }
 }
