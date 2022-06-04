@@ -20,7 +20,6 @@ import java.util.Set;
  * Singleton, which means that only one instance of the class exists and can be accessed everywhere
  * in the project.
  *
- * @author Konstantinos Vasilopoulos
  * @see Routine
  */
 public class RoutineDAO {

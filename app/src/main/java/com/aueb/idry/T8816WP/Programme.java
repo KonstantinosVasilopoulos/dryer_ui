@@ -4,8 +4,6 @@ import com.aueb.idry.R;
 
 /**
  * An enum which has every programme available to the dryer and the programme's string ID.
- *
- * @author Konstantinos Vasilopoulos
  */
 public enum Programme {
     COTTONS {

@@ -4,8 +4,6 @@ import com.aueb.idry.R;
 
 /**
  * An enum that holds every drying level of the dryer, along with the level's string representation ID.
- *
- * @author Konstantinos Vasilopoulos
  */
 public enum DryingLevel {
     EXTRA_DRY {
