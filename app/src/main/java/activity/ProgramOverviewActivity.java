@@ -249,7 +249,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
             final Handler handler = new Handler();
             handler.postDelayed(() -> {
                 final String toSpeak = getString(R.string.tts_preview_save_dialog);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_save_dialog");
+                speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_save_dialog");
             }, 500);
         }
 
@@ -301,7 +301,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                     final Handler handler = new Handler();
                     handler.postDelayed(() -> {
                         final String toSpeak = getString(R.string.tts_preview_empty_name);
-                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_empty_name");
+                        speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_empty_name");
                     }, 500);
 
                     Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_empty_text), Toast.LENGTH_SHORT).show();
@@ -327,7 +327,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                     final Handler handler = new Handler();
                     handler.postDelayed(() -> {
                         final String toSpeak = getString(R.string.tts_preview_different_name);
-                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_different_name");
+                        speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_different_name");
                     }, 500);
 
                     Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_name_match), Toast.LENGTH_SHORT).show();
@@ -351,7 +351,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                 String toSpeak = getResources().getQuantityString(R.plurals.tts_preview_hours, hours, hours)
                         + " " + getResources().getQuantityString(R.plurals.tts_preview_minutes, minutes, minutes)
                         + " " + getString(R.string.tts_preview_level_programme, levelStr, programmeStr);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null, "tts_preview");
+                speak(toSpeak, TextToSpeech.QUEUE_ADD, null, "tts_preview");
             }, 1000);
         }
     }

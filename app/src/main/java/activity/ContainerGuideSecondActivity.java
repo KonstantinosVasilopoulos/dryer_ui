@@ -39,7 +39,7 @@ public class ContainerGuideSecondActivity extends AdvancedAppActivity {
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             if (preference.getVoiceInstructions()) {
-                tts.speak(getString(R.string.tts_second_container), TextToSpeech.QUEUE_FLUSH, null, "tts_second_container");
+                speak(getString(R.string.tts_second_container), TextToSpeech.QUEUE_FLUSH, null, "tts_second_container");
             }
         }, 1000);
     }

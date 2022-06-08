@@ -37,7 +37,7 @@ public class FilterGuideFourthActivity extends AdvancedAppActivity {
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             if (preference.getVoiceInstructions()) {
-                tts.speak(getString(R.string.tts_fourth_filter), TextToSpeech.QUEUE_FLUSH, null, "tts_fourth_filter");
+                speak(getString(R.string.tts_fourth_filter), TextToSpeech.QUEUE_FLUSH, null, "tts_fourth_filter");
             }
         }, 1000);
     }
