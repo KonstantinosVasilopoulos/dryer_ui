@@ -1,9 +1,16 @@
 package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 
 import java.util.HashMap;
@@ -12,6 +19,7 @@ import java.util.Map;
 
 import model.Preference;
 import model.PreferenceDAO;
+import utils.DryerListener;
 
 /*
 Activity class containing more app-specific functionality
@@ -23,6 +31,11 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
     protected Preference preference;
     protected TextToSpeech tts;
     protected Map<String, Object> extras;
+
+    // Speech recognition
+    protected SpeechRecognizer speech;
+    private Intent recognizerIntent;
+    private static final int SPEECH_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +51,32 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
 
         // Initialize dictionary that stores the activities extras
         extras = new HashMap<>();
+
+        // Check if the speech recording permission is granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            final String[] permissions = {Manifest.permission.RECORD_AUDIO};
+            ActivityCompat.requestPermissions(this, permissions, SPEECH_REQUEST_CODE);
+        }
+
+        // Initialize speech recognizer
+        speech = SpeechRecognizer.createSpeechRecognizer(this);
+        if (SpeechRecognizer.isRecognitionAvailable(this)) {
+            speech.setRecognitionListener(new DryerListener());
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Start listening for commands
+        recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
+        recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
+        recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
+        speech.startListening(recognizerIntent);
     }
 
     @Override
@@ -72,6 +111,9 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
             }
         }
         startActivity(intent);
+
+        // Restart the voice listener
+        speech.startListening(recognizerIntent);
     }
 
     @Override
@@ -82,6 +124,16 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
             tts.stop();
             tts.shutdown();
         }
+
+        // Stop listening for voice commands
+        speech.stopListening();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        speech.destroy();
     }
 
     // Initialize text-to-speech

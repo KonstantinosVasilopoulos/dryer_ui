@@ -131,18 +131,18 @@
 
         <Button
             android:id="@+id/dryingLevelPreviousBtn"
+            style="@style/Theme.IDry.Button.Standard"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/gray_400"
-            android:singleLine="true"
+            android:singleLine="false"
             android:text="@string/previous_btn"
-            android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/dryingLevelNextBtn"
+            style="@style/Theme.IDry.Button.Green"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
