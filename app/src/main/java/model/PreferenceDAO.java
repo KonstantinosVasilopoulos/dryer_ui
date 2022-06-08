@@ -10,6 +10,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This class serves as a DAO singleton for the Preference class, offering CRUD functionality.
+ *
+ * @see Preference
+ */
 public class PreferenceDAO {
     private File file;
 
@@ -18,6 +23,13 @@ public class PreferenceDAO {
 
     private final String FILENAME = "preferences.txt";
 
+    /**
+     * This method is used to access the singleton instance. It will initialize the instance if it
+     * is the first time being called.
+     *
+     * @param context the Android application's context instance
+     * @return the singleton instance of the DAO
+     */
     public static PreferenceDAO getInstance(Context context) {
         if (instance == null) {
             instance = new PreferenceDAO(context);
@@ -26,6 +38,11 @@ public class PreferenceDAO {
         return instance;
     }
 
+    /**
+     * Private constructor for the this class. Creates the file needed to store the user's preferences.
+     *
+     * @param context the Android application's context instance
+     */
     private PreferenceDAO(Context context) {
         try {
             file = new File(context.getFilesDir(), FILENAME);
@@ -51,6 +68,12 @@ public class PreferenceDAO {
         }
     }
 
+    /**
+     * Saves the provided as parameter preference to memory.
+     *
+     * @param preference the preference to be saved
+     * @throws JSONException in case the preference cannot be converted into a JSON object
+     */
     public void savePreference(Preference preference) throws JSONException {
         JSONObject preferenceJsonObject = new JSONObject();
 
@@ -71,6 +94,11 @@ public class PreferenceDAO {
         }
     }
 
+    /**
+     * Retrieve the saved preference from memory.
+     *
+     * @return the saved preference instance
+     */
     public Preference retrievePreference() {
         Preference preference = null;
 

@@ -60,7 +60,7 @@ public class MainActivity extends AdvancedAppActivity {
                 // Use text-to-speech to inform the user
                 if (preference.getVoiceInstructions()) {
                     String toSpeak = getString(R.string.tts_turn_on);
-                    tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+                    speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
                 }
             }
 

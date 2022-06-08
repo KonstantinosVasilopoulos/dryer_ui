@@ -39,7 +39,7 @@ public class FilterGuideFirstActivity extends AdvancedAppActivity {
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             if (preference.getVoiceInstructions()) {
-                tts.speak(getString(R.string.tts_first_filter), TextToSpeech.QUEUE_FLUSH, null, "tts_first_filter");
+                speak(getString(R.string.tts_first_filter), TextToSpeech.QUEUE_FLUSH, null, "tts_first_filter");
             }
         }, 1000);
     }

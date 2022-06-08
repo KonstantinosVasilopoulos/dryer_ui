@@ -195,7 +195,7 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
             handler.postDelayed(() -> {
                 // Prompt the use to select a drying level
                 String toSpeak = getString(R.string.tts_first_step_prompt);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_first_step_prompt");
+                speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_first_step_prompt");
             }, 1000);
         }
     }
@@ -229,7 +229,7 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
 
         // Inform the user about the selected drying level via the microphone
         if (preference.getVoiceInstructions()) {
-            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_drying_level_selected");
+            speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_drying_level_selected");
         }
     }
 

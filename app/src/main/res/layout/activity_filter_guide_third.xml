@@ -202,6 +202,7 @@
 
         <Button
             android:id="@+id/filter_guide_third_back_btn"
+            style="@style/Theme.IDry.Button.Standard"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/gray_400"
@@ -211,6 +212,7 @@
 
         <Button
             android:id="@+id/filter_guide_third_next_btn"
+            style="@style/Theme.IDry.Button.Green"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
