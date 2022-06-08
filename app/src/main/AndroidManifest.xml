@@ -3,6 +3,7 @@
     package="com.aueb.idry">
 
     <application
+        android:name="activity.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -71,6 +72,7 @@
             android:name="activity.ProgramOverviewActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
+        <receiver android:name="activity.PreviewNotificationService"/>
     </application>
 
 </manifest>
