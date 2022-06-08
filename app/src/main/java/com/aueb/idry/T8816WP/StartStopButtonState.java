@@ -1,6 +1,8 @@
 package com.aueb.idry.T8816WP;
 
-// Emulates the Start/Stop buttons behavior
+/**
+ * An enum containing the different states the Start/Stop button can be in.
+ */
 public enum StartStopButtonState {
     OFF,
     FLASHING,
