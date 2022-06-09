@@ -83,12 +83,6 @@ public class FunctionButtonsFragment extends Fragment {
             dryer.openDoor();
             hideDoorUnlockBtn();
 
-            // Use speech-to-text to inform the user that the door is now unlocked
-            if (preference.getVoiceInstructions()) {
-                String toSpeak = getString(R.string.tts_door_unlocked);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
-            }
-
             // Display a pop-up informing the use that the door is now unlocked
             Snackbar.make(v, R.string.door_unlocked_message, Snackbar.LENGTH_SHORT).show();
         });
@@ -126,6 +120,12 @@ public class FunctionButtonsFragment extends Fragment {
     public void hideDoorUnlockBtn() {
         if (doorUnlockBtn != null) {
             doorUnlockBtn.setVisibility(View.GONE);
+        }
+
+        // Use speech-to-text to inform the user that the door is now unlocked
+        if (preference.getVoiceInstructions()) {
+            String toSpeak = getString(R.string.tts_door_unlocked);
+            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
         }
     }
 

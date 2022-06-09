@@ -51,6 +51,9 @@ public class MainActivity extends AdvancedAppActivity {
             addNotificationFragment(Notifications.CONTAINERS);
         }
 
+        // Find the instance of the function buttons
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.mainFunctionBtns));
+
         // Set listener for start button
         mainStartBtn.setOnClickListener(view -> {
             // Turn on the dryer

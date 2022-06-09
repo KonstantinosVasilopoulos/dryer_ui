@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
+
+import com.aueb.idry.T8816WP.TumbleDryer;
+import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +24,6 @@ import java.util.Map;
 import model.Preference;
 import model.PreferenceDAO;
 import utils.DryerListener;
-import utils.DryerListenerObserver;
 
 /**
  * Activity class containing more app-specific functionality
@@ -30,7 +31,7 @@ import utils.DryerListenerObserver;
  *   - Preferences instance
  *   - Text-to-speech
  */
-public abstract class AdvancedAppActivity extends AppCompatActivity implements DryerListenerObserver {
+public abstract class AdvancedAppActivity extends AppCompatActivity {
     protected Preference preference;
     protected TextToSpeech tts;
     protected Map<String, Object> extras;
@@ -39,6 +40,8 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
     protected SpeechRecognizer speech;
     private Intent recognizerIntent;
     private static final int SPEECH_REQUEST_CODE = 0;
+
+    private FunctionButtonsFragment functionButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,6 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
         if (SpeechRecognizer.isRecognitionAvailable(this)) {
             DryerListener listener = new DryerListener(this);
             speech.setRecognitionListener(listener);
-
-            // Subscribe the class to the listener's observers
-            listener.addObserver(this);
         }
     }
 
@@ -158,7 +158,9 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
         });
     }
 
-    // Set extras dictionary in routine-related activities
+    /**
+     * Set extras dictionary in routine-related activities.
+     */
     protected void setRoutineActivityExtras(String routineName) {
         extras.put("routine_name", routineName);
     }
@@ -186,18 +188,31 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
         speech.startListening(recognizerIntent);
     }
 
-    @Override
+    /**
+     * Process the results of the listener.
+     *
+     * @param matches an array containing all the words the listener has matched successfully.
+     */
     public void listenerUpdated(List<String> matches) {
         // Search for a set of predefined commands
         String[] words;
         for (String match : matches) {
             words = match.split(" ");
             if (stringArrayContains(words, "open") && stringArrayContains(words, "door")) {
-                // TODO: Open the dryer's door & notify the function buttons' fragment about the change
-                Log.d("speech", "opening door"); // -0
+                // Open the dryer's door & notify the function buttons' fragment about the change
+                TumbleDryer dryer = TumbleDryerImp.getInstance();
+                dryer.openDoor();
+                if (functionButtons != null) {
+                    functionButtons.hideDoorUnlockBtn();
+                }
+
                 break;
             }
         }
+    }
+
+    protected void setFunctionButtons(FunctionButtonsFragment functionButtons) {
+        this.functionButtons = functionButtons;
     }
 
     /**
