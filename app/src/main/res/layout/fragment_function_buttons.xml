@@ -15,15 +15,17 @@
             android:id="@+id/settingsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:background="@drawable/settings_btn"
             android:backgroundTint="@color/gray_400"
             android:contentDescription="@string/settings_btn_description"
             android:padding="14dp"
             android:src="@drawable/ic_action_settings"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.039"
+            app:layout_constraintStart_toEndOf="@+id/homeBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.875" />
 
         <Button
             android:id="@+id/doorUnlockBtn"
@@ -42,6 +44,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/homeBtn"
+            android:layout_width="41dp"
+            android:layout_height="42dp"
+
+            android:background="@drawable/house_white"
+            android:contentDescription="Navigate to Home Page"
+            android:padding="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/settingsBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/settingsBtn"
+            app:layout_constraintVertical_bias="0.615" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>
