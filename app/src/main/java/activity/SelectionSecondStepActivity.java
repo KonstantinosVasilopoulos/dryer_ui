@@ -231,7 +231,7 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
             final Handler handler = new Handler();
             handler.postDelayed(() -> {
                 final String toSpeak = getString(R.string.tts_second_step_prompt);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_second_step_prompt");
+                speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_second_step_prompt");
             }, 1000);
         }
     }

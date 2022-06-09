@@ -290,6 +290,7 @@
 
         <Button
             android:id="@+id/overview_previous_btn"
+            style="@style/Theme.IDry.Button.Standard"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -301,6 +302,7 @@
 
         <Button
             android:id="@+id/overview_confirm_btn"
+            style="@style/Theme.IDry.Button.Green"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -311,10 +313,10 @@
 
         <Button
             android:id="@+id/overview_stop_btn"
+            style="@style/Theme.IDry.Button.Red"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#D22525"
             android:text="@string/stop_program_btn"
             android:textAllCaps="false"
             android:textSize="16sp"
@@ -322,6 +324,7 @@
 
         <Button
             android:id="@+id/overview_return_to_home_page_btn"
+            style="@style/Theme.IDry.Button.Standard"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

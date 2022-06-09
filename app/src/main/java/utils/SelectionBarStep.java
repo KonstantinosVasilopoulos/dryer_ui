@@ -1,6 +1,9 @@
 package utils;
 
-// All steps for creating a new routine
+/**
+ * An enum containing all steps needed to create a new routine or edit an existing one.
+ * Each enum entry corresponds to one step and each step has its own Android activity.
+ */
 public enum SelectionBarStep {
     DRYING_LEVEL,
     PROGRAMME,

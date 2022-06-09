@@ -2,6 +2,9 @@ package com.aueb.idry.T8816WP;
 
 import com.aueb.idry.R;
 
+/**
+ * An enum which has every programme available to the dryer and the programme's string ID.
+ */
 public enum Programme {
     COTTONS {
         @Override
@@ -76,5 +79,9 @@ public enum Programme {
         }
     };
 
+    /**
+     * Return the string representation for this enum's entry.
+     * @return the string ID for this entry
+     */
     public abstract int getStringId();
 }

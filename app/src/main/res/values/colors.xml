@@ -14,5 +14,6 @@
     <color name="gray_200">#36393F</color>
     <color name="gray_100">#B9BBBE</color> <!-- For text -->
     <color name="confirmation_green">#43C466</color>
+    <color name="error_red">#D21404</color>
     <color name="whitesmoke">#F5F5F5</color>
 </resources>

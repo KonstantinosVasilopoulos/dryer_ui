@@ -29,6 +29,7 @@ android {
         viewBinding true
     }
     buildToolsVersion '30.0.3'
+    namespace 'com.aueb.idry'
 }
 
 dependencies {

@@ -2,6 +2,9 @@ package com.aueb.idry.T8816WP;
 
 import com.aueb.idry.R;
 
+/**
+ * An enum that holds every drying level of the dryer, along with the level's string representation ID.
+ */
 public enum DryingLevel {
     EXTRA_DRY {
         @Override
@@ -28,5 +31,9 @@ public enum DryingLevel {
         }
     };
 
+    /**
+     * Return the string representation of the enum entry.
+     * @return the string ID for this enum entry
+     */
     public abstract int getStringId();
 }

@@ -137,7 +137,7 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
                     // Play audio error message
                     if (preference.getVoiceInstructions()) {
                         String toSpeak = getString(R.string.tts_third_step_invalid_date);
-                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_invalid_date");
+                        speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_invalid_date");
                     }
 
                     return; // Exit the function since the date is invalid
@@ -180,7 +180,7 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
             final Handler handler = new Handler();
             handler.postDelayed(() -> {
                 final String toSpeak = getString(R.string.tts_third_step_prompt);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_third_step_prompt");
+                speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_third_step_prompt");
             }, 1000);
         }
     }
