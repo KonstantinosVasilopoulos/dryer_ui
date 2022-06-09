@@ -129,4 +129,5 @@
     <string name="tts_second_filter">Remove the handle and wash the filter</string>
     <string name="tts_third_filter">Clean the heat exchanger with the help of a vacuum cleaner</string>
     <string name="tts_fourth_filter">Reattach the handle and then slide the filter back into the dryer</string>
+    <string name="notification_swipe_down_for_more">Swipe down for more</string>
 </resources>
