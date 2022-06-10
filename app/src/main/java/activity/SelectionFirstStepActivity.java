@@ -189,6 +189,9 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
     protected void onStart() {
         super.onStart();
 
+        // Display the home button
+        diplayHomeBtn(R.id.dryingLevelFunctionBtns);
+
         if (preference.getVoiceInstructions()) {
             // Wait for 1 seconds before speaking
             final Handler handler = new Handler();

@@ -49,7 +49,7 @@
             android:id="@+id/homeBtn"
             android:layout_width="41dp"
             android:layout_height="42dp"
-
+            android:visibility="gone"
             android:background="@drawable/house_white"
             android:contentDescription="Navigate to Home Page"
             android:padding="14dp"

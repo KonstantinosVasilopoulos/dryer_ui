@@ -26,6 +26,7 @@ import model.PreferenceDAO;
 
 public class FunctionButtonsFragment extends Fragment {
     private Button doorUnlockBtn;
+    private ImageButton homeBtn;
     private TumbleDryer dryer;
     private TextToSpeech tts;
     private Preference preference;
@@ -78,9 +79,8 @@ public class FunctionButtonsFragment extends Fragment {
 
 
         //Home Button
-        ImageButton HomeBtn;
-        HomeBtn = view.findViewById(R.id.homeBtn);
-        HomeBtn.setOnClickListener(v -> {
+        homeBtn = view.findViewById(R.id.homeBtn);
+        homeBtn.setOnClickListener(v -> {
             // Navigate to the first page with favorites programs
             if (getActivity() != null) {
                 startActivity(new Intent(getActivity(), RoutineMenuActivity.class));
@@ -122,7 +122,6 @@ public class FunctionButtonsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         // Check whether the door is open
         if (dryer.isClosed()) {
             // Display button for closing the door
@@ -144,7 +143,8 @@ public class FunctionButtonsFragment extends Fragment {
 
     public void displayDoorUnlockBtn() {
         if (doorUnlockBtn != null) {
-            doorUnlockBtn.setVisibility(View.VISIBLE);
+            doorUnlockBtn
+                    .setVisibility(View.VISIBLE);
         }
     }
 
@@ -152,6 +152,11 @@ public class FunctionButtonsFragment extends Fragment {
         if (doorUnlockBtn != null) {
             doorUnlockBtn.setVisibility(View.GONE);
         }
+    }
+
+    public void displayHomeBtn() {
+        // Make the home button visible
+        homeBtn.setVisibility(View.VISIBLE);
     }
 
     // Helper method

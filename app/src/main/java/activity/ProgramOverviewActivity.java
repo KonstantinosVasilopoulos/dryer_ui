@@ -201,7 +201,8 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
     protected void onStart() {
         super.onStart();
 
-
+        // Display the home button
+        diplayHomeBtn(R.id.previewFunctionBtns);
     }
 
     private void onFinishDelayCountDownTimer() {

@@ -3,6 +3,7 @@ package activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.Intent;
@@ -215,5 +216,10 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
             }
         }
         return false;
+    }
+
+    protected void diplayHomeBtn(int fragmentId) {
+        FunctionButtonsFragment functionBtns = (FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(fragmentId);
+        functionBtns.displayHomeBtn();
     }
 }
