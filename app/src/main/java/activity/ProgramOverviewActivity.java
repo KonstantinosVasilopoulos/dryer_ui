@@ -87,7 +87,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
 
         // Notification declaration
         IntentFilter intentFilter = new IntentFilter("notificationPreview");
-        previewNotification = new PreviewNotification(this);
+        previewNotification = new PreviewNotification(this, preference.getNotifications());
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {

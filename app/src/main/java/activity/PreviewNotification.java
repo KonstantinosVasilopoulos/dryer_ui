@@ -18,6 +18,7 @@ public class PreviewNotification {
     private PendingIntent pendingIntentStop, pendingIntentResume;
     private RemoteViews collapsedView, expandedView;
     private Notification notification;
+    private boolean preference;
 
     public static final String DRYER_STOP = "actionStop";
     public static final String DRYER_RESUME = "actionResume";
@@ -25,8 +26,9 @@ public class PreviewNotification {
     private final int resumeBtnID = R.id.notification_preview_resume_btn;
     private final int stopBtnID = R.id.notification_preview_stop_btn;
 
-    public PreviewNotification(Context context) {
+    public PreviewNotification(Context context, boolean preference) {
         this.context = context;
+        this.preference = preference;
 
         notificationManager = NotificationManagerCompat.from(context);
         Intent intentStop = new Intent(context, PreviewNotificationService.class)
@@ -42,8 +44,13 @@ public class PreviewNotification {
         collapsedView = new RemoteViews(context.getPackageName(), R.layout.notification_preview_collapsed);
         expandedView = new RemoteViews(context.getPackageName(), R.layout.notification_preview_expanded);
 
+        collapsedView.setTextViewText(R.id.notification_preview_collapsed_swipe_label,
+                context.getString(R.string.notification_swipe_down_for_more));
+
         expandedView.setOnClickPendingIntent(resumeBtnID, pendingIntentResume);
         expandedView.setOnClickPendingIntent(stopBtnID, pendingIntentStop);
+        expandedView.setTextViewText(R.id.notification_preview_expanded_routine_label,
+                context.getString(R.string.notification_routine_label));
 
         expandedView.setTextViewText(R.id.notification_preview_expanded_duration, "Hello world!");
 
@@ -55,12 +62,13 @@ public class PreviewNotification {
                 .setCustomBigContentView(expandedView)
                 .build();
 
+        notificationManager.cancelAll();
     }
 
     public void showNotificationWithDelay(String routineName) {
         notificationManager.cancel(1);
         setRemoteViewsContent(R.string.notification_delay, routineName, R.string.notification_delay_hint);
-        notificationManager.notify(1, notification);
+        sendNotification();
     }
 
     public void showNotificationReadyToStart(String routineName) {
@@ -68,12 +76,12 @@ public class PreviewNotification {
         setButtonsVisibility(View.VISIBLE, View.GONE);
         setDurationVisibility(View.GONE);
         setRemoteViewsContent(R.string.notification_on_start, routineName, R.string.notification_on_start_hint);
-        notificationManager.notify(1, notification);
+        sendNotification();
     }
 
     public void updateNotificationTime(String time) {
         expandedView.setTextViewText(R.id.notification_preview_expanded_duration, time);
-        notificationManager.notify(1, notification);
+        sendNotification();
     }
 
     public void showStartNotification() {
@@ -81,7 +89,7 @@ public class PreviewNotification {
         setButtonsVisibility(View.GONE, View.VISIBLE);
         setDurationVisibility(View.VISIBLE);
         setRemoteViewsContent(R.string.notification_running, R.string.notification_duration_label);
-        notificationManager.notify(1, notification);
+        sendNotification();
     }
 
     public void showResumeNotification() {
@@ -89,7 +97,7 @@ public class PreviewNotification {
         setButtonsVisibility(View.GONE, View.VISIBLE);
         setDurationVisibility(View.VISIBLE);
         setRemoteViewsContent(R.string.notification_on_resume, R.string.notification_duration_label);
-        notificationManager.notify(1, notification);
+        sendNotification();
     }
 
     public void showPauseNotification() {
@@ -97,7 +105,7 @@ public class PreviewNotification {
         setButtonsVisibility(View.VISIBLE, View.GONE);
         setDurationVisibility(View.GONE);
         setRemoteViewsContent(R.string.notification_on_pause, R.string.notification_on_pause_hint);
-        notificationManager.notify(1, notification);
+        sendNotification();
     }
 
     public void showFinishNotification() {
@@ -105,7 +113,7 @@ public class PreviewNotification {
         setButtonsVisibility(View.GONE, View.GONE);
         setRemoteViewsContent(R.string.notification_finish, R.string.notification_finish_hint);
         setDurationVisibility(View.GONE);
-        notificationManager.notify(1, notification);
+        sendNotification();
     }
 
     private void setButtonsVisibility(int resume, int stop) {
@@ -132,5 +140,11 @@ public class PreviewNotification {
                 context.getString(collapsedViewLabel));
         expandedView.setTextViewText(R.id.notification_preview_expanded_info,
                 context.getString(expandedViewInfo));
+    }
+
+    private void sendNotification() {
+        if (preference) {
+            notificationManager.notify(1, notification);
+        }
     }
 }

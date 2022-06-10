@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable-anydpi/ic_settings_icon.xml" value="0.1" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.202" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/circle_btn.xml" value="0.1755" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/ic_done.xml" value="0.1595" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/ic_help.xml" value="0.1755" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/ic_launcher_background.xml" value="0.293" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/ic_pause.xml" value="0.1" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/ic_play.xml" value="0.133" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/round_button.xml" value="0.1755" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/square_rounded_shape.xml" value="0.1905" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/square_second_shape.xml" value="0.1245" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/drawable/square_shape.xml" value="0.1905" />
@@ -21,7 +27,7 @@
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_filter_guide_third.xml" value="0.264" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_filters_guide_first.xml" value="0.152" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_filters_guide_second.xml" value="0.3143939393939394" />
-        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_main.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_program_overview.xml" value="0.264" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_routine_menu.xml" value="0.264" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/activity_selection_first_step.xml" value="0.28558476881233" />
@@ -32,6 +38,8 @@
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_routine.xml" value="0.2774252039891206" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_second.xml" value="0.16304347826086957" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_selection_bar.xml" value="0.28558476881233" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/fragment_time_picker.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/main_notification_help.xml" value="0.20778110303548525" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/notification_preview_collapsed.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/notification_preview_expanded.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/apipi/Documents/UNI/dryer_ui/app/src/main/res/layout/settings.xml" value="0.20534904805077062" />
