@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/settingskey"
+        android:textColor="@color/confirmation_green"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,6 +215,7 @@
 
     <Button
         android:id="@+id/returnfromsettings"
+        style="@style/Theme.IDry.Button.Standard"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gray_400"

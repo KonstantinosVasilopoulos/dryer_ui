@@ -25,7 +25,6 @@ import model.Preference;
 import model.PreferenceDAO;
 
 public class FunctionButtonsFragment extends Fragment {
-
     private Button doorUnlockBtn;
     private TumbleDryer dryer;
     private TextToSpeech tts;
@@ -77,9 +76,35 @@ public class FunctionButtonsFragment extends Fragment {
             }
         });
 
+
+        //Home Button
+        ImageButton HomeBtn;
+        HomeBtn = view.findViewById(R.id.homeBtn);
+        HomeBtn.setOnClickListener(v -> {
+            // Navigate to the first page with favorites programs
+            if (getActivity() != null) {
+                startActivity(new Intent(getActivity(), RoutineMenuActivity.class));
+            }
+        });
+
+//        if (this.getClass().getSimpleName().contains("SelectionFirstStepActivity")
+//                || this.getClass().getSimpleName().contains("SelectionSecondStepActivity")
+//                || this.getClass().getSimpleName().equals("SelectionThirdStepActivity")){
+//            HomeBtn.setVisibility(View.VISIBLE);
+//        } else{
+//            HomeBtn.setVisibility(View.GONE);}
+
+
+
         // Door unlock button
         doorUnlockBtn.setOnClickListener(v -> {
             // Open the door and hide this button
+                // Navigate to the door activity
+                if (getActivity() != null) {
+                    Intent temp=new Intent(getActivity(), DoorGuideActivity.class);
+                    temp.putExtra("class",String.valueOf(getActivity()));
+                    startActivity(temp);
+                }
             dryer.openDoor();
             hideDoorUnlockBtn();
 
