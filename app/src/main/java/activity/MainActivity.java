@@ -55,40 +55,21 @@ public class MainActivity extends AdvancedAppActivity {
         setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.mainFunctionBtns));
 
         // Set listener for start button
-        mainStartBtn.setOnClickListener(view -> {
-            // Turn on the dryer
-            if (!dryer.getPowerStatus()) {
-                dryer.turnOn();
-
-                // Use text-to-speech to inform the user
-                if (preference.getVoiceInstructions()) {
-                    String toSpeak = getString(R.string.tts_turn_on);
-                    speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
-                }
-            }
-
-            // Unlock the dryer's door
-            if (dryer.isClosed()) {
-                dryer.openDoor();
-            }
-
-            // Wait for the text-to-speech to finish talking
-            if (preference.getVoiceInstructions()) {
-                boolean isSpeaking = tts.isSpeaking();
-                while (isSpeaking) {
-                    isSpeaking = tts.isSpeaking();
-                }
-            }
-
-            // Start the routine menu activity
-            //Intent intent = new Intent(MainActivity.this, RoutineMenuActivity.class);
-            Intent intent = new Intent(MainActivity.this, DoorGuideActivity.class);
-            intent.putExtra("className", "RoutineMenuActivity");
-            startActivity(intent);
-        });
+        mainStartBtn.setOnClickListener(view -> mainBtnClicked());
     }
 
-    // Helper method
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "turn") && stringArrayContains(words, "on")) {
+            // Turn on the dryer and proceed to the next activity
+            mainBtnClicked();
+        }
+    }
+
+    // Helper methods
     // Add a notification fragment
     private void addNotificationFragment(Notifications type) {
         FragmentManager fm = getSupportFragmentManager();
@@ -98,5 +79,39 @@ public class MainActivity extends AdvancedAppActivity {
         args.putSerializable("notification", type);
         fragment.setArguments(args);
         transaction.add(NOTIFICATIONS_LAYOUT, fragment).commit();
+    }
+
+    // Respond to the main button being clicked by initiating the dryer and starting the next activity
+    private void mainBtnClicked() {
+        // Turn on the dryer
+        TumbleDryer dryer = TumbleDryerImp.getInstance();
+        if (!dryer.getPowerStatus()) {
+            dryer.turnOn();
+
+            // Use text-to-speech to inform the user
+            if (preference.getVoiceInstructions()) {
+                String toSpeak = getString(R.string.tts_turn_on);
+                speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+            }
+        }
+
+        // Unlock the dryer's door
+        if (dryer.isClosed()) {
+            dryer.openDoor();
+        }
+
+        // Wait for the text-to-speech to finish talking
+        if (preference.getVoiceInstructions()) {
+            boolean isSpeaking = tts.isSpeaking();
+            while (isSpeaking) {
+                isSpeaking = tts.isSpeaking();
+            }
+        }
+
+        // Start the routine menu activity
+        //Intent intent = new Intent(MainActivity.this, RoutineMenuActivity.class);
+        Intent intent = new Intent(MainActivity.this, DoorGuideActivity.class);
+        intent.putExtra("className", "RoutineMenuActivity");
+        startActivity(intent);
     }
 }

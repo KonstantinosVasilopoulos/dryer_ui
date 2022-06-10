@@ -17,7 +17,6 @@ import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -39,6 +38,7 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
     // Speech recognition
     protected SpeechRecognizer speech;
     private Intent recognizerIntent;
+    private static boolean voiceRecognitionAvailable;
     private static final int SPEECH_REQUEST_CODE = 0;
 
     private FunctionButtonsFragment functionButtons;
@@ -69,6 +69,9 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         if (SpeechRecognizer.isRecognitionAvailable(this)) {
             DryerListener listener = new DryerListener(this);
             speech.setRecognitionListener(listener);
+            voiceRecognitionAvailable = true;
+        } else {
+            voiceRecognitionAvailable = false;
         }
     }
 
@@ -77,13 +80,15 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         super.onStart();
 
         // Start listening for commands
-        recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            recognizerIntent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
-        speech.startListening(recognizerIntent);
+        if (voiceRecognitionAvailable && preference.getVoiceCommands()) {
+            recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                recognizerIntent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
+            speech.startListening(recognizerIntent);
+        }
     }
 
     @Override
@@ -120,7 +125,7 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         startActivity(intent);
 
         // Restart the voice listener
-        speech.startListening(recognizerIntent);
+        restartListener();
     }
 
     @Override
@@ -166,47 +171,45 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
     }
 
     /**
-     * Wrapper for TextToSpeech speak method. This method ensures that the SpeechRecognizer isn't
-     * listening while text-to-speech is speaking.
+     * Wrapper for TextToSpeech speak method.
      *
      * @param toSpeak string to be spoken
      * @param queueMode flush or add new string to the queue
      * @param params extra parameters
      * @param utteranceId a unique identifier
-     * @see TextToSpeech
      */
     protected void speak(String toSpeak, int queueMode, Bundle params, String utteranceId) {
-        speech.stopListening(); // Stop listening while speaking
         tts.speak(toSpeak, queueMode, params, utteranceId); // Speak
-        speech.startListening(recognizerIntent); // Restart listening
     }
 
     /**
      * Start listening for voice commands again.
      */
     public void restartListener() {
-        speech.startListening(recognizerIntent);
+        if (voiceRecognitionAvailable && preference.getVoiceCommands()) {
+            speech.startListening(recognizerIntent);
+        }
     }
 
     /**
      * Process the results of the listener.
      *
-     * @param matches an array containing all the words the listener has matched successfully.
+     * @param match the string the listener
      */
-    public void listenerUpdated(List<String> matches) {
-        // Search for a set of predefined commands
-        String[] words;
-        for (String match : matches) {
-            words = match.split(" ");
-            if (stringArrayContains(words, "open") && stringArrayContains(words, "door")) {
-                // Open the dryer's door & notify the function buttons' fragment about the change
-                TumbleDryer dryer = TumbleDryerImp.getInstance();
-                dryer.openDoor();
-                if (functionButtons != null) {
-                    functionButtons.hideDoorUnlockBtn();
-                }
+    public void listenerUpdated(String match) {
+        // Skip if voice recognition is not available or the user has turned voice commands off
+        if (!voiceRecognitionAvailable || !preference.getVoiceCommands()) {
+            return;
+        }
 
-                break;
+        // Search for a set of predefined commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "open") && stringArrayContains(words, "door")) {
+            // Open the dryer's door & notify the function buttons' fragment about the change
+            TumbleDryer dryer = TumbleDryerImp.getInstance();
+            dryer.openDoor();
+            if (functionButtons != null) {
+                functionButtons.hideDoorUnlockBtn();
             }
         }
     }
@@ -215,6 +218,7 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         this.functionButtons = functionButtons;
     }
 
+    // Helper method
     /**
      * Search for an item in a string array. Ignore case.
      *
@@ -222,7 +226,6 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
      * @param item the item to be found
      * @return true if the item was found, otherwise false
      */
-    // Helper method
     protected boolean stringArrayContains(String[] array, String item) {
         for (String word : array) {
             if (word.equalsIgnoreCase(item)) {

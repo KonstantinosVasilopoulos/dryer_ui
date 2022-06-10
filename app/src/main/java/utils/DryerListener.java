@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import activity.AdvancedAppActivity;
@@ -66,7 +65,7 @@ public class DryerListener implements RecognitionListener {
             for (String match : matches) {
                 if (match.startsWith(VOICE_KEYWORD)) {
                     // Have the parent activity handle the output
-                    parentActivity.listenerUpdated(matches);
+                    parentActivity.listenerUpdated(match);
                     break;
                 }
             }
