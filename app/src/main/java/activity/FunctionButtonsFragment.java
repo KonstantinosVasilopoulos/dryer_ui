@@ -87,15 +87,6 @@ public class FunctionButtonsFragment extends Fragment {
             }
         });
 
-//        if (this.getClass().getSimpleName().contains("SelectionFirstStepActivity")
-//                || this.getClass().getSimpleName().contains("SelectionSecondStepActivity")
-//                || this.getClass().getSimpleName().equals("SelectionThirdStepActivity")){
-//            HomeBtn.setVisibility(View.VISIBLE);
-//        } else{
-//            HomeBtn.setVisibility(View.GONE);}
-
-
-
         // Door unlock button
         doorUnlockBtn.setOnClickListener(v -> {
             // Open the door and hide this button
