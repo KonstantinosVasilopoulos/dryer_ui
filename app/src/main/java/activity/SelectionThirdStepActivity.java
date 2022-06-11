@@ -82,11 +82,14 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
             Calendar calendar = Calendar.getInstance(locale);
             calendar.setTime(date);
             calendar.add(Calendar.DATE, -1); // 1 day
-            date = calendar.getTime();
-            Log.d("routine_date_left", date.toString());
+            Calendar now = Calendar.getInstance(locale);
+            if (calendar.get(Calendar.DAY_OF_YEAR) >= now.get(Calendar.DAY_OF_YEAR)) {
+                date = calendar.getTime();
+                Log.d("routine_date_left", date.toString());
 
-            // Display new date
-            displayDate();
+                // Display new date
+                displayDate();
+            }
         });
 
         // Right arrow button
@@ -188,6 +191,27 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         }
     }
 
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigation commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "go") || stringArrayContains(words, "back")) {
+            final Button previousBtn = findViewById(R.id.programmePreviousBtn);
+            previousBtn.performClick();
+        } else if (stringArrayContains(words, "proceed")) {
+            final Button nextBtn = findViewById(R.id.programmeNextBtn);
+            nextBtn.performClick();
+        }
+
+        // Start now voice command
+        if (stringArrayContains(words, "start") || stringArrayContains(words, "now")) {
+            final Button nowBtn = findViewById(R.id.timeNowBtn);
+            nowBtn.performClick();
+        }
+    }
+
     // Helper method
     // Change displayed date
     private void displayDate() {
@@ -203,5 +227,12 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         dateBtn.setTextSize(textSize);
 
         dateBtn.setText(dateStr);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Click on the previous button
+        final Button previousBtn = findViewById(R.id.timePreviousBtn);
+        previousBtn.performClick();
     }
 }

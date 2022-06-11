@@ -13,17 +13,17 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
+
+import com.aueb.idry.T8816WP.TumbleDryer;
+import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import model.Preference;
 import model.PreferenceDAO;
 import utils.DryerListener;
-import utils.DryerListenerObserver;
 
 /**
  * Activity class containing more app-specific functionality
@@ -31,7 +31,7 @@ import utils.DryerListenerObserver;
  *   - Preferences instance
  *   - Text-to-speech
  */
-public abstract class AdvancedAppActivity extends AppCompatActivity implements DryerListenerObserver {
+public abstract class AdvancedAppActivity extends AppCompatActivity {
     protected Preference preference;
     protected TextToSpeech tts;
     protected Map<String, Object> extras;
@@ -39,7 +39,10 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
     // Speech recognition
     protected SpeechRecognizer speech;
     private Intent recognizerIntent;
+    private static boolean voiceRecognitionAvailable;
     private static final int SPEECH_REQUEST_CODE = 0;
+
+    private FunctionButtonsFragment functionButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +70,9 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
         if (SpeechRecognizer.isRecognitionAvailable(this)) {
             DryerListener listener = new DryerListener(this);
             speech.setRecognitionListener(listener);
-
-            // Subscribe the class to the listener's observers
-            listener.addObserver(this);
+            voiceRecognitionAvailable = true;
+        } else {
+            voiceRecognitionAvailable = false;
         }
     }
 
@@ -78,13 +81,15 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
         super.onStart();
 
         // Start listening for commands
-        recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            recognizerIntent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
-        speech.startListening(recognizerIntent);
+        if (voiceRecognitionAvailable && preference.getVoiceCommands()) {
+            recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                recognizerIntent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
+            speech.startListening(recognizerIntent);
+        }
     }
 
     @Override
@@ -121,7 +126,7 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
         startActivity(intent);
 
         // Restart the voice listener
-        speech.startListening(recognizerIntent);
+        restartListener();
     }
 
     @Override
@@ -159,48 +164,62 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
         });
     }
 
-    // Set extras dictionary in routine-related activities
+    /**
+     * Set extras dictionary in routine-related activities.
+     */
     protected void setRoutineActivityExtras(String routineName) {
         extras.put("routine_name", routineName);
     }
 
     /**
-     * Wrapper for TextToSpeech speak method. This method ensures that the SpeechRecognizer isn't
-     * listening while text-to-speech is speaking.
+     * Wrapper for TextToSpeech speak method.
      *
      * @param toSpeak string to be spoken
      * @param queueMode flush or add new string to the queue
      * @param params extra parameters
      * @param utteranceId a unique identifier
-     * @see TextToSpeech
      */
     protected void speak(String toSpeak, int queueMode, Bundle params, String utteranceId) {
-        speech.stopListening(); // Stop listening while speaking
         tts.speak(toSpeak, queueMode, params, utteranceId); // Speak
-        speech.startListening(recognizerIntent); // Restart listening
     }
 
     /**
      * Start listening for voice commands again.
      */
     public void restartListener() {
-        speech.startListening(recognizerIntent);
+        if (voiceRecognitionAvailable && preference.getVoiceCommands()) {
+            speech.startListening(recognizerIntent);
+        }
     }
 
-    @Override
-    public void listenerUpdated(List<String> matches) {
+    /**
+     * Process the results of the listener.
+     *
+     * @param match the string the listener
+     */
+    public void listenerUpdated(String match) {
+        // Skip if voice recognition is not available or the user has turned voice commands off
+        if (!voiceRecognitionAvailable || !preference.getVoiceCommands()) {
+            return;
+        }
+
         // Search for a set of predefined commands
-        String[] words;
-        for (String match : matches) {
-            words = match.split(" ");
-            if (stringArrayContains(words, "open") && stringArrayContains(words, "door")) {
-                // TODO: Open the dryer's door & notify the function buttons' fragment about the change
-                Log.d("speech", "opening door"); // -0
-                break;
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "open") && stringArrayContains(words, "door")) {
+            // Open the dryer's door & notify the function buttons' fragment about the change
+            TumbleDryer dryer = TumbleDryerImp.getInstance();
+            dryer.openDoor();
+            if (functionButtons != null) {
+                functionButtons.hideDoorUnlockBtn();
             }
         }
     }
 
+    protected void setFunctionButtons(FunctionButtonsFragment functionButtons) {
+        this.functionButtons = functionButtons;
+    }
+
+    // Helper method
     /**
      * Search for an item in a string array. Ignore case.
      *
@@ -208,7 +227,6 @@ public abstract class AdvancedAppActivity extends AppCompatActivity implements D
      * @param item the item to be found
      * @return true if the item was found, otherwise false
      */
-    // Helper method
     protected boolean stringArrayContains(String[] array, String item) {
         for (String word : array) {
             if (word.equalsIgnoreCase(item)) {

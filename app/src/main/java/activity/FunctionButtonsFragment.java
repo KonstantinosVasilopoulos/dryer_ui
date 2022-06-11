@@ -77,11 +77,10 @@ public class FunctionButtonsFragment extends Fragment {
             }
         });
 
-
-        //Home Button
-        homeBtn = view.findViewById(R.id.homeBtn);
+        // Home button
+        ImageButton homeBtn = view.findViewById(R.id.homeBtn);
         homeBtn.setOnClickListener(v -> {
-            // Navigate to the first page with favorites programs
+            // Navigate to the routines menu activity
             if (getActivity() != null) {
                 startActivity(new Intent(getActivity(), RoutineMenuActivity.class));
             }
@@ -98,12 +97,6 @@ public class FunctionButtonsFragment extends Fragment {
                 }
             dryer.openDoor();
             hideDoorUnlockBtn();
-
-            // Use speech-to-text to inform the user that the door is now unlocked
-            if (preference.getVoiceInstructions()) {
-                String toSpeak = getString(R.string.tts_door_unlocked);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
-            }
 
             // Display a pop-up informing the use that the door is now unlocked
             Snackbar.make(v, R.string.door_unlocked_message, Snackbar.LENGTH_SHORT).show();
@@ -142,6 +135,12 @@ public class FunctionButtonsFragment extends Fragment {
     public void hideDoorUnlockBtn() {
         if (doorUnlockBtn != null) {
             doorUnlockBtn.setVisibility(View.GONE);
+        }
+
+        // Use speech-to-text to inform the user that the door is now unlocked
+        if (preference.getVoiceInstructions()) {
+            String toSpeak = getString(R.string.tts_door_unlocked);
+            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
         }
     }
 

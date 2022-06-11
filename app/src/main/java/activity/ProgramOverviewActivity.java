@@ -1,12 +1,19 @@
 package activity;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -15,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +34,10 @@ import model.RoutineDAO;
 import utils.SelectionBarStep;
 
 public class ProgramOverviewActivity extends AdvancedAppActivity {
+    // Notification manager
+    private BroadcastReceiver broadcastReceiver;
+    private PreviewNotification previewNotification;
+
     // Routine basic variables initialization
     private String routineName;
     private long duration;
@@ -73,6 +85,27 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_overview);
 
+        // Notification declaration
+        IntentFilter intentFilter = new IntentFilter("notificationPreview");
+        previewNotification = new PreviewNotification(this);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getExtras().getString("actionName");
+
+                switch (action) {
+                    case PreviewNotification.DRYER_STOP:
+                        stopButtonClicked();
+                        break;
+                    case PreviewNotification.DRYER_RESUME:
+                        confirmResumeButtonClicked();
+                        break;
+                }
+            }
+        };
+
+        this.registerReceiver( broadcastReceiver, intentFilter);
+
         // Textviews declaration
         programDuration = (TextView) findViewById(R.id.programme_overview_duration_txt);
         dryerLevel = (TextView) findViewById(R.id.program_overview_dryer_level_txt);
@@ -94,9 +127,6 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         statusLayout = (LinearLayout) findViewById(R.id.program_overview_statusLayout);
         removeClothesNotificationLayout = (LinearLayout) findViewById(R.id.program_overview_status_details_removeClothesLayout);
 
-        // Show the first Dialog Interface about saving the routine
-        showSaveDialogInterface();
-
         // Retrieve the routine using the provided parameters
         Bundle params = getIntent().getExtras();
         routineName = params.getString("routine_name");
@@ -105,6 +135,11 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
 
         // Get the edit mode from the parameters
         editMode = params.getBoolean("edit_mode", true);
+
+        // Show the first Dialog Interface about saving the routine
+        if (!editMode) {
+            showSaveDialogInterface();
+        }
 
         // Create the selection bar
         FragmentManager fm = getSupportFragmentManager();
@@ -124,9 +159,13 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         programDurationCountDown = new MyCountDownTimer(duration, programDuration, 1);
         delayTimeCountDown = new MyCountDownTimer(routine.getDelay(), delayTime, 2);
 
+        if (routine.getDelay() != 0) {
+            previewNotification.showNotificationWithDelay(routineName);
+        }
+
         // For testing reasons
-        //programDurationCountDown = new MyCountDownTimer(5000, programDuration, 1);
-        //delayTimeCountDown = new MyCountDownTimer(6000, delayTime, 2);
+        //programDurationCountDown = new MyCountDownTimer(25000, programDuration, 1);
+        //delayTimeCountDown = new MyCountDownTimer(16000, delayTime, 2);
 
         delayTimeCountDown.onStart();
         programDuration.setText(getFormatSimple(duration));
@@ -151,40 +190,14 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         confirmResumeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activityStatus = true;
-                if (!confirmClicked) {
-                    confirmResumeBtn.setText(R.string.resume_btn);
-                    dryerStatusDetails.setText(R.string.program_overview_status_details_resume_txt);
-                    confirmClicked = true;
-                }
-                else if (programDurationCountDown.hasTimerStarted()) {
-                    programDurationCountDown.onResume();
-                }
-
-                if (delayTimeCountDown.hasTimerFinished() && !durationStarted) {
-                    programDurationCountDown.onStart();
-                    durationStarted = true;
-                }
-
-                previousBtn.setVisibility(View.GONE);
-                confirmResumeBtn.setVisibility(View.GONE);
-                stopBtn.setVisibility(View.VISIBLE);
-                dryerStatus.setText(R.string.program_overview_status_working);
-                dryerStatusDetails.setVisibility(View.GONE);
-
+                confirmResumeButtonClicked();
             }
         });
 
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activityStatus = false;
-                stopBtn.setVisibility(View.GONE);
-                previousBtn.setVisibility(View.VISIBLE);
-                confirmResumeBtn.setVisibility(View.VISIBLE);
-                dryerStatus.setText(R.string.program_overview_status_suspended);
-                dryerStatusDetails.setVisibility(View.VISIBLE);
-                programDurationCountDown.onPause();
+                stopButtonClicked();
             }
         });
 
@@ -195,25 +208,86 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                 startActivity(intent);
             }
         });
+
+        //createBroadcastReceiver();
+        //showNotification();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigation voice commands
+        String[] words = match.split(" ");
+        if ((stringArrayContains(words, "go") || stringArrayContains(words, "back")) && previousBtn.getVisibility() == View.VISIBLE) {
+            previousBtn.performClick();
+        } else if ((stringArrayContains(words, "confirm") || stringArrayContains(words, "resume")) && confirmResumeBtn.getVisibility() == View.VISIBLE) {
+            confirmResumeBtn.performClick();
+        } else if (stringArrayContains(words, "stop") && stopBtn.getVisibility() == View.VISIBLE) {
+            stopBtn.performClick();
+        } else if ((stringArrayContains(words, "return") || stringArrayContains(words, "home")) && returnToHomeBtn.getVisibility() == View.VISIBLE) {
+            returnToHomeBtn.performClick();
+        }
+    }
+
+    private void confirmResumeButtonClicked() {
+        activityStatus = true;
+        if (!confirmClicked) {
+            confirmResumeBtn.setText(R.string.resume_btn);
+            dryerStatusDetails.setText(R.string.program_overview_status_details_resume_txt);
+            confirmClicked = true;
+        }
+        else if (programDurationCountDown.hasTimerStarted()) {
+            previewNotification.showResumeNotification();
+            programDurationCountDown.onResume();
+        }
 
         // Display the home button
         diplayHomeBtn(R.id.previewFunctionBtns);
+
+        if (delayTimeCountDown.hasTimerFinished() && !durationStarted) {
+            previewNotification.showStartNotification();
+            programDurationCountDown.onStart();
+            durationStarted = true;
+        }
+
+        previousBtn.setVisibility(View.GONE);
+        confirmResumeBtn.setVisibility(View.GONE);
+        stopBtn.setVisibility(View.VISIBLE);
+        dryerStatus.setText(R.string.program_overview_status_working);
+        dryerStatusDetails.setVisibility(View.GONE);
+    }
+
+    private void stopButtonClicked() {
+        previewNotification.showPauseNotification();
+        activityStatus = false;
+        stopBtn.setVisibility(View.GONE);
+        previousBtn.setVisibility(View.VISIBLE);
+        confirmResumeBtn.setVisibility(View.VISIBLE);
+        dryerStatus.setText(R.string.program_overview_status_suspended);
+        dryerStatusDetails.setVisibility(View.VISIBLE);
+        programDurationCountDown.onPause();
     }
 
     private void onFinishDelayCountDownTimer() {
         delayLayout.setVisibility(View.GONE);
         statusLayout.setVisibility(View.VISIBLE);
         if (activityStatus) {
+            previewNotification.showStartNotification();
             programDurationCountDown.onStart();
+        }
+        else {
+            previewNotification.showNotificationReadyToStart(routineName);
         }
     }
 
     private void onFinishDurationCountDownTimer() {
+        previewNotification.showFinishNotification();
         durationLayout.setVisibility(View.GONE);
         programCompletedLayout.setVisibility(View.VISIBLE);
         confirmResumeBtn.setVisibility(View.GONE);
@@ -416,8 +490,10 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
 
             if (formatType == 1) {
                 format = getFormatSimple(l);
+                previewNotification.updateNotificationTime(format);
             }
             else {
+                previewNotification.updateNotificationTime(getFormatSimple(l));
                 format = getFormatWithWords(l);
             }
 
