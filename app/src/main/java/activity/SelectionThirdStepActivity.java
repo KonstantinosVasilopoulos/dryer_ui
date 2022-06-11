@@ -82,11 +82,14 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
             Calendar calendar = Calendar.getInstance(locale);
             calendar.setTime(date);
             calendar.add(Calendar.DATE, -1); // 1 day
-            date = calendar.getTime();
-            Log.d("routine_date_left", date.toString());
+            Calendar now = Calendar.getInstance(locale);
+            if (calendar.get(Calendar.DAY_OF_YEAR) >= now.get(Calendar.DAY_OF_YEAR)) {
+                date = calendar.getTime();
+                Log.d("routine_date_left", date.toString());
 
-            // Display new date
-            displayDate();
+                // Display new date
+                displayDate();
+            }
         });
 
         // Right arrow button
@@ -221,5 +224,12 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         dateBtn.setTextSize(textSize);
 
         dateBtn.setText(dateStr);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Click on the previous button
+        final Button previousBtn = findViewById(R.id.timePreviousBtn);
+        previousBtn.performClick();
     }
 }

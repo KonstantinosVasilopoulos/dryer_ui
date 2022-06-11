@@ -287,4 +287,11 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
         // Highlight the button
         btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
     }
+
+    @Override
+    public void onBackPressed() {
+        // Click on the previous button
+        final Button previousBtn = findViewById(R.id.dryingLevelPreviousBtn);
+        previousBtn.performClick();
+    }
 }
