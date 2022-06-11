@@ -11,8 +11,6 @@ import java.util.Locale;
 public class LanguageHelper {
 
     private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
-
-
     public static void onCreate(Context context) {
 
         String lang;
@@ -24,43 +22,33 @@ public class LanguageHelper {
 
         setLocale(context, lang);
     }
-
+    private static String getPersistedData(Context context, String defaultLanguage) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        return pref.getString(SELECTED_LANGUAGE, defaultLanguage);
+    }
     public static void onCreate(Context context, String defaultLanguage) {
         String lang = getPersistedData(context, defaultLanguage);
         setLocale(context, lang);
     }
-
     public static String getLanguage(Context context) {
         return getPersistedData(context, Locale.getDefault().getLanguage());
     }
-
-    public static void setLocale(Context context, String language) {
-        persist(context, language);
-        updateResources(context, language);
+    public static void setLocale(Context cont, String lang) {
+        persist(cont, lang);
+        updateResources(cont, lang);
     }
-
-    private static String getPersistedData(Context context, String defaultLanguage) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(SELECTED_LANGUAGE, defaultLanguage);
-    }
-
-    private static void persist(Context context, String language) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        editor.putString(SELECTED_LANGUAGE, language);
-        editor.apply();
-    }
-
-    private static void updateResources(Context context, String language) {
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-
-        Resources resources = context.getResources();
-
+    private static void updateResources(Context cont, String lang) {
+        Locale loc = new Locale(lang);
+        Locale.setDefault(loc);
+        Resources resources = cont.getResources();
         Configuration configuration = resources.getConfiguration();
-        configuration.locale = locale;
-
+        configuration.locale = loc;
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+    }
+    private static void persist(Context context, String language) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor ed = pref.edit();
+        ed.putString(SELECTED_LANGUAGE, language);
+        ed.apply();
     }
 }

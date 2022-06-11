@@ -178,6 +178,9 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
     protected void onStart() {
         super.onStart();
 
+        // Display the home button
+        diplayHomeBtn(R.id.timeFunctionBtns);
+
         // Play prompt
         if (preference.getVoiceInstructions()) {
             final Handler handler = new Handler();

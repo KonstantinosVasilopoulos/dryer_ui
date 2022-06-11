@@ -247,6 +247,9 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
             programDurationCountDown.onResume();
         }
 
+        // Display the home button
+        diplayHomeBtn(R.id.previewFunctionBtns);
+
         if (delayTimeCountDown.hasTimerFinished() && !durationStarted) {
             previewNotification.showStartNotification();
             programDurationCountDown.onStart();

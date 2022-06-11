@@ -226,6 +226,9 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
     protected void onStart() {
         super.onStart();
 
+        // Display the home button
+        diplayHomeBtn(R.id.programmeFunctionBtns);
+
         // Play prompt
         if (preference.getVoiceInstructions()) {
             final Handler handler = new Handler();

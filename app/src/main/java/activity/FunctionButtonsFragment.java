@@ -26,6 +26,7 @@ import model.PreferenceDAO;
 
 public class FunctionButtonsFragment extends Fragment {
     private Button doorUnlockBtn;
+    private ImageButton homeBtn;
     private TumbleDryer dryer;
     private TextToSpeech tts;
     private Preference preference;
@@ -105,7 +106,6 @@ public class FunctionButtonsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         // Check whether the door is open
         if (dryer.isClosed()) {
             // Display button for closing the door
@@ -127,7 +127,8 @@ public class FunctionButtonsFragment extends Fragment {
 
     public void displayDoorUnlockBtn() {
         if (doorUnlockBtn != null) {
-            doorUnlockBtn.setVisibility(View.VISIBLE);
+            doorUnlockBtn
+                    .setVisibility(View.VISIBLE);
         }
     }
 
@@ -141,6 +142,11 @@ public class FunctionButtonsFragment extends Fragment {
             String toSpeak = getString(R.string.tts_door_unlocked);
             tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
         }
+    }
+
+    public void displayHomeBtn() {
+        // Make the home button visible
+        homeBtn.setVisibility(View.VISIBLE);
     }
 
     // Helper method
