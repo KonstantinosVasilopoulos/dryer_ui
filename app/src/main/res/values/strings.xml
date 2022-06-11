@@ -32,7 +32,7 @@
     <string name="programme_express_btn">Σύντομο</string>
     <string name="programme_automatic_plus_btn">Αυτόματο</string>
     <string name="programme_shirts_btn">Μπλούζες</string>
-    <string name="programme_denim_btn">Τζην</string>
+    <string name="programme_denim_btn">Τζιν</string>
     <string name="programme_hygiene_btn">Υγιεινό</string>
     <string name="programme_warm_air_btn">Ζεστός αέρας</string>
     <string name="programme_gentle_smoothing_btn">Απαλή λείανση</string>
@@ -141,4 +141,16 @@
     <string name="tts_second_filter">Αφαιρέστε το χερούλι και πλύντε το φίλτρο</string>
     <string name="tts_third_filter">Καθαρίστε τον εναλλακτή θερμότητας με μία σκούπα</string>
     <string name="tts_fourth_filter">Επανατοποθετήστε το χερούλι και μετά βάλτε το φίλτρο πίσω στο στεγνωτήριο</string>
+    <string name="notification_swipe_down_for_more">Σύρε προς τα κάτω για περισσότερα</string>
+    <string name="notification_on_pause">Το στεγνωτήριο βρίσκεται σε παύση</string>
+    <string name="notification_duration_label">Το πρόγραμμα θα ολοκληρωθεί σε</string>
+    <string name="notification_running">Το πρόγραμμα ξεκίνησε!</string>
+    <string name="notification_on_resume">Το στεγνωτήριο συνεχίζει την λειτουργία του!</string>
+    <string name="notification_on_pause_hint">Πατήστε το κουμπί δεξιά για να συνεχίσει το πρόγραμμα</string>
+    <string name="notification_finish">Το πρόγραμμα ολοκληρώθηκε!</string>
+    <string name="notification_finish_hint">Βγάλτε τα ρούχα από το στεγνωτήριο</string>
+    <string name="notification_delay_hint">Το πρόγραμμα θα ξεκινήσει σε</string>
+    <string name="notification_delay">Το πρόγραμμα επιβεβαιώθηκε!</string>
+    <string name="notification_on_start">Το πρόγραμμα είναι έτοιμο για εκκίνηση!</string>
+    <string name="notification_on_start_hint">Πατήστε το κουμπί στα δεξιά για εκκίνηση</string>
 </resources>
