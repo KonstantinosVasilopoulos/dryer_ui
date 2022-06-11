@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -25,7 +24,7 @@ public class RoutineMenuActivity extends AdvancedAppActivity {
         setContentView(R.layout.activity_routine_menu);
 
         // Get the layout which will hold the routines' buttons
-        LinearLayout routinesLayout = (LinearLayout) findViewById(R.id.routinesLayout);
+        LinearLayout routinesLayout = findViewById(R.id.routinesLayout);
 
         // Add a selection button for every saved routine
         RoutineDAO routineDAO = RoutineDAO.getInstance(this);
@@ -56,13 +55,71 @@ public class RoutineMenuActivity extends AdvancedAppActivity {
         }
 
         // Add listener to the button responsible for creating new routines
-        newRoutineBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the first step activity for selecting drying level
-                Intent intent = new Intent(RoutineMenuActivity.this, SelectionFirstStepActivity.class);
-                startActivity(intent);
+        newRoutineBtn.setOnClickListener(view -> newRoutineBtnClicked());
+    }
+
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "new") && stringArrayContains(words, "routine")) {
+            // Start the process for creating a new routine
+            newRoutineBtnClicked();
+        } else if (stringArrayContains(words, "start")) {
+            String routineName = findRoutineNameInMatch(words);
+
+            // Guard against non-existing routines
+            if (routineName != null) {
+                routineName = routineName.substring(0, 1).toUpperCase() + routineName.substring(1);
+                RoutineDAO routineDAO = RoutineDAO.getInstance(this);
+                if (routineDAO.containsName(routineName)) {
+                    // Start the preview activity for the requested routine
+                    Intent intent = new Intent(this, ProgramOverviewActivity.class);
+                    intent.putExtra("routine_name", routineName);
+                    intent.putExtra("edit_mode", true);
+                    startActivity(intent);
+                }
             }
-        });
+        } else if (stringArrayContains(words, "edit")) {
+            // Get the routine's name provided by the user
+            String routineName = findRoutineNameInMatch(words);
+            if (routineName != null) {
+                routineName = routineName.substring(0, 1).toUpperCase() + routineName.substring(1);
+                RoutineDAO routineDAO = RoutineDAO.getInstance(this);
+                if (routineDAO.containsName(routineName)) {
+                    // Start the first selection step to edit the routine
+                    Intent intent = new Intent(this, SelectionFirstStepActivity.class);
+                    intent.putExtra("routine_name", routineName);
+                    startActivity(intent);
+                }
+            }
+        }
+    }
+
+    private void newRoutineBtnClicked()  {
+        // Start the first step activity for selecting drying level
+        Intent intent = new Intent(RoutineMenuActivity.this, SelectionFirstStepActivity.class);
+        startActivity(intent);
+    }
+
+    // Search in a voice command's output from a routine name
+    private String findRoutineNameInMatch(String[] words) {
+        for (int i = 0; i < words.length; i++) {
+            if ((words[i].equalsIgnoreCase("start") ||
+                    words[i].equalsIgnoreCase("delete")) ||
+                    words[i].equalsIgnoreCase("edit") &&
+                    i != words.length - 1) {
+
+                // Return the rest of the words
+                StringBuilder name = new StringBuilder();
+                for (int j = i + 1; j < words.length; j++) {
+                    name.append(words[j]);
+                    name.append(" "); // words must be separated
+                }
+
+                return name.toString().trim();
+            }
+        }
+        return null;
     }
 }

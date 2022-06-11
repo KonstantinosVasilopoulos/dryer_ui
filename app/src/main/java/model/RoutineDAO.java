@@ -120,7 +120,7 @@ public class RoutineDAO {
     }
 
     /**
-     * Finds whether a routine whose name matches the provided string. A routine's name serves as a
+     * Finds whether a routine's name matches the provided string. A routine's name serves as a
      * unique ID; two or more routines cannot have the same name.
      * @param name the name to be queried.
      * @return true if a routine named 'name' exists or false if it doesn't

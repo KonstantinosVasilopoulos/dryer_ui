@@ -236,6 +236,32 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
         }
     }
 
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigation commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "go") || stringArrayContains(words, "back")) {
+            final Button previousBtn = findViewById(R.id.programmePreviousBtn);
+            previousBtn.performClick();
+        } else if (stringArrayContains(words, "proceed")) {
+            final Button nextBtn = findViewById(R.id.programmeNextBtn);
+            nextBtn.performClick();
+        }
+
+        // Select programme using voice commands
+        for (int btnId : programmeBtnIds.keySet()) {
+            // Retrieve the programme's name as a string
+            String programmeStr = getString(programmeBtnIds.get(btnId).getStringId()).toLowerCase();
+            if (stringArrayContains(words, programmeStr)) {
+                // Click on the programme's button
+                Button programmeBtn = findViewById(btnId);
+                programmeBtn.performClick();
+            }
+        }
+    }
+
     // Helper method
     // React to a programme button click by highlighting it
     private void selectProgramme(int btnId) {
@@ -256,5 +282,12 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
             Button btn = findViewById(btnId);
             btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Click on the previous button
+        final Button previousBtn = findViewById(R.id.programmePreviousBtn);
+        previousBtn.performClick();
     }
 }

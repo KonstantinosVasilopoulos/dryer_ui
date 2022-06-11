@@ -43,4 +43,21 @@ public class ContainerGuideFirstActivity extends AdvancedAppActivity {
             }
         }, 1000);
     }
+
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigate activities using voice commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "proceed")) {
+            // Click on the next button
+            final Button nextBtn = findViewById(R.id.container_guide_first_next_btn);
+            nextBtn.performClick();
+        } else if (stringArrayContains(words, "go") || stringArrayContains(words, "back")) {
+            // Click on the previous button
+            final Button finalBtn = findViewById(R.id.container_guide_first_return_btn);
+            finalBtn.performClick();
+        }
+    }
 }

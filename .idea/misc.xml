@@ -81,7 +81,7 @@
         <entry key="app/src/main/res/font/proxima_nova.xml" value="0.3859375" />
         <entry key="app/src/main/res/font/proxima_nova_bold.xml" value="0.3859375" />
         <entry key="app/src/main/res/layout/activity_container_guide_first.xml" value="0.34601449275362317" />
-        <entry key="app/src/main/res/layout/activity_container_guide_second.xml" value="0.34601449275362317" />
+        <entry key="app/src/main/res/layout/activity_container_guide_second.xml" value="0.3523550724637681" />
         <entry key="app/src/main/res/layout/activity_door_guide.xml" value="0.3523550724637681" />
         <entry key="app/src/main/res/layout/activity_filter_guide_first.xml" value="0.34601449275362317" />
         <entry key="app/src/main/res/layout/activity_filter_guide_fourth.xml" value="0.34601449275362317" />
@@ -90,7 +90,7 @@
         <entry key="app/src/main/res/layout/activity_filters_guide_second.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34601449275362317" />
         <entry key="app/src/main/res/layout/activity_program_overview.xml" value="0.3523550724637681" />
-        <entry key="app/src/main/res/layout/activity_routine_menu.xml" value="0.34601449275362317" />
+        <entry key="app/src/main/res/layout/activity_routine_menu.xml" value="0.3523550724637681" />
         <entry key="app/src/main/res/layout/activity_selection_first_step.xml" value="0.3523550724637681" />
         <entry key="app/src/main/res/layout/activity_selection_name.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selection_second_step.xml" value="0.35572916666666665" />
