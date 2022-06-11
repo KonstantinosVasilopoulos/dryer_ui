@@ -200,8 +200,23 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
 
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
 
+        // Navigation voice commands
+        String[] words = match.split(" ");
+        if ((stringArrayContains(words, "go") || stringArrayContains(words, "back")) && previousBtn.getVisibility() == View.VISIBLE) {
+            previousBtn.performClick();
+        } else if ((stringArrayContains(words, "confirm") || stringArrayContains(words, "resume")) && confirmResumeBtn.getVisibility() == View.VISIBLE) {
+            confirmResumeBtn.performClick();
+        } else if (stringArrayContains(words, "stop") && stopBtn.getVisibility() == View.VISIBLE) {
+            stopBtn.performClick();
+        } else if ((stringArrayContains(words, "return") || stringArrayContains(words, "home")) && returnToHomeBtn.getVisibility() == View.VISIBLE) {
+            returnToHomeBtn.performClick();
+        }
     }
 
     private void onFinishDelayCountDownTimer() {

@@ -67,6 +67,19 @@ public class MainActivity extends AdvancedAppActivity {
             // Turn on the dryer and proceed to the next activity
             mainBtnClicked();
         }
+
+        // Show notifications' activities via voice commands
+        else if (stringArrayContains(words, "show")) {
+            if (stringArrayContains(words, "filters") || stringArrayContains(words, "filter")) {
+                NotificationFragment fragment = (NotificationFragment) getSupportFragmentManager().findFragmentByTag("filtersNotificationTag");
+                assert fragment != null;
+                fragment.performClick();
+            } else if (stringArrayContains(words, "container")) {
+                NotificationFragment fragment = (NotificationFragment) getSupportFragmentManager().findFragmentByTag("containerNotificationTag");
+                assert fragment != null;
+                fragment.performClick();
+            }
+        }
     }
 
     // Helper methods
@@ -78,7 +91,16 @@ public class MainActivity extends AdvancedAppActivity {
         Bundle args = new Bundle();
         args.putSerializable("notification", type);
         fragment.setArguments(args);
-        transaction.add(NOTIFICATIONS_LAYOUT, fragment).commit();
+
+        // Tag the fragment for later retrieval
+        String tag;
+        if (type == Notifications.FILTERS) {
+            tag = "filtersNotificationTag";
+        } else {
+            tag = "containerNotificationTag";
+        }
+
+        transaction.add(NOTIFICATIONS_LAYOUT, fragment, tag).commit();
     }
 
     // Respond to the main button being clicked by initiating the dryer and starting the next activity

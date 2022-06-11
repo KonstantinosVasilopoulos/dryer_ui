@@ -185,6 +185,27 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         }
     }
 
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigation commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "go") || stringArrayContains(words, "back")) {
+            final Button previousBtn = findViewById(R.id.programmePreviousBtn);
+            previousBtn.performClick();
+        } else if (stringArrayContains(words, "proceed")) {
+            final Button nextBtn = findViewById(R.id.programmeNextBtn);
+            nextBtn.performClick();
+        }
+
+        // Start now voice command
+        if (stringArrayContains(words, "start") || stringArrayContains(words, "now")) {
+            final Button nowBtn = findViewById(R.id.timeNowBtn);
+            nowBtn.performClick();
+        }
+    }
+
     // Helper method
     // Change displayed date
     private void displayDate() {

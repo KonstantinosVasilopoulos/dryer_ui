@@ -63,11 +63,8 @@ public class DryerListener implements RecognitionListener {
         if (matches != null) {
             // Search for the keyword
             for (String match : matches) {
-                if (match.startsWith(VOICE_KEYWORD)) {
-                    // Have the parent activity handle the output
-                    parentActivity.listenerUpdated(match);
-                    break;
-                }
+                // Have the parent activity handle the output
+                parentActivity.listenerUpdated(match);
             }
 
             // Restart the speech recognition

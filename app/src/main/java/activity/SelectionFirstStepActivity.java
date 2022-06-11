@@ -233,6 +233,34 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
         }
     }
 
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigate activities using voice commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "proceed")) {
+            // Click on the next button
+            final Button nextBtn = findViewById(R.id.dryingLevelNextBtn);
+            nextBtn.performClick();
+        } else if (stringArrayContains(words, "go") || stringArrayContains(words, "back")) {
+            // Click on the previous button
+            final Button finalBtn = findViewById(R.id.dryingLevelPreviousBtn);
+            finalBtn.performClick();
+        }
+
+        // Choose drying level via voice commands
+        if (stringArrayContains(words, "extra") && stringArrayContains(words, "dry")) {
+            extraDryBtn.performClick();
+        } else if (stringArrayContains(words, "normal")) {
+            normalBtn.performClick();
+        } else if (stringArrayContains(words, "hand")) {
+            handIronBtn.performClick();
+        } else if (stringArrayContains(words, "machine")) {
+            machineIronBtn.performClick();
+        }
+    }
+
     // Helper method
     // Apply stylistic changes to the selected drying level button
     private void selectDryingLevelBtn(Button btn) {

@@ -76,6 +76,20 @@ public class RoutineMenuActivity extends AdvancedAppActivity {
                     // Start the preview activity for the requested routine
                     Intent intent = new Intent(this, ProgramOverviewActivity.class);
                     intent.putExtra("routine_name", routineName);
+                    intent.putExtra("edit_mode", true);
+                    startActivity(intent);
+                }
+            }
+        } else if (stringArrayContains(words, "edit")) {
+            // Get the routine's name provided by the user
+            String routineName = findRoutineNameInMatch(words);
+            if (routineName != null) {
+                routineName = routineName.substring(0, 1).toUpperCase() + routineName.substring(1);
+                RoutineDAO routineDAO = RoutineDAO.getInstance(this);
+                if (routineDAO.containsName(routineName)) {
+                    // Start the first selection step to edit the routine
+                    Intent intent = new Intent(this, SelectionFirstStepActivity.class);
+                    intent.putExtra("routine_name", routineName);
                     startActivity(intent);
                 }
             }
@@ -100,9 +114,10 @@ public class RoutineMenuActivity extends AdvancedAppActivity {
                 StringBuilder name = new StringBuilder();
                 for (int j = i + 1; j < words.length; j++) {
                     name.append(words[j]);
+                    name.append(" "); // words must be separated
                 }
 
-                return name.toString();
+                return name.toString().trim();
             }
         }
         return null;
