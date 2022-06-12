@@ -2,17 +2,16 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
@@ -25,8 +24,8 @@ import model.Preference;
 import model.PreferenceDAO;
 
 public class FunctionButtonsFragment extends Fragment {
-
     private Button doorUnlockBtn;
+    private ImageButton homeBtn;
     private TumbleDryer dryer;
     private TextToSpeech tts;
     private Preference preference;
@@ -77,17 +76,26 @@ public class FunctionButtonsFragment extends Fragment {
             }
         });
 
+        // Home button
+        homeBtn = view.findViewById(R.id.homeBtn);
+        homeBtn.setOnClickListener(v -> {
+            // Navigate to the routines menu activity
+            if (getActivity() != null) {
+                startActivity(new Intent(getActivity(), RoutineMenuActivity.class));
+            }
+        });
+
         // Door unlock button
         doorUnlockBtn.setOnClickListener(v -> {
             // Open the door and hide this button
+                // Navigate to the door activity
+                if (getActivity() != null) {
+                    Intent temp=new Intent(getActivity(), DoorGuideActivity.class);
+                    temp.putExtra("class",String.valueOf(getActivity()));
+                    startActivity(temp);
+                }
             dryer.openDoor();
             hideDoorUnlockBtn();
-
-            // Use speech-to-text to inform the user that the door is now unlocked
-            if (preference.getVoiceInstructions()) {
-                String toSpeak = getString(R.string.tts_door_unlocked);
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
-            }
 
             // Display a pop-up informing the use that the door is now unlocked
             Snackbar.make(v, R.string.door_unlocked_message, Snackbar.LENGTH_SHORT).show();
@@ -97,7 +105,6 @@ public class FunctionButtonsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         // Check whether the door is open
         if (dryer.isClosed()) {
             // Display button for closing the door
@@ -119,7 +126,8 @@ public class FunctionButtonsFragment extends Fragment {
 
     public void displayDoorUnlockBtn() {
         if (doorUnlockBtn != null) {
-            doorUnlockBtn.setVisibility(View.VISIBLE);
+            doorUnlockBtn
+                    .setVisibility(View.VISIBLE);
         }
     }
 
@@ -127,6 +135,22 @@ public class FunctionButtonsFragment extends Fragment {
         if (doorUnlockBtn != null) {
             doorUnlockBtn.setVisibility(View.GONE);
         }
+
+        // Use speech-to-text to inform the user that the door is now unlocked
+        if (preference.getVoiceInstructions()) {
+            String toSpeak = getString(R.string.tts_door_unlocked);
+            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_door_unlocked");
+        }
+    }
+
+    public void displayHomeBtn() {
+        // Make the home button visible
+        homeBtn.setVisibility(View.VISIBLE);
+    }
+
+    public void hideHomeBtn() {
+        // Make the home button invisible
+        homeBtn.setVisibility(View.GONE);
     }
 
     // Helper method

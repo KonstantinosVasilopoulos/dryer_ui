@@ -1,4 +1,4 @@
-package activity;
+package notification;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -11,6 +11,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.aueb.idry.R;
+
+import utils.App;
 
 public class PreviewNotification {
     private Context context;

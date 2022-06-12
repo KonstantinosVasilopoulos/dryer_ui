@@ -1,14 +1,14 @@
 package activity;
 
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.widget.Button;
+
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.Programme;
@@ -226,6 +226,10 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
     protected void onStart() {
         super.onStart();
 
+        // Display the home button
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.programmeFunctionBtns));
+        displayHomeBtn();
+
         // Play prompt
         if (preference.getVoiceInstructions()) {
             final Handler handler = new Handler();
@@ -233,6 +237,37 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
                 final String toSpeak = getString(R.string.tts_second_step_prompt);
                 speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_second_step_prompt");
             }, 1000);
+        }
+    }
+
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigation commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "go") || stringArrayContains(words, "back")) {
+            final Button previousBtn = findViewById(R.id.programmePreviousBtn);
+            previousBtn.performClick();
+        } else if (stringArrayContains(words, "proceed")) {
+            final Button nextBtn = findViewById(R.id.programmeNextBtn);
+            nextBtn.performClick();
+        }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_second_step_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_programme");
+        }
+
+        // Select programme using voice commands
+        for (int btnId : programmeBtnIds.keySet()) {
+            // Retrieve the programme's name as a string
+            String programmeStr = getString(programmeBtnIds.get(btnId).getStringId()).toLowerCase();
+            if (stringArrayContains(words, programmeStr)) {
+                // Click on the programme's button
+                Button programmeBtn = findViewById(btnId);
+                programmeBtn.performClick();
+            }
         }
     }
 
@@ -256,5 +291,12 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
             Button btn = findViewById(btnId);
             btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Click on the previous button
+        final Button previousBtn = findViewById(R.id.programmePreviousBtn);
+        previousBtn.performClick();
     }
 }

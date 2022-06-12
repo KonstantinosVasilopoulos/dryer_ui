@@ -1,9 +1,5 @@
 package activity;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +9,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import pl.droidsonroids.gif.GifImageView;
+import utils.LanguageHelper;
 import utils.Notifications;
 
 public class MainActivity extends AdvancedAppActivity {
@@ -54,50 +55,52 @@ public class MainActivity extends AdvancedAppActivity {
 
         // Create notification fragments if required
         // Filters notification
-        if (dryer.checkFilters()) {
+//        if (dryer.checkFilters()) {
             addNotificationFragment(Notifications.FILTERS);
-        }
+//        }
 
         // Container notification
-        if (dryer.checkContainer()) {
+//        if (dryer.checkContainer()) {
             addNotificationFragment(Notifications.CONTAINERS);
-        }
+//        }
+
+        // Find the instance of the function buttons
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.mainFunctionBtns));
 
         // Set listener for start button
-        mainStartBtn.setOnClickListener(view -> {
-            // Turn on the dryer
-            if (!dryer.getPowerStatus()) {
-                dryer.turnOn();
-
-                // Use text-to-speech to inform the user
-                if (preference.getVoiceInstructions()) {
-                    String toSpeak = getString(R.string.tts_turn_on);
-                    speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
-                }
-            }
-
-            // Unlock the dryer's door
-            if (dryer.isClosed()) {
-                dryer.openDoor();
-            }
-
-            // Wait for the text-to-speech to finish talking
-            if (preference.getVoiceInstructions()) {
-                boolean isSpeaking = tts.isSpeaking();
-                while (isSpeaking) {
-                    isSpeaking = tts.isSpeaking();
-                }
-            }
-
-            // Start the routine menu activity
-            //Intent intent = new Intent(MainActivity.this, RoutineMenuActivity.class);
-            Intent intent = new Intent(MainActivity.this, DoorGuideActivity.class);
-            intent.putExtra("className", "RoutineMenuActivity");
-            startActivity(intent);
-        });
+        mainStartBtn.setOnClickListener(view -> mainBtnClicked());
     }
 
-    // Helper method
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "turn") && stringArrayContains(words, "on")) {
+            // Turn on the dryer and proceed to the next activity
+            mainBtnClicked();
+        }
+
+        // Show notifications' activities via voice commands
+        else if (stringArrayContains(words, "show")) {
+            if (stringArrayContains(words, "filters") || stringArrayContains(words, "filter")) {
+                NotificationFragment fragment = (NotificationFragment) getSupportFragmentManager().findFragmentByTag("filtersNotificationTag");
+                assert fragment != null;
+                fragment.performClick();
+            } else if (stringArrayContains(words, "container")) {
+                NotificationFragment fragment = (NotificationFragment) getSupportFragmentManager().findFragmentByTag("containerNotificationTag");
+                assert fragment != null;
+                fragment.performClick();
+            }
+        }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_main_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_main");
+        }
+    }
+
+    // Helper methods
     // Add a notification fragment
     private void addNotificationFragment(Notifications type) {
         FragmentManager fm = getSupportFragmentManager();
@@ -106,7 +109,50 @@ public class MainActivity extends AdvancedAppActivity {
         Bundle args = new Bundle();
         args.putSerializable("notification", type);
         fragment.setArguments(args);
-        transaction.add(NOTIFICATIONS_LAYOUT, fragment).commit();
+
+        // Tag the fragment for later retrieval
+        String tag;
+        if (type == Notifications.FILTERS) {
+            tag = "filtersNotificationTag";
+        } else {
+            tag = "containerNotificationTag";
+        }
+
+        transaction.add(NOTIFICATIONS_LAYOUT, fragment, tag).commit();
+    }
+
+    // Respond to the main button being clicked by initiating the dryer and starting the next activity
+    private void mainBtnClicked() {
+        // Turn on the dryer
+        TumbleDryer dryer = TumbleDryerImp.getInstance();
+        if (!dryer.getPowerStatus()) {
+            dryer.turnOn();
+
+            // Use text-to-speech to inform the user
+            if (preference.getVoiceInstructions()) {
+                String toSpeak = getString(R.string.tts_turn_on);
+                speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_main");
+            }
+        }
+
+        // Unlock the dryer's door
+        if (dryer.isClosed()) {
+            dryer.openDoor();
+        }
+
+        // Wait for the text-to-speech to finish talking
+        if (preference.getVoiceInstructions()) {
+            boolean isSpeaking = tts.isSpeaking();
+            while (isSpeaking) {
+                isSpeaking = tts.isSpeaking();
+            }
+        }
+
+        // Start the routine menu activity
+        //Intent intent = new Intent(MainActivity.this, RoutineMenuActivity.class);
+        Intent intent = new Intent(MainActivity.this, DoorGuideActivity.class);
+        intent.putExtra("className", "RoutineMenuActivity");
+        startActivity(intent);
     }
 
     private void showHelpDialog() {

@@ -2,15 +2,14 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.aueb.idry.R;
 
@@ -21,6 +20,7 @@ public class NotificationFragment extends Fragment {
     private static final String NOTIFICATION = "notification";
 
     private Notifications notification;
+    private TextView notificationLabel;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -54,7 +54,7 @@ public class NotificationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Set the label's text and the listener for navigating to the relevant guide activity
-        TextView notificationLabel = view.findViewById(R.id.notificationLabel);
+        notificationLabel = view.findViewById(R.id.notificationLabel);
         switch (notification) {
             case FILTERS:
             default:
@@ -81,5 +81,10 @@ public class NotificationFragment extends Fragment {
                 });
                 break;
         }
+    }
+
+    // Click on the notification's label
+    public void performClick() {
+        notificationLabel.performClick();
     }
 }

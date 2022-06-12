@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import activity.AdvancedAppActivity;
@@ -17,7 +16,6 @@ import activity.AdvancedAppActivity;
 public class DryerListener implements RecognitionListener {
 
     private final AdvancedAppActivity parentActivity;
-    private final List<DryerListenerObserver> observers;
     private static final String VOICE_KEYWORD = "dryer";
 
     /**
@@ -27,7 +25,6 @@ public class DryerListener implements RecognitionListener {
      */
     public DryerListener(AdvancedAppActivity parentActivity) {
         this.parentActivity = parentActivity;
-        this.observers = new ArrayList<>();
     }
 
     @Override
@@ -66,11 +63,8 @@ public class DryerListener implements RecognitionListener {
         if (matches != null) {
             // Search for the keyword
             for (String match : matches) {
-                if (match.startsWith(VOICE_KEYWORD)) {
-                    // Have the observers handle the output
-                    notifyObservers(matches);
-                    break;
-                }
+                // Have the parent activity handle the output
+                parentActivity.listenerUpdated(match);
             }
 
             // Restart the speech recognition
@@ -86,21 +80,5 @@ public class DryerListener implements RecognitionListener {
     @Override
     public void onEvent(int i, Bundle bundle) {
 
-    }
-
-    /**
-     * Add a new observer to be notified when the listener has new input.
-     *
-     * @param observer new observer
-     */
-    public void addObserver(DryerListenerObserver observer) {
-        observers.add(observer);
-    }
-
-    // Helper method
-    private void notifyObservers(List<String> matches) {
-        for (DryerListenerObserver observer : observers) {
-            observer.listenerUpdated(matches);
-        }
     }
 }

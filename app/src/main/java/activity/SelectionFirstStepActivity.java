@@ -1,15 +1,15 @@
 package activity;
 
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.widget.Button;
+
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.DryingLevel;
@@ -67,7 +67,7 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
         transaction.commit();
 
         // Find all drying level buttons
-        selectedDryingLevel = DryingLevel.NORMAL;
+        selectedDryingLevel = newRoutine.getLevel();
         extraDryBtn = findViewById(R.id.dryingLevelExtraDryBtn);
         normalBtn = findViewById(R.id.dryingLevelNormalBtn);
         handIronBtn = findViewById(R.id.dryingLevelHandIronBtn);
@@ -189,6 +189,10 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
     protected void onStart() {
         super.onStart();
 
+        // Display the home button
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.dryingLevelFunctionBtns));
+        displayHomeBtn();
+
         if (preference.getVoiceInstructions()) {
             // Wait for 1 seconds before speaking
             final Handler handler = new Handler();
@@ -233,6 +237,39 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
         }
     }
 
+    @Override
+    public void listenerUpdated(String match) {
+        super.listenerUpdated(match);
+
+        // Navigate activities using voice commands
+        String[] words = match.split(" ");
+        if (stringArrayContains(words, "proceed")) {
+            // Click on the next button
+            final Button nextBtn = findViewById(R.id.dryingLevelNextBtn);
+            nextBtn.performClick();
+        } else if (stringArrayContains(words, "go") || stringArrayContains(words, "back")) {
+            // Click on the previous button
+            final Button finalBtn = findViewById(R.id.dryingLevelPreviousBtn);
+            finalBtn.performClick();
+        }
+
+        // Choose drying level via voice commands
+        if (stringArrayContains(words, "extra") && stringArrayContains(words, "dry")) {
+            extraDryBtn.performClick();
+        } else if (stringArrayContains(words, "normal")) {
+            normalBtn.performClick();
+        } else if (stringArrayContains(words, "hand")) {
+            handIronBtn.performClick();
+        } else if (stringArrayContains(words, "machine")) {
+            machineIronBtn.performClick();
+        }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_first_step_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_drying_level");
+        }
+    }
+
     // Helper method
     // Apply stylistic changes to the selected drying level button
     private void selectDryingLevelBtn(Button btn) {
@@ -258,5 +295,12 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
 
         // Highlight the button
         btn.setBackgroundTintList(AppCompatResources.getColorStateList(this, R.color.gray_400));
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Click on the previous button
+        final Button previousBtn = findViewById(R.id.dryingLevelPreviousBtn);
+        previousBtn.performClick();
     }
 }
