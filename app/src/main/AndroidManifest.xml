@@ -71,7 +71,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name="activity.ProgramOverviewActivity"
+            android:name="activity.RoutinePreviewActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <receiver android:name="notification.PreviewNotificationService"/>

@@ -90,8 +90,8 @@
     <string name="seconds_label">δευτερόλεπτα</string>
     <string name="and_label">και</string>
     <string name="program_overview_status_title">Κατάσταση</string>
-    <string name="program_overview_status_details_confirm_txt">Πατήστε το κουμπί \"Επιβεβαίωση\" για να θέσετε σε λειτουργία το μηχάνημα.</string>
-    <string name="program_overview_status_details_resume_txt">Πατήστε το κουμπί \"Συνέχιση\" για να θέσετε ξανά σε λειτουργία το μηχάνημα.</string>
+    <string name="program_overview_status_details_confirm_txt">Πατήστε το κουμπί \"Επιβεβαίωση\" για να θέσετε σε λειτουργία το πρόγραμμα.</string>
+    <string name="program_overview_status_details_resume_txt">Πατήστε το κουμπί \"Συνέχιση\" για να συνεχίσει το πρόγραμμα.</string>
     <string name="program_overview_status_working">Σε λειτουργία</string>
     <string name="program_overview_status_suspended">Σε αναμονή</string>
     <string name="program_overview_dialog_message_save_routine">Επιθυμείς την αποθήκευση του συγκεκριμένου προγράμματος;</string>
@@ -156,4 +156,10 @@
     <string name="main_notification_help_label">Για να μάθετε περισσότερες πληροφορίες, πατήστε πάνω στην ειδοποίηση.</string>
     <string name="got_it_btn">Το κατάλαβα</string>
     <string name="notification_routine_label">Πρόγραμμα:</string>
+    <string name="tts_menu_help">" "</string>
+    <string name="tts_main_help"></string>
+    <string name="tts_first_step_help"></string>
+    <string name="tts_second_step_help"></string>
+    <string name="tts_third_step_help"></string>
+    <string name="tts_preview_help"></string>
 </resources>

@@ -254,6 +254,11 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
             nextBtn.performClick();
         }
 
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_second_step_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_programme");
+        }
+
         // Select programme using voice commands
         for (int btnId : programmeBtnIds.keySet()) {
             // Retrieve the programme's name as a string

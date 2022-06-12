@@ -152,7 +152,7 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
                 RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
                 // Navigate to the routine preview activity
-                Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
+                Intent intent = new Intent(SelectionThirdStepActivity.this, RoutinePreviewActivity.class);
                 intent.putExtra("routine_name", routineName);
                 intent.putExtra("edit_mode", editMode);
                 startActivity(intent);
@@ -167,7 +167,7 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
             RoutineDAO.getInstance(getApplicationContext()).updateRoutine(routine);
 
             // Start routine preview activity
-            Intent intent = new Intent(SelectionThirdStepActivity.this, ProgramOverviewActivity.class);
+            Intent intent = new Intent(SelectionThirdStepActivity.this, RoutinePreviewActivity.class);
             intent.putExtra("routine_name", routineName);
             intent.putExtra("edit_mode", editMode);
             startActivity(intent);
@@ -207,9 +207,14 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         }
 
         // Start now voice command
-        if (stringArrayContains(words, "start") || stringArrayContains(words, "now")) {
+        else if (stringArrayContains(words, "start") || stringArrayContains(words, "now")) {
             final Button nowBtn = findViewById(R.id.timeNowBtn);
             nowBtn.performClick();
+        }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_third_step_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_time");
         }
     }
 

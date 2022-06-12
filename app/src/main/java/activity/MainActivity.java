@@ -93,6 +93,11 @@ public class MainActivity extends AdvancedAppActivity {
                 fragment.performClick();
             }
         }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_main_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_main");
+        }
     }
 
     // Helper methods

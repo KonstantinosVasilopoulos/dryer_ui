@@ -66,7 +66,7 @@ public class RoutineFragment extends Fragment {
 
             // Connect the routine with its preview activity
             routineSelectionBtn.setOnClickListener(v -> {
-                Intent intent = new Intent(getContext(), ProgramOverviewActivity.class);
+                Intent intent = new Intent(getContext(), RoutinePreviewActivity.class);
                 intent.putExtra("routine_name", routine.getName());
                 startActivity(intent);
             });

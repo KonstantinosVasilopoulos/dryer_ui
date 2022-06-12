@@ -2,6 +2,7 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -74,7 +75,7 @@ public class RoutineMenuActivity extends AdvancedAppActivity {
                 RoutineDAO routineDAO = RoutineDAO.getInstance(this);
                 if (routineDAO.containsName(routineName)) {
                     // Start the preview activity for the requested routine
-                    Intent intent = new Intent(this, ProgramOverviewActivity.class);
+                    Intent intent = new Intent(this, RoutinePreviewActivity.class);
                     intent.putExtra("routine_name", routineName);
                     intent.putExtra("edit_mode", true);
                     startActivity(intent);
@@ -93,6 +94,12 @@ public class RoutineMenuActivity extends AdvancedAppActivity {
                     startActivity(intent);
                 }
             }
+        }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            // Play help text-to-speech
+            speak(getString(R.string.tts_menu_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_menu");
         }
     }
 

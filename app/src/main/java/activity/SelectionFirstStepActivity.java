@@ -263,6 +263,11 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
         } else if (stringArrayContains(words, "machine")) {
             machineIronBtn.performClick();
         }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_first_step_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_drying_level");
+        }
     }
 
     // Helper method
