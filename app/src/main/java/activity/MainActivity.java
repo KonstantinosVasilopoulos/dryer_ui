@@ -4,16 +4,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
+import pl.droidsonroids.gif.GifImageView;
 import utils.Notifications;
 
 public class MainActivity extends AdvancedAppActivity {
@@ -36,6 +40,14 @@ public class MainActivity extends AdvancedAppActivity {
         // Round the corners of the notifications' layout by allowing it to clip its corners
         LinearLayout notificationsLayout = findViewById(NOTIFICATIONS_LAYOUT);
         notificationsLayout.setClipToOutline(true);
+
+        ImageButton notificationHelpBtn = findViewById(R.id.main_notification_help_btn);
+        notificationHelpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showHelpDialog();
+            }
+        });
 
         // Get the dryer interface
         TumbleDryer dryer = TumbleDryerImp.getInstance();
@@ -135,5 +147,24 @@ public class MainActivity extends AdvancedAppActivity {
         Intent intent = new Intent(MainActivity.this, DoorGuideActivity.class);
         intent.putExtra("className", "RoutineMenuActivity");
         startActivity(intent);
+    }
+
+    private void showHelpDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.main_notification_help);
+
+        if (!preference.getLanguage()) {
+            GifImageView gifImg = dialog.findViewById(R.id.main_notification_help_gifImg);
+            gifImg.setImageResource(R.drawable.notification_help_en);
+        }
+
+        Button dialogBtn = dialog.findViewById(R.id.main_notification_got_it_btn);
+        dialogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

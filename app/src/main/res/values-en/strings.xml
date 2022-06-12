@@ -130,4 +130,18 @@
     <string name="tts_third_filter">Clean the heat exchanger with the help of a vacuum cleaner</string>
     <string name="tts_fourth_filter">Reattach the handle and then slide the filter back into the dryer</string>
     <string name="notification_swipe_down_for_more">Swipe down for more</string>
+    <string name="main_notification_help_label">For more information, tap the notification.</string>
+    <string name="got_it_btn">Got it</string>
+    <string name="notification_on_start_hint">Click the button on the right to start</string>
+    <string name="notification_on_start">The program is ready to start!</string>
+    <string name="notification_delay">The program has been confirmed!</string>
+    <string name="notification_delay_hint">"The program will start in "</string>
+    <string name="notification_finish_hint">Remove the clothes from the dryer.</string>
+    <string name="notification_finish">The program has finished!</string>
+    <string name="notification_on_pause_hint">Click the button on the right to restart</string>
+    <string name="notification_on_resume">The dryer has restarted!</string>
+    <string name="notification_running">The program has started!</string>
+    <string name="notification_duration_label">The program will finish in</string>
+    <string name="notification_on_pause">The dryer is on pause!</string>
+    <string name="notification_routine_label">"Program: "</string>
 </resources>
