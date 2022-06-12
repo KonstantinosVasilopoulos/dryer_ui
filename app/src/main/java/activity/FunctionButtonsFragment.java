@@ -149,6 +149,10 @@ public class FunctionButtonsFragment extends Fragment {
         homeBtn.setVisibility(View.VISIBLE);
     }
 
+    public void hideHomeBtn(){
+        // Make the home button unvisible
+        homeBtn.setVisibility(View.GONE);
+    }
     // Helper method
     // Initialize the text-to-speech component
     private void initTextToSpeech() {
