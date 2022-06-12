@@ -5,6 +5,7 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -14,17 +15,18 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/notification_preview_expanded_routine_label"
                 style="@style/TextAppearance.Compat.Notification.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Πρόγραμμα: " />
+                android:text="@string/notification_routine_label" />
 
             <TextView
                 android:id="@+id/notification_preview_expanded_routine_name"
                 style="@style/TextAppearance.Compat.Notification.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Πρόγραμμα: Express routine" />
+                android:text="" />
 
         </LinearLayout>
 
@@ -58,16 +60,23 @@
         android:gravity="right">
 
         <ImageButton
+            android:layout_margin="5dp"
             android:id="@+id/notification_preview_resume_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:backgroundTint="@color/confirmation_green"
+            android:background="@drawable/circle_btn"
             android:src="@drawable/ic_play"
             android:visibility="gone" />
 
         <ImageButton
+            android:layout_margin="5dp"
             android:id="@+id/notification_preview_stop_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/error_red"
+            android:background="@drawable/circle_btn"
             android:src="@drawable/ic_pause"
             android:visibility="gone" />
 

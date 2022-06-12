@@ -11,6 +11,8 @@
         android:name="activity.FunctionButtonsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,11 +21,11 @@
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60dp">
+        app:layout_constraintTop_toTopOf="parent">
         <!--  Settings button and back to home button  -->
 
 
@@ -65,9 +67,9 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="@string/container_guide_first_step_title"
-                android:paddingLeft="5dp"
                 android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="@string/container_guide_first_step_title"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -81,10 +83,10 @@
                 android:layout_width="166dp"
                 android:layout_height="125dp"
                 android:layout_marginTop="20dp"
+                android:src="@drawable/dryer_container_pull_out"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cont_square_first_step"
-                android:src="@drawable/dryer_container_pull_out"
                 tools:ignore="MissingConstraints" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -148,9 +150,9 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/square_text_shape"
-                android:text="@string/container_guide_second_step_title"
-                android:paddingLeft="5dp"
                 android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="@string/container_guide_second_step_title"
                 android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"

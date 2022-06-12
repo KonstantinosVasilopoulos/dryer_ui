@@ -153,4 +153,7 @@
     <string name="notification_delay">Το πρόγραμμα επιβεβαιώθηκε!</string>
     <string name="notification_on_start">Το πρόγραμμα είναι έτοιμο για εκκίνηση!</string>
     <string name="notification_on_start_hint">Πατήστε το κουμπί στα δεξιά για εκκίνηση</string>
+    <string name="main_notification_help_label">Για να μάθετε περισσότερες πληροφορίες, πατήστε πάνω στην ειδοποίηση.</string>
+    <string name="got_it_btn">Το κατάλαβα</string>
+    <string name="notification_routine_label">Πρόγραμμα:</string>
 </resources>

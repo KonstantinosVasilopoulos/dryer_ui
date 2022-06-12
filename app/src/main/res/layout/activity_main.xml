@@ -83,14 +83,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/mainNotificationsLabel"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="@string/main_notifications_label"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/mainNotificationsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:text="@string/main_notifications_label"
+                        android:layout_gravity="center"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        tools:ignore="RtlCompat" />
+
+                    <ImageButton
+                        android:id="@+id/main_notification_help_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/circle_btn"
+                        android:src="@drawable/ic_help" />
+
+                </LinearLayout>
 
                 <ScrollView
                     android:layout_width="match_parent"
