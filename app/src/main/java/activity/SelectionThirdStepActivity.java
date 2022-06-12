@@ -179,7 +179,8 @@ public class SelectionThirdStepActivity extends AdvancedAppActivity {
         super.onStart();
 
         // Display the home button
-        diplayHomeBtn(R.id.timeFunctionBtns);
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.timeFunctionBtns));
+        displayHomeBtn();
 
         // Play prompt
         if (preference.getVoiceInstructions()) {

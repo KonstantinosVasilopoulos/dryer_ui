@@ -78,7 +78,7 @@ public class FunctionButtonsFragment extends Fragment {
         });
 
         // Home button
-        ImageButton homeBtn = view.findViewById(R.id.homeBtn);
+        homeBtn = view.findViewById(R.id.homeBtn);
         homeBtn.setOnClickListener(v -> {
             // Navigate to the routines menu activity
             if (getActivity() != null) {

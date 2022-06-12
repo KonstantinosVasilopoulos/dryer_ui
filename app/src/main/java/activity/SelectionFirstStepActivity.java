@@ -190,7 +190,8 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
         super.onStart();
 
         // Display the home button
-        diplayHomeBtn(R.id.dryingLevelFunctionBtns);
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.dryingLevelFunctionBtns));
+        displayHomeBtn();
 
         if (preference.getVoiceInstructions()) {
             // Wait for 1 seconds before speaking
