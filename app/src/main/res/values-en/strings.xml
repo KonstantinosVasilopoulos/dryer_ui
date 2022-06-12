@@ -150,4 +150,5 @@
     <string name="tts_second_step_help">Say the programme you want out loud or \"proceed\" to move on.</string>
     <string name="tts_third_step_help">You may say \"start now\" to initiate the routine right now.</string>
     <string name="tts_preview_help">Say \"confirm\" to start the selected routine. While the dryer is operational you may stop it by saying \"stop\".</string>
+    <string name="savee">Save</string>
 </resources>

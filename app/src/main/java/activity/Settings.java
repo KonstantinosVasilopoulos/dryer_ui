@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,6 +46,13 @@ public class Settings extends AppCompatActivity {
 
         Button returnBtn = findViewById(R.id.returnfromsettings);
 
+        if (greekSwitcher.isChecked()){
+            if (voiceCommandsSwitcher.isChecked()){
+               voiceCommandsSwitcher.setChecked(false);
+                Toast.makeText(this, "Οι φωνητικές εντολές δεν υποστηρίζονται στα ελληνικά", Toast.LENGTH_SHORT).show();
+            }
+        }
+
         if(Locale.getDefault().getLanguage().equals("en")) {
             greekSwitcher.setChecked(false);
             englishSwitcher.setChecked(true);
@@ -52,6 +60,7 @@ public class Settings extends AppCompatActivity {
         } else{
             greekSwitcher.setChecked(true);
             englishSwitcher.setChecked(false);
+            voiceCommandsSwitcher.setChecked(false);
         }
 
         /* ENGLISH SWITCER */
@@ -62,6 +71,14 @@ public class Settings extends AppCompatActivity {
 
         /* Return button */
         returnBtn.setOnClickListener(view -> finishSettings());
+
+        /* voice commands only available in english*/
+        voiceCommandsSwitcher.setOnClickListener(view -> {
+               if (greekSwitcher.isChecked()) {
+                   voiceCommandsSwitcher.setChecked(false);
+                   Toast.makeText(this, "Οι φωνητικές εντολές δεν υποστηρίζονται στα ελληνικά", Toast.LENGTH_SHORT).show();
+               }
+        });
     }
 
     private void setSwitchers(Preference preference) {
