@@ -91,6 +91,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                 switch (action) {
                     case PreviewNotification.DRYER_STOP:
                         stopButtonClicked();
+                        displayHomeBtn();
                         break;
                     case PreviewNotification.DRYER_RESUME:
                         confirmResumeButtonClicked();
@@ -186,6 +187,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
             @Override
             public void onClick(View view) {
                 confirmResumeButtonClicked();
+                hideHomeBtn();
             }
         });
 
@@ -443,12 +445,14 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         }
 
         public void onStart() {
+            hideHomeBtn();
             this.countDownTimer.start();
             this.timerStarted = true;
         }
 
         public void onPause() {
             this.countDownTimer.cancel();
+            displayHomeBtn();
         }
 
         public void onResume() {

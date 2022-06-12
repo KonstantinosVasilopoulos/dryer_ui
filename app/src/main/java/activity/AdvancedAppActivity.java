@@ -247,4 +247,17 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
             functionButtons.displayHomeBtn();
         }
     }
+
+
+    /**
+     * Hide the home button in the function buttons fragment.
+     */
+    protected void hideHomeBtn() {
+        if (functionButtons != null) {
+            functionButtons.hideHomeBtn();
+        }
+    }
+
+
 }
+
