@@ -109,7 +109,7 @@
     <string name="notif">Notifications</string>
     <string name="VI">Voice Instructions</string>
     <string name="VC">Voice Commands</string>
-    <string name="tts_turn_on">Machine turned on</string>
+    <string name="tts_turn_on">Turning on</string>
     <string name="tts_door_unlocked">Door unlocked</string>
     <string name="tts_first_step_prompt">Select drying level</string>
     <string name="tts_extra_dry_selected">Extra dry selected</string>
@@ -144,4 +144,10 @@
     <string name="notification_duration_label">The program will finish in</string>
     <string name="notification_on_pause">The dryer is on pause!</string>
     <string name="notification_routine_label">"Program: "</string>
+    <string name="tts_menu_help">Say \"start\", \"edit\" or \"delete\" and a routine\'s name to interact with that routine. Otherwise, say \"new routine\" to create a new one.</string>
+    <string name="tts_main_help">Say \"turn on\" to turn on the dryer, or say \"open door\" to open the dryer\'s door.</string>
+    <string name="tts_first_step_help">Say the desired drying level out loud or \"proceed\" to move on.</string>
+    <string name="tts_second_step_help">Say the programme you want out loud or \"proceed\" to move on.</string>
+    <string name="tts_third_step_help">You may say \"start now\" to initiate the routine right now.</string>
+    <string name="tts_preview_help">Say \"confirm\" to start the selected routine. While the dryer is operational you may stop it by saying \"stop\".</string>
 </resources>

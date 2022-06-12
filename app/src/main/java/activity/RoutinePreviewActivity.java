@@ -1,9 +1,5 @@
 package activity;
 
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,14 +17,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import model.Routine;
 import model.RoutineDAO;
+import notification.PreviewNotification;
 import utils.SelectionBarStep;
 
-public class ProgramOverviewActivity extends AdvancedAppActivity {
+public class RoutinePreviewActivity extends AdvancedAppActivity {
     // Notification manager
     private BroadcastReceiver broadcastReceiver;
     private PreviewNotification previewNotification;
@@ -78,7 +79,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_program_overview);
+        setContentView(R.layout.activity_routine_preview);
 
         // Notification declaration
         IntentFilter intentFilter = new IntentFilter("notificationPreview");
@@ -234,6 +235,11 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         } else if ((stringArrayContains(words, "return") || stringArrayContains(words, "home")) && returnToHomeBtn.getVisibility() == View.VISIBLE) {
             returnToHomeBtn.performClick();
         }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_preview_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_routine_preview");
+        }
     }
 
     private void confirmResumeButtonClicked() {
@@ -311,7 +317,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
                             readRoutineInfo();
-                            Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -348,7 +354,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
                         readRoutineInfo();
-                        Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -378,14 +384,14 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                         speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_empty_name");
                     }, 500);
 
-                    Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_empty_text), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_empty_text), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_empty_text, Snackbar.LENGTH_SHORT).show();
                 }
                 else if (!RoutineDAO.getInstance().containsName(newRoutineName) || (routineName.equals(newRoutineName))) {
                     routine.setName(newRoutineName);
                     routineName = newRoutineName;
                     RoutineDAO.getInstance().saveRoutine(routine);
-                    Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_saved), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_saved), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_saved, Snackbar.LENGTH_SHORT).show();
                     savePreference = true;
 
@@ -404,7 +410,7 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
                         speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_different_name");
                     }, 500);
 
-                    Toast.makeText(ProgramOverviewActivity.this, getString(R.string.program_overview_notification_message_name_match), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_name_match), Toast.LENGTH_SHORT).show();
                     //Snackbar.make(view, R.string.program_overview_notification_message_name_match, Snackbar.LENGTH_SHORT).show();
                 }
 

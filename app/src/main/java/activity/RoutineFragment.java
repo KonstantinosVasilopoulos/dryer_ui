@@ -2,16 +2,15 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.aueb.idry.R;
 
@@ -67,7 +66,7 @@ public class RoutineFragment extends Fragment {
 
             // Connect the routine with its preview activity
             routineSelectionBtn.setOnClickListener(v -> {
-                Intent intent = new Intent(getContext(), ProgramOverviewActivity.class);
+                Intent intent = new Intent(getContext(), RoutinePreviewActivity.class);
                 intent.putExtra("routine_name", routine.getName());
                 startActivity(intent);
             });

@@ -1,9 +1,5 @@
 package activity;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +9,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
 
 import pl.droidsonroids.gif.GifImageView;
+import utils.LanguageHelper;
 import utils.Notifications;
 
 public class MainActivity extends AdvancedAppActivity {
@@ -54,14 +55,14 @@ public class MainActivity extends AdvancedAppActivity {
 
         // Create notification fragments if required
         // Filters notification
-        if (dryer.checkFilters()) {
+//        if (dryer.checkFilters()) {
             addNotificationFragment(Notifications.FILTERS);
-        }
+//        }
 
         // Container notification
-        if (dryer.checkContainer()) {
+//        if (dryer.checkContainer()) {
             addNotificationFragment(Notifications.CONTAINERS);
-        }
+//        }
 
         // Find the instance of the function buttons
         setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.mainFunctionBtns));
@@ -91,6 +92,11 @@ public class MainActivity extends AdvancedAppActivity {
                 assert fragment != null;
                 fragment.performClick();
             }
+        }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_main_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_main");
         }
     }
 

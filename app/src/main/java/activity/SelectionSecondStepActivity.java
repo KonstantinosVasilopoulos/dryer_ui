@@ -1,14 +1,14 @@
 package activity;
 
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.widget.Button;
+
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.Programme;
@@ -252,6 +252,11 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
         } else if (stringArrayContains(words, "proceed")) {
             final Button nextBtn = findViewById(R.id.programmeNextBtn);
             nextBtn.performClick();
+        }
+
+        // Help voice command
+        else if (stringArrayContains(words, "help") || stringArrayContains(words, "assistance")) {
+            speak(getString(R.string.tts_second_step_help), TextToSpeech.QUEUE_FLUSH, null, "tts_help_programme");
         }
 
         // Select programme using voice commands
