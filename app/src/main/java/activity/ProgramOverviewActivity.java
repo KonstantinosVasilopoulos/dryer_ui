@@ -213,6 +213,10 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        // Display the home button
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.previewFunctionBtns));
+        displayHomeBtn();
+
     }
 
     @Override
@@ -244,9 +248,6 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
             programDurationCountDown.onResume();
         }
 
-        // Display the home button
-        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.previewFunctionBtns));
-        displayHomeBtn();
 
         if (delayTimeCountDown.hasTimerFinished() && !durationStarted) {
             previewNotification.showStartNotification();
