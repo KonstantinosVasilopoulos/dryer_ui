@@ -363,7 +363,7 @@ public class RoutinePreviewActivity extends AdvancedAppActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
         builder.setTitle(R.string.program_overview_dialog_message_rename_routine)
                 .setView(editText)
-                .setPositiveButton(R.string.confirm_label, dialogClickListener)
+                .setPositiveButton(R.string.savee, dialogClickListener)
                 .setNegativeButton(R.string.cancel_label, dialogClickListener);
 
         alertDialog = builder.create();

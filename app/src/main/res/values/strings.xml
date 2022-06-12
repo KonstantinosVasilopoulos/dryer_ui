@@ -162,4 +162,5 @@
     <string name="tts_second_step_help"></string>
     <string name="tts_third_step_help"></string>
     <string name="tts_preview_help"></string>
+    <string name="savee">Αποθηκευση</string>
 </resources>
