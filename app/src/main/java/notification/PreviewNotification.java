@@ -57,7 +57,7 @@ public class PreviewNotification {
         expandedView.setTextViewText(R.id.notification_preview_expanded_duration, "Hello world!");
 
         notification = new NotificationCompat.Builder(context, App.NOT_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_settings_icon)
+                .setSmallIcon(R.drawable.notification_ic)
                 .setOnlyAlertOnce(true)
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                 .setCustomContentView(collapsedView)

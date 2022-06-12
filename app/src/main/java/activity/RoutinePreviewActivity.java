@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -23,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
+import com.google.android.material.snackbar.Snackbar;
 
 import model.Routine;
 import model.RoutineDAO;
@@ -33,6 +33,8 @@ public class RoutinePreviewActivity extends AdvancedAppActivity {
     // Notification manager
     private BroadcastReceiver broadcastReceiver;
     private PreviewNotification previewNotification;
+
+    private View rootView;
 
     // Routine basic variables initialization
     private String routineName;
@@ -80,6 +82,8 @@ public class RoutinePreviewActivity extends AdvancedAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine_preview);
+
+        rootView = findViewById(R.id.routine_preview_layout);
 
         // Notification declaration
         IntentFilter intentFilter = new IntentFilter("notificationPreview");
@@ -317,7 +321,7 @@ public class RoutinePreviewActivity extends AdvancedAppActivity {
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
                             readRoutineInfo();
-                            Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
+                        Snackbar.make(rootView, R.string.program_overview_notification_message_not_saved, Snackbar.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -354,7 +358,7 @@ public class RoutinePreviewActivity extends AdvancedAppActivity {
                         break;
                     case  DialogInterface.BUTTON_NEGATIVE:
                         readRoutineInfo();
-                        Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_not_saved), Toast.LENGTH_SHORT).show();
+                        Snackbar.make(rootView, R.string.program_overview_notification_message_not_saved, Snackbar.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -383,16 +387,13 @@ public class RoutinePreviewActivity extends AdvancedAppActivity {
                         final String toSpeak = getString(R.string.tts_preview_empty_name);
                         speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_empty_name");
                     }, 500);
-
-                    Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_empty_text), Toast.LENGTH_SHORT).show();
-                    //Snackbar.make(view, R.string.program_overview_notification_message_empty_text, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView, R.string.program_overview_notification_message_empty_text, Snackbar.LENGTH_SHORT).show();
                 }
                 else if (!RoutineDAO.getInstance().containsName(newRoutineName) || (routineName.equals(newRoutineName))) {
                     routine.setName(newRoutineName);
                     routineName = newRoutineName;
                     RoutineDAO.getInstance().saveRoutine(routine);
-                    Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_saved), Toast.LENGTH_SHORT).show();
-                    //Snackbar.make(view, R.string.program_overview_notification_message_saved, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView, R.string.program_overview_notification_message_saved, Snackbar.LENGTH_SHORT).show();
                     savePreference = true;
 
                     // Activate edit mode to not delete the routine if the user backtracks
@@ -410,8 +411,7 @@ public class RoutinePreviewActivity extends AdvancedAppActivity {
                         speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "tts_preview_different_name");
                     }, 500);
 
-                    Toast.makeText(RoutinePreviewActivity.this, getString(R.string.program_overview_notification_message_name_match), Toast.LENGTH_SHORT).show();
-                    //Snackbar.make(view, R.string.program_overview_notification_message_name_match, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView, R.string.program_overview_notification_message_name_match, Snackbar.LENGTH_SHORT).show();
                 }
 
             }
