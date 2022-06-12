@@ -7,11 +7,16 @@ import android.widget.Button;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.aueb.idry.R;
+
 import org.json.JSONException;
+
 import java.util.Locale;
+
 import model.Preference;
 import model.PreferenceDAO;
+import utils.LanguageHelper;
 
 public class Settings extends AppCompatActivity {
     @SuppressLint("UseSwitchCompatOrMaterialCode")

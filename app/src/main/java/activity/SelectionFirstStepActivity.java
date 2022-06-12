@@ -1,15 +1,15 @@
 package activity;
 
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.widget.Button;
+
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.DryingLevel;
@@ -67,7 +67,7 @@ public class SelectionFirstStepActivity extends AdvancedAppActivity {
         transaction.commit();
 
         // Find all drying level buttons
-        selectedDryingLevel = DryingLevel.NORMAL;
+        selectedDryingLevel = newRoutine.getLevel();
         extraDryBtn = findViewById(R.id.dryingLevelExtraDryBtn);
         normalBtn = findViewById(R.id.dryingLevelNormalBtn);
         handIronBtn = findViewById(R.id.dryingLevelHandIronBtn);

@@ -1,9 +1,5 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +8,10 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.aueb.idry.T8816WP.TumbleDryer;
 import com.aueb.idry.T8816WP.TumbleDryerImp;
@@ -248,7 +248,6 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * Hide the home button in the function buttons fragment.
      */
@@ -257,7 +256,4 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
             functionButtons.hideHomeBtn();
         }
     }
-
-
 }
-

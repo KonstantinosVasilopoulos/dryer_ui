@@ -2,17 +2,16 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.aueb.idry.R;
 import com.aueb.idry.T8816WP.TumbleDryer;
@@ -149,10 +148,11 @@ public class FunctionButtonsFragment extends Fragment {
         homeBtn.setVisibility(View.VISIBLE);
     }
 
-    public void hideHomeBtn(){
-        // Make the home button unvisible
+    public void hideHomeBtn() {
+        // Make the home button invisible
         homeBtn.setVisibility(View.GONE);
     }
+
     // Helper method
     // Initialize the text-to-speech component
     private void initTextToSpeech() {

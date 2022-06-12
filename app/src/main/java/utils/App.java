@@ -1,4 +1,4 @@
-package activity;
+package utils;
 
 import android.app.Application;
 import android.app.NotificationChannel;
