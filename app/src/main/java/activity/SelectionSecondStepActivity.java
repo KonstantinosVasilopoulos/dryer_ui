@@ -227,7 +227,8 @@ public class SelectionSecondStepActivity extends AdvancedAppActivity {
         super.onStart();
 
         // Display the home button
-        diplayHomeBtn(R.id.programmeFunctionBtns);
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.programmeFunctionBtns));
+        displayHomeBtn();
 
         // Play prompt
         if (preference.getVoiceInstructions()) {

@@ -1,14 +1,10 @@
 package activity;
 
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -248,7 +243,8 @@ public class ProgramOverviewActivity extends AdvancedAppActivity {
         }
 
         // Display the home button
-        diplayHomeBtn(R.id.previewFunctionBtns);
+        setFunctionButtons((FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(R.id.previewFunctionBtns));
+        displayHomeBtn();
 
         if (delayTimeCountDown.hasTimerFinished() && !durationStarted) {
             previewNotification.showStartNotification();

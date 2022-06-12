@@ -3,7 +3,6 @@ package activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.Intent;
@@ -215,11 +214,15 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setter for the function buttons fragment.
+     *
+     * @param functionButtons the function buttons fragment of the activity
+     */
     protected void setFunctionButtons(FunctionButtonsFragment functionButtons) {
         this.functionButtons = functionButtons;
     }
 
-    // Helper method
     /**
      * Search for an item in a string array. Ignore case.
      *
@@ -236,8 +239,12 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
         return false;
     }
 
-    protected void diplayHomeBtn(int fragmentId) {
-        FunctionButtonsFragment functionBtns = (FunctionButtonsFragment) getSupportFragmentManager().findFragmentById(fragmentId);
-        functionBtns.displayHomeBtn();
+    /**
+     * Display the home button in the function buttons fragment.
+     */
+    protected void displayHomeBtn() {
+        if (functionButtons != null) {
+            functionButtons.displayHomeBtn();
+        }
     }
 }
