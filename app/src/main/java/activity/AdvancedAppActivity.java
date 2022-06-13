@@ -192,7 +192,7 @@ public abstract class AdvancedAppActivity extends AppCompatActivity {
     }
 
     /**
-     * Process the results of the listener.
+     * Process a single result of the listener.
      *
      * @param match the string the listener
      */
