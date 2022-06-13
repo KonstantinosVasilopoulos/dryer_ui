@@ -88,12 +88,6 @@ public class FunctionButtonsFragment extends Fragment {
         // Door unlock button
         doorUnlockBtn.setOnClickListener(v -> {
             // Open the door and hide this button
-                // Navigate to the door activity
-                if (getActivity() != null) {
-                    Intent temp=new Intent(getActivity(), DoorGuideActivity.class);
-                    temp.putExtra("class",String.valueOf(getActivity()));
-                    startActivity(temp);
-                }
             dryer.openDoor();
             hideDoorUnlockBtn();
 
@@ -126,8 +120,7 @@ public class FunctionButtonsFragment extends Fragment {
 
     public void displayDoorUnlockBtn() {
         if (doorUnlockBtn != null) {
-            doorUnlockBtn
-                    .setVisibility(View.VISIBLE);
+            doorUnlockBtn.setVisibility(View.VISIBLE);
         }
     }
 
