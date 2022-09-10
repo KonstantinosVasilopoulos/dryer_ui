@@ -1,3 +1,5 @@
+![Header image](docs/images/idryer_header.png)
+
 # Dryer UI
 
 DryerUI is an android application which simplifies and beautifies the UI of an existing Miele home dryer. The goal of this university semester assignment is to teach good UI appearance principles and meticulous project design.
@@ -21,33 +23,27 @@ The production stage differs in each cycle. During first of three cycles, mock-u
 
 Here is a list of screenshots of the application's activities.
 
-![Main activity](docs/images/screenshot_main.jpg)
+| <img src="docs/images/screenshot_main.jpg" alt="Main activity" width="275" > | <img src="docs/images/screenshot_container.jpg" alt="Container notification activity" width="275" > |
+| :-: | :-: |
+| Main activity viewed by the user upon starting the app | Container notification activity |
 
-Main activity
+<br />
 
-![Container notification activity](docs/images/screenshot_container.jpg)
+| <img src="docs/images/screenshot_door_prompt.jpg" alt="Door prompt activity" width="275" > | <img src="docs/images/screenshot_routines.jpg" alt="Routines activity" width="275" > |
+| :-: | :-: |
+| User is prompted to close the door before proceeding | Activity for interacting stored routines |
 
-Container notification activity
+<br />
 
-![Door prompt activity](docs/images/screenshot_door_prompt.jpg)
+| <img src="docs/images/screenshot_drying_level.jpg" alt="Drying level activity" width="275" > | <img src="docs/images/screenshot_time.jpg" alt="Time activity" width="275" > |
+| :-: | :-: |
+| Activity for selecting the new routine's drying level | The starting time of the routine can be selected here |
 
-After turning on the dryer, the user is prompted to close the machine's door in order to proceed
+<br />
 
-![Routines activity](docs/images/screenshot_routines.jpg)
-
-Activity for interacting stored routines
-
-![Drying level activity](docs/images/screenshot_drying_level.jpg)
-
-While creating a new routine, the user can select the routine's drying level in this activity
-
-![Time activity](docs/images/screenshot_time.jpg)
-
-Similarly, the starting time of the routine can be selected here
-
-![Preview activity](docs/images/screenshot_preview.jpg)
-
-Lastly, the preview activity is responsible for naming, initiating, pausing & stopping the routine.
+| <img src="docs/images/screenshot_preview.jpg" alt="Preview activity" width="275" > |
+| :-: |
+| The preview activity is responsible for naming, initiating, pausing & stopping the routine. |
 
 ## Features of the application
 
